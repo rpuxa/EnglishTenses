@@ -1,0 +1,2 @@
+rootProject.name='EnglishTenses2'
+include ':app'
