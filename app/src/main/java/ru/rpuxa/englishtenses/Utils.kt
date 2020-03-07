@@ -1,10 +1,13 @@
 package ru.rpuxa.englishtenses
 
 import android.content.res.Resources
+import android.graphics.Point
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import androidx.annotation.LayoutRes
+import kotlin.math.sqrt
 
 
 /*
@@ -109,3 +112,19 @@ fun View.removeParent() {
 fun Int.dpToPx(): Int {
     return (this * Resources.getSystem().displayMetrics.density).toInt()
 }
+
+inline fun View.onMeasured(crossinline block: () -> Unit) {
+    viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+        override fun onPreDraw(): Boolean {
+            viewTreeObserver.removeOnPreDrawListener(this)
+            block()
+            return true
+        }
+    })
+}
+
+fun Point(x: Float, y: Float) = Point(x.toInt(), y.toInt())
+
+fun Int.sqr() = this * this
+
+infix fun Point.dist(other: Point) = sqrt(((other.x - x).sqr() + (other.y - y).sqr()).toFloat())
