@@ -1,6 +1,6 @@
 package ru.rpuxa.englishtenses.parser
 
-import ru.rpuxa.englishtenses.Sentence
+import ru.rpuxa.englishtenses.model.Sentence
 
 interface SentenceSource {
 

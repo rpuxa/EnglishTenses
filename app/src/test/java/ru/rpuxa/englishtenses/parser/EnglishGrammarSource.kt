@@ -3,8 +3,8 @@ package ru.rpuxa.englishtenses.parser
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
 import org.jsoup.nodes.TextNode
-import ru.rpuxa.englishtenses.Sentence
-import ru.rpuxa.englishtenses.WordAnswer
+import ru.rpuxa.englishtenses.model.Sentence
+import ru.rpuxa.englishtenses.model.WordAnswer
 
 object EnglishGrammarSource : SentenceSource {
 

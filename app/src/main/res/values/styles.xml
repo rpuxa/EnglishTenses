@@ -1,16 +1,42 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="WhiteStatusBarTheme" parent="AppTheme">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
 
     <style name="ItemTextStyle" parent="AppTheme">
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="BottomMenuAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
+    </style>
+
+    <style name="BorderlessButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="BlueButton" parent="BorderlessButton">
+        <item name="android:textColor">@color/colorBlueButton</item>
+    </style>
+
+    <style name="CloseTheme" parent="AppTheme">
+        <item name="android:width">50dp</item>
+        <item name="android:height">50dp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:src">@drawable/cross</item>
     </style>
 
 </resources>

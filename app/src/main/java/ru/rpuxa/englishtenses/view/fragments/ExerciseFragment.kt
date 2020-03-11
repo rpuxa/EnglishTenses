@@ -1,57 +1,134 @@
-package ru.rpuxa.englishtenses
+package ru.rpuxa.englishtenses.view.fragments
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.graphics.Point
-import android.graphics.Rect
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.component1
 import androidx.core.graphics.component2
-import androidx.core.graphics.contains
 import androidx.core.graphics.minus
-import androidx.core.view.doOnLayout
+import androidx.core.os.bundleOf
 import androidx.core.view.doOnNextLayout
+import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import ru.rpuxa.englishtenses.databinding.ActivityMainBinding
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
+import org.jetbrains.anko.support.v4.act
+import org.jetbrains.anko.support.v4.ctx
+import ru.rpuxa.englishtenses.*
+import ru.rpuxa.englishtenses.databinding.FragmentExerciseBinding
+import ru.rpuxa.englishtenses.databinding.MistakeBottomMenuBinding
+import ru.rpuxa.englishtenses.model.ExerciseResult
+import ru.rpuxa.englishtenses.view.activities.ExerciseActivity
+import ru.rpuxa.englishtenses.view.views.BottomMenu
+import ru.rpuxa.englishtenses.view.views.DummyView
+import ru.rpuxa.englishtenses.view.views.Menus
+import ru.rpuxa.englishtenses.viewmodel.ExerciseViewModel
 import kotlin.math.abs
-import kotlin.math.sqrt
+import kotlin.properties.Delegates
 
-class NewMainActivity : AppCompatActivity() {
+class ExerciseFragment : Fragment() {
 
-    private val answersTexts =
-        listOf("am", "is", "very long word", "another", "and another", "and another another")
-    private val sentence =
-        "This is simple sentence. And this %s space for answer. Another space: %s"
+    private val tenses by lazy { arguments?.get(ExerciseActivity.TENSES) as Set<Int> }
+    private val tipsEnabled by lazy { arguments?.get(TIPS_ENABLED) as Boolean }
+
+    private val binding by lazy { FragmentExerciseBinding.inflate(layoutInflater) }
+
+
+    private val viewModel: ExerciseViewModel by fragmentViewModel()
+
     private val dummyWidthMargin = 16.dpToPx()
     private val dummyHeightMargin = 8.dpToPx()
     private val spaceDummyMinWidth by lazy { resources.getDimensionPixelSize(R.dimen.space_answer_min_width) }
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     private val answers = ArrayList<Answer>()
     private val answerSpaces = ArrayList<AnswerSpace>()
     private val answersDummies = ArrayList<DummyView>()
     private val answersSpacesDummies = ArrayList<DummyView>()
 
-    @SuppressLint("ClickableViewAccessibility")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
 
-        answersTexts.forEachIndexed { index, text ->
+    private val listener by lazy { viewModel.answerListener }
+    private var onNext: ((ExerciseResult) -> Unit)? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) = binding.root
+
+
+    @SuppressLint("ClickableViewAccessibility")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.load(tenses, tipsEnabled)
+
+        binding.tip.setOnClickListener {
+            val space = lowestEmptySpace()
+            if (space != null) {
+                viewModel.tipModeOn(space.index)
+            } else {
+                check()
+            }
+        }
+
+        viewModel.showWrongMenu.observe(viewLifecycleOwner) {
+            val binding = MistakeBottomMenuBinding.inflate(act.layoutInflater)
+            val menu = BottomMenu(binding.root)
+            binding.next.setOnClickListener {
+                menu.dismiss()
+                onNext?.invoke(viewModel.result)
+            }
+            binding.showCorrectAnswers.setOnClickListener {
+                showCorrectAnswers()
+                it.isVisible = false
+            }
+            menu.show(act)
+        }
+
+        var tipMenu: BottomMenu? = null
+        viewModel.tipMode.observe(viewLifecycleOwner) {
+            if (it == ExerciseViewModel.TIP_MODE_OFF) {
+                tipMenu?.dismiss()
+            } else {
+                tipMenu = Menus.showTipMenu(act, it.tense, it.spaceIndex, answerSpaces.size > 1)
+            }
+        }
+
+        binding.check.setOnClickListener {
+            check()
+        }
+
+        viewModel.showTipButton.observe(viewLifecycleOwner) {
+            binding.tip.isVisible = it
+            binding.check.isGone = it
+        }
+
+        viewModel.allCorrect.observe(viewLifecycleOwner) {
+            if (it) {
+                var menu: BottomMenu? = null
+                menu = Menus.showCorrectMenu(act) {
+                    menu!!.dismiss()
+                    onNext?.invoke(viewModel.result)
+                }
+            }
+        }
+
+        viewModel.shuffledAnswers.forEachIndexed { index, text ->
             val answerView = binding.answersField.inflate(R.layout.item_answer) as TextView
             answerView.isInvisible = true
             answerView.text = text
             binding.answersField.addView(answerView)
             val point = Point()
             answerView.onMeasured {
-                val dummyView = DummyView(this)
+                val dummyView = DummyView(ctx)
                 dummyView.width = answerView.width + dummyWidthMargin
                 dummyView.height = answerView.height + dummyHeightMargin
                 answersDummies += dummyView
@@ -64,6 +141,35 @@ class NewMainActivity : AppCompatActivity() {
                     answerView.isVisible = true
                 }
             }
+
+            viewModel.getAnswerState(index).observe(viewLifecycleOwner) {
+                val tint = when (it) {
+                    ExerciseViewModel.AnswerState.RIGHT -> R.color.colorRightAnswer
+                    ExerciseViewModel.AnswerState.WRONG -> R.color.colorWrongAnswer
+                    ExerciseViewModel.AnswerState.WRONG_SIGNAL -> {
+                        viewModel.resetState(index)
+                        ObjectAnimator.ofInt(1, 0, 1, 0, 1, 0).apply {
+                            duration = 400
+                            addUpdateListener {
+                                val color = it.animatedValue as Int
+
+                                answerView.backgroundTintList = ContextCompat.getColorStateList(
+                                    ctx,
+                                    if (color == 1) R.color.colorWrongAnswer else android.R.color.white
+                                )
+                            }
+                            start()
+                        }
+
+                        null
+                    }
+                    ExerciseViewModel.AnswerState.NONE -> android.R.color.white
+                }
+
+                if (tint != null)
+                    answerView.backgroundTintList = ContextCompat.getColorStateList(ctx, tint)
+            }
+
             val answer = Answer(index, answerView)
             answerView.setOnTouchListener(AnswerTouchListener(answer))
             answers += answer
@@ -71,12 +177,12 @@ class NewMainActivity : AppCompatActivity() {
 
 
         var answerSpaceIndex = 0
-        sentence.split(" ")
+        viewModel.sentence.text.split(" ")
             .filter { it.isNotBlank() }
             .forEach { text ->
                 val view = if (text == "%s") {
                     val space = binding.sentence.inflate(R.layout.item_answer_margin) as ViewGroup
-                    val dummy = DummyView(this)
+                    val dummy = DummyView(ctx)
                     dummy.height = 50
                     dummy.width = spaceDummyMinWidth
                     space.addView(dummy)
@@ -95,9 +201,35 @@ class NewMainActivity : AppCompatActivity() {
             }
     }
 
+
+    private fun showCorrectAnswers() {
+        viewModel.rightAnswers.forEachIndexed { space, rightAnswer ->
+            val answer = answers.first { it.answerIndex == rightAnswer }
+            listener.onMoveToSpace(answer.answerIndex, space)
+            answer.moveToSpace(answerSpaces[space])
+            viewModel.setAllCorrect()
+        }
+    }
+
+    fun setOnNextListener(block: (ExerciseResult) -> Unit) {
+        onNext = block
+    }
+
+    private fun check() {
+        viewModel.check(answers())
+    }
+
+    private fun answers(): List<Int?> =
+        List(answerSpaces.size) { spaceIndex ->
+            answers.find { it.spaceIndex == spaceIndex }?.answerIndex
+        }
+
+
     private var animator: Animator? = null
     private fun moveAnswersWithDummies(duration: Long, answerIndex: Int, spaceIndex: Int) {
+        Log.d(TAG, "moveAnswersWithDummies $answerIndex $spaceIndex")
         answers.forEach { answer ->
+            Log.d(TAG, "Check ${answer.answerIndex} ${answer.spaceIndex}")
             if (answer.answerIndex > answerIndex && answer.spaceIndex == -1) {
                 val dummyView = answersDummies[answer.answerIndex]
                 moveAnswerToDummies(duration, answer, dummyView)
@@ -120,10 +252,14 @@ class NewMainActivity : AppCompatActivity() {
     }
 
     private fun moveAnswerToDummies(duration: Long, answer: Answer, dummyView: DummyView) {
+        Log.d(TAG, "Preparing move with dummy  ${answer.answerIndex}")
         answer.view.animation?.cancel()
+        dummyView.requestLayout()
+
         dummyView.doOnNextLayout {
             val coords = dummyView.coordinates - binding.answersField.coordinates
 
+            Log.d(TAG, "Move with dummy  ${answer.answerIndex}  ${dummyView.hashCode()}")
             answer.view.animate()
                 .x(coords.x.toFloat())
                 .y(coords.y.toFloat())
@@ -132,30 +268,23 @@ class NewMainActivity : AppCompatActivity() {
         }
     }
 
-    private var View.coordinates: Point
-        get() {
-            val array = IntArray(2)
-            getLocationOnScreen(array)
-            return Point(array[0], array[1])
-        }
-        set(point) {
-            val (x, y) = point - parentCoordinates
-            setX(x.toFloat())
-            setY(y.toFloat())
-        }
-
-    private val View.parentCoordinates: Point get() = (parent as View).coordinates
-
-    private val View.viewRect: Rect
-        get() {
-            val (x, y) = coordinates
-            return Rect(x, y, x + width, y + height)
-        }
+    private fun lowestEmptySpace(): AnswerSpace? {
+        val set = LinkedHashSet<Int>()
+        set.addAll(0 until answersSpacesDummies.size)
+        answers.forEach { set -= it.spaceIndex }
+        val min = set.min() ?: return null
+        return answerSpaces[min]
+    }
 
     private inner class Answer(var answerIndex: Int, val view: View) {
-        var spaceIndex = -1
+        var spaceIndex by Delegates.observable(-1) { _, old, new ->
+            if (old != new) {
+                viewModel.updateSpaces(answers())
+            }
+        }
 
         fun move(coordinates: Point, duration: Long) {
+            Log.d(TAG, "Move $answerIndex to coordinates $coordinates")
             val (x, y) = coordinates - view.parentCoordinates
             if (duration == 0L) {
                 view.x = x.toFloat()
@@ -171,7 +300,7 @@ class NewMainActivity : AppCompatActivity() {
         }
 
         fun moveToSpace(space: AnswerSpace) {
-            println("MOVE $answerIndex TO SPACE")
+            Log.d(TAG, "Move $answerIndex to space number ${space.index} from $spaceIndex")
 
             val duration = duration(space.view.coordinates)
             move(space.view.coordinates, duration)
@@ -190,7 +319,7 @@ class NewMainActivity : AppCompatActivity() {
         }
 
         fun moveToAnswers(changeSpace: Boolean = true) {
-            println("MOVE $answerIndex TO ANSWERS")
+            Log.d(TAG, "Move $answerIndex to answers")
             val dummyView = answersDummies[answerIndex]
             val coords = dummyView.coordinates
             val duration = duration(coords)
@@ -205,6 +334,7 @@ class NewMainActivity : AppCompatActivity() {
         }
 
         fun moveBack() {
+            Log.d(TAG, "Move $answerIndex back from $spaceIndex")
             if (spaceIndex == -1) {
                 val coords = answersDummies[answerIndex].coordinates
                 val duration = duration(coords)
@@ -220,13 +350,11 @@ class NewMainActivity : AppCompatActivity() {
             200L
 
         fun move() {
+            Log.d(TAG, "Move $answerIndex to $spaceIndex  (2)")
             if (spaceIndex == -1) {
-                val set = LinkedHashSet<Int>()
-                set.addAll(0 until answersSpacesDummies.size)
-                answers.forEach { set -= it.spaceIndex }
-                val min = set.min()
-                if (min != null)
-                    moveToSpace(answerSpaces[min])
+                val space = lowestEmptySpace()
+                if (space != null && listener.onMoveToSpace(answerIndex, space.index))
+                    moveToSpace(space)
             } else {
                 moveToAnswers()
             }
@@ -238,7 +366,9 @@ class NewMainActivity : AppCompatActivity() {
         val view: ViewGroup
     )
 
-    private inner class AnswerTouchListener(private val answer: Answer) : View.OnTouchListener {
+    private inner class AnswerTouchListener(
+        private val answer: Answer
+    ) : View.OnTouchListener {
         private var startX = 0f
         private var startY = 0f
 
@@ -246,13 +376,13 @@ class NewMainActivity : AppCompatActivity() {
             val duration = event.eventTime - event.downTime
 
             fun isAClick(): Boolean =
-                duration < 500 && abs(startX - event.x) <= 20 && abs(startY - event.y) <= 20
+                duration < 500 && abs(startX - event.rawX) <= 20 && abs(startY - event.rawY) <= 20
 
             return when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    startX = event.x
-                    startY = event.y
-                    true
+                    startX = event.rawX
+                    startY = event.rawY
+                    listener.onTouch(answer.answerIndex)
                 }
 
                 MotionEvent.ACTION_MOVE -> {
@@ -280,7 +410,11 @@ class NewMainActivity : AppCompatActivity() {
                                         event.rawY.toInt()
                                     )
                                 ) {
-                                    answer.moveToSpace(space)
+                                    if (listener.onMoveToSpace(answer.answerIndex, space.index)) {
+                                        answer.moveToSpace(space)
+                                    } else {
+                                        answer.moveBack()
+                                    }
                                     return@checkSpaceInterception
                                 }
                             }
@@ -296,7 +430,23 @@ class NewMainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    }
 
+    interface AnswersMoveListener {
+        fun onMoveToSpace(answerId: Int, spaceId: Int): Boolean
+        fun onTouch(id: Int): Boolean
+    }
 
+    companion object {
+        const val TIPS_ENABLED = "tips"
+
+        fun create(tenses: Set<Int>, tipEnabled: Boolean) = ExerciseFragment().apply {
+            arguments = bundleOf(
+                ExerciseActivity.TENSES to tenses,
+                TIPS_ENABLED to tipEnabled
+            )
+        }
+
+        val TAG = ExerciseFragment::class.simpleName + "Debug"
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Button3d">
+        <attr name="button3dStyle" format="enum">
+            <enum name="gray" value="0" />
+            <enum name="green" value="1" />
+            <enum name="yellow" value="2" />
+            <enum name="blue" value="3" />
+            <enum name="blue_borderless" value="4" />
+            <enum name="red" value="5" />
+        </attr>
+        <attr name="button3dText" format="string"/>
+    </declare-styleable>
+</resources>

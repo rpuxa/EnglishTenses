@@ -1,11 +1,26 @@
-package ru.rpuxa.englishtenses
+package ru.rpuxa.englishtenses.view.views
 
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.content.Context
+import android.util.AttributeSet
 import android.view.View
 
-class DummyView(context: Context) : View(context) {
+class DummyView : View {
+    constructor(context: Context) : super(context)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
+
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRef: Int) : super(
+        context,
+        attrs,
+        defStyleAttr,
+        defStyleRef
+    )
 
     private var animator: Animator? = null
     private var mWidth = 0

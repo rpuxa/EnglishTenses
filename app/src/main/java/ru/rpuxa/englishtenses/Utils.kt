@@ -2,11 +2,23 @@ package ru.rpuxa.englishtenses
 
 import android.content.res.Resources
 import android.graphics.Point
+import android.graphics.Rect
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.activity.ComponentActivity
+import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
+import androidx.core.graphics.component1
+import androidx.core.graphics.component2
+import androidx.core.graphics.minus
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import ru.rpuxa.englishtenses.viewmodel.ViewModelFactory
 import kotlin.math.sqrt
 
 
@@ -36,7 +48,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.chauthai.swipereveallayout.SwipeRevealLayout
-import ru.rpuxa.chinese.viewmodel.ViewModelFactory
+import ru.rpuxa.englishtenses.viewmodel.ViewModelFactory
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.random.Random
 
@@ -52,11 +64,7 @@ var <T> MutableLiveData<T>.nnValue: T
         }
     }
 
-inline fun <T> MutableLiveData<T>.update(block: T.() -> Unit = {}) {
-    val v = value
-    v!!.block()
-    value = v
-}
+
 
 inline val Fragment.lazyNavController get() = lazy { findNavController() }
 
@@ -75,14 +83,7 @@ private object EqualsDiff : DiffUtil.ItemCallback<Any>() {
 
 
 
-inline fun <reified VM : ViewModel> ComponentActivity.viewModel() =
-    viewModels<VM>(::ViewModelFactory)
 
-inline fun <reified VM : ViewModel> Fragment.viewModel() =
-    activityViewModels<VM>(::ViewModelFactory)
-
-inline fun <reified VM : ViewModel> Fragment.fragmentViewModel() =
-    viewModels<VM>(factoryProducer = ::ViewModelFactory)
 
 
 fun Activity.hideKeyboard() {
@@ -100,6 +101,22 @@ fun Activity.openKeyboard() {
     inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
 }
 */
+
+inline fun <T> MutableLiveData<T>.update(block: T.() -> Unit = {}) {
+    val v = value
+    v!!.block()
+    value = v
+}
+
+inline fun <reified VM : ViewModel> ComponentActivity.viewModel() =
+    viewModels<VM>(::ViewModelFactory)
+
+inline fun <reified VM : ViewModel> Fragment.viewModel() =
+    activityViewModels<VM>(::ViewModelFactory)
+
+inline fun <reified VM : ViewModel> Fragment.fragmentViewModel() =
+    viewModels<VM>(factoryProducer = ::ViewModelFactory)
+
 fun ViewGroup.inflate(@LayoutRes res: Int): View {
     val inflater = LayoutInflater.from(context)
     return inflater.inflate(res, this, false)
@@ -128,3 +145,26 @@ fun Point(x: Float, y: Float) = Point(x.toInt(), y.toInt())
 fun Int.sqr() = this * this
 
 infix fun Point.dist(other: Point) = sqrt(((other.x - x).sqr() + (other.y - y).sqr()).toFloat())
+
+
+var View.coordinates: Point
+    get() {
+        val array = IntArray(2)
+        getLocationOnScreen(array)
+        return Point(array[0], array[1])
+    }
+    set(point) {
+        val (x, y) = point - parentCoordinates
+        setX(x.toFloat())
+        setY(y.toFloat())
+    }
+
+val View.parentCoordinates: Point get() = (parent as View).coordinates
+
+val View.viewRect: Rect
+    get() {
+        val (x, y) = coordinates
+        return Rect(x, y, x + width, y + height)
+    }
+
+fun event() = SingleLiveEvent<Unit>()

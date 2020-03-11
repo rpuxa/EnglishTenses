@@ -11,4 +11,6 @@
     android:gravity="center"
     android:paddingStart="11dp"
     android:paddingEnd="11dp"
+    tools:backgroundTint="@android:color/white"
+    android:backgroundTintMode="multiply"
     android:textColor="@android:color/black"/>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_menu_height"
+    android:background="#FA7D7D"
+    android:animateLayoutChanges="true">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:text="Неверно!"
+        android:textColor="@color/redText"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ru.rpuxa.englishtenses.view.views.Button3d
+        android:id="@+id/next"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/button3d_height"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:button3dStyle="red"
+        app:button3dText="Дальше"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ru.rpuxa.englishtenses.view.views.Button3d
+        android:id="@+id/showCorrectAnswers"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/button3d_height"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:button3dStyle="red"
+        app:button3dText="Показать ответы"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/next" />
+</androidx.constraintlayout.widget.ConstraintLayout>

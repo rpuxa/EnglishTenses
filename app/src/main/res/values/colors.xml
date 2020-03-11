@@ -4,5 +4,23 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
 
+    <color name="bottomMenuRight">#85E613</color>
+
     <color name="colorSpace">#e0e0e0</color>
+    <color name="colorGreenButton">#92D544</color>
+    <color name="colorYellowButton">#EAD308</color>
+    <color name="colorGrayButton">#B3B3B3</color>
+    <color name="colorBlueButton">#40AAFF</color>
+    <color name="colorRedButton">#F60A5A</color>
+
+
+    <color name="colorRightAnswer">#CCFB95</color>
+    <color name="colorWrongAnswer">#EA6679</color>
+    <color name="progressbar_background">#DCDBDB</color>
+    <color name="progressbar_progress">#24AF29</color>
+    <color name="progressbar_flare">#10C316</color>
+    <color name="blueBottomMenu">#B7F2FA</color>
+    <color name="redText">#EF1F10</color>
+
+
 </resources>

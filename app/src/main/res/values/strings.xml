@@ -1,3 +1,32 @@
 <resources>
-    <string name="app_name">EnglishTenses2</string>
+    <string name="app_name">English Tenses</string>
+
+    <string name="present_simple">Present Simple</string>
+    <string name="present_continuous">Present Continuous</string>
+    <string name="present_perfect">Present Perfect</string>
+    <string name="present_perfect_continuous">Present Perfect Continuous</string>
+
+    <string name="past_simple">Past Simple</string>
+    <string name="past_continuous">Past Continuous</string>
+    <string name="past_perfect">Past Perfect</string>
+    <string name="past_perfect_continuous">Past Perfect Continuous</string>
+
+    <string name="future_simple">Future Simple</string>
+    <string name="future_continuous">Future Continuous</string>
+    <string name="future_perfect">Future Perfect</string>
+    <string name="future_perfect_continuous">Future Perfect Continuous</string>
+
+
+    <string name="single_tip">Здесь нужно употребить %s</string>
+    <string name="many_tip">%s случае нужно употребить %s</string>
+
+    <string-array name="ordinal_numbers">
+        <item>В первом</item>
+        <item>Во втором</item>
+        <item>В третьем</item>
+        <item>В четвертом</item>
+        <item>В пятом</item>
+        <item>В шестом</item>
+        <item>В седьмом</item>
+    </string-array>
 </resources>
