@@ -1,19 +1,20 @@
 package ru.rpuxa.englishtenses.view.views
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.PorterDuff
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
-import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import ru.rpuxa.englishtenses.R
-import ru.rpuxa.englishtenses.dpToPx
 import ru.rpuxa.englishtenses.viewRect
 
-open class Layout3d : LinearLayout {
+
+open class Layout3d : ViewGroup {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -23,74 +24,77 @@ open class Layout3d : LinearLayout {
         defStyleAttr
     )
 
+    protected var backTint = android.R.color.white
     private var hasPressed = false
+    private val margin = resources.getDimensionPixelSize(R.dimen.button3d_margin)
     private val buttonDepth = resources.getDimensionPixelSize(R.dimen.button3d_depth)
-    protected val singleChild: View?
-        get() {
-            if (childCount < 2) return null
-            require(childCount == 2) { "Layout3d can contains only 1 child" }
-            return getChildAt(1)
-        }
-    private val marginView = DummyView(context)
+
 
     init {
-        orientation = VERTICAL
-        addView(marginView)
-        unpressed()
+        setWillNotDraw(false)
     }
 
-    protected fun unpressed() {
-        Log.d(TAG, "Unpressed")
-        marginView.height = 0
-        singleChild?.backgroundTintMode = PorterDuff.Mode.MULTIPLY
-        singleChild?.setBackgroundResource(R.drawable.button3d_unpressed)
-        hasPressed = false
-        marginView.requestLayout()
-        requestLayout()
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        val widthMode = MeasureSpec.getMode(widthMeasureSpec)
+        val heightMode = MeasureSpec.getMode(heightMeasureSpec)
+        val width = MeasureSpec.getSize(widthMeasureSpec)
+        val height = MeasureSpec.getSize(heightMeasureSpec)
+
+
+        val child: View = getChildAt(0)
+        child.measure(
+            MeasureSpec.makeMeasureSpec(width - margin * 2, widthMode),
+            MeasureSpec.makeMeasureSpec(height - margin * 2, heightMode)
+        )
+        setMeasuredDimension(
+            child.measuredWidth + margin * 2,
+            child.measuredHeight + margin * 2 + buttonDepth
+        )
     }
 
-    private fun pressed() {
-        Log.d(TAG, "Pressed")
-        marginView.height = buttonDepth
-        singleChild?.backgroundTintMode = PorterDuff.Mode.MULTIPLY
-        singleChild?.setBackgroundResource(R.drawable.button3d_pressed)
-        hasPressed = true
-        marginView.requestLayout()
-        requestLayout()
+    override fun onDraw(canvas: Canvas) {
+        val drawable = ContextCompat.getDrawable(
+            context,
+            if (hasPressed) R.drawable.button3d_pressed else R.drawable.button3d_unpressed
+        )!!
+        drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
+        drawable.setTint(ContextCompat.getColor(context, backTint))
+        drawable.setBounds(0, if (hasPressed) buttonDepth else 0, width, height)
+        drawable.draw(canvas)
     }
 
-    override fun addView(child: View?, index: Int, params: ViewGroup.LayoutParams?) {
-        super.addView(child, index, params)
-        unpressed()
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        val x = x.toInt()
+        val y = y.toInt()
+        getChildAt(0).layout(
+            l - x + margin,
+            t - y + margin + if (hasPressed) buttonDepth else 0,
+            r - x - margin,
+            b - y - margin - if (hasPressed) 0 else buttonDepth
+        )
     }
 
-    private var entered = false
+    final override fun setWillNotDraw(willNotDraw: Boolean) {
+        super.setWillNotDraw(willNotDraw)
+    }
+
     override fun onTouchEvent(event: MotionEvent): Boolean {
         return when (event.action) {
             MotionEvent.ACTION_DOWN -> true
             MotionEvent.ACTION_MOVE -> {
-                entered = if (viewRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                    pressed()
-                    true
-                } else {
-                    unpressed()
-                    false
-                }
+                hasPressed = viewRect.contains(event.rawX.toInt(), event.rawY.toInt())
+                requestLayout()
                 true
             }
             MotionEvent.ACTION_UP -> {
-                if (entered) {
-                    unpressed()
-                    entered = false
+                if (hasPressed) {
+                    hasPressed = false
                     performClick()
                 }
+                requestLayout()
                 true
             }
             else -> false
         }
-    }
-
-    companion object {
-        private val TAG = Layout3d::class.simpleName
     }
 }

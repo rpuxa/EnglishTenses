@@ -24,7 +24,7 @@
     <ru.rpuxa.englishtenses.view.views.Button3d
         android:id="@+id/next"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/button3d_height"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         app:button3dStyle="green"
         app:button3dText="Дальше"

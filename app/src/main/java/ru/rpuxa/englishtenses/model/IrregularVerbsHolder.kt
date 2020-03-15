@@ -16,10 +16,6 @@ class IrregularVerbsHolder(
         }
 
     fun preload() {
-        _verbs = listOf(
-            IrregularVerb(0, "be", "was/were", "been"),
-            IrregularVerb(1, "do/does", "did", "done"),
-            IrregularVerb(2, "write", "wrote", "written")
-        )
+        _verbs = listOf()
     }
 }

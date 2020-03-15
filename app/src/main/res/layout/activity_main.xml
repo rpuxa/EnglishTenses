@@ -185,31 +185,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingStart="10dp"
-                android:paddingTop="3dp"
-                android:paddingBottom="7dp">
-
-
-                <CheckBox
-                    android:id="@+id/choseAllCheckbox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:maxLines="1"
-                    android:text="Выбрать все" />
-
-            </FrameLayout>
+            <CheckBox
+                android:id="@+id/choseAllCheckbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:maxLines="1"
+                android:text="Выбрать все" />
 
         </ru.rpuxa.englishtenses.view.views.Layout3d>
 
         <ru.rpuxa.englishtenses.view.views.Button3d
             android:id="@+id/irregularVerbs"
             android:layout_width="0dp"
-            android:layout_height="@dimen/button3d_height"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"

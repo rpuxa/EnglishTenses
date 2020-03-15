@@ -11,12 +11,17 @@ class SentenceLoader(private val context: Context) {
 
         return Sentence(
             1,
-            "What %s now?",
+            "What %s now? Where %s",
             listOf(
                 WordAnswer(
                     "to do",
                     listOf("are you doing"),
                     Tense.PRESENT_CONTINUOUS
+                ),
+                WordAnswer(
+                    "to be",
+                    listOf("have you been"),
+                    Tense.PRESENT_PERFECT
                 )
             ),
             listOf(

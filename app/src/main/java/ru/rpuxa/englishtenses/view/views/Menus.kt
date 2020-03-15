@@ -30,12 +30,4 @@ object Menus {
     }
 
 
-    fun showCorrectMenu(activity: Activity, block: () -> Unit): BottomMenu {
-        val binding = BottomMenuCorrectBinding.inflate(activity.layoutInflater)
-        binding.next.setOnClickListener {
-            block()
-        }
-        return BottomMenu(binding.root).apply { show(activity) }
-    }
-
 }

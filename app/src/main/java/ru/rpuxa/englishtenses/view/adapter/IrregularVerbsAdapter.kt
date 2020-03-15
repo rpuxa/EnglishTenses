@@ -12,7 +12,7 @@ class IrregularVerbsAdapter : BaseAdapter<IrregularVerb, ItemIrregularVerbBindin
     override fun View.getViewHolder(binding: ItemIrregularVerbBinding) =
         bind {
             binding.first.text = it.first
-            binding.second.text = it.second
-            binding.third.text = it.third
+            binding.second.text = it.secondText
+            binding.third.text = it.thirdText
         }
 }

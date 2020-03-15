@@ -4,5 +4,5 @@ import ru.rpuxa.englishtenses.model.Sentence
 
 interface SentenceSource {
 
-    fun loadSentences(): List<Sentence>
+    fun loadSentences(): List<SimpleSentence>
 }

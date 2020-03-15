@@ -40,7 +40,7 @@ class Button3d : Layout3d {
             0
         )
 
-        val txt =obtainStyledAttributes.getString(R.styleable.Button3d_button3dText)
+        val txt = obtainStyledAttributes.getString(R.styleable.Button3d_button3dText)
         text.text = txt
 
         val (color, textColor) = when (obtainStyledAttributes.getInteger(R.styleable.Button3d_button3dStyle, 0)) {
@@ -53,11 +53,10 @@ class Button3d : Layout3d {
 
             else -> error("Unknown attribute")
         }
-        text.backgroundTintList = ContextCompat.getColorStateList(context, color)
+        backTint = color
         text.textColor = ContextCompat.getColor(context, textColor)
 
         addView(text)
-        unpressed()
     }
 
 }

@@ -45,7 +45,7 @@
     <ru.rpuxa.englishtenses.view.views.Button3d
         android:id="@+id/check"
         android:layout_width="0dp"
-        android:layout_height="@dimen/button3d_height"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -58,7 +58,7 @@
     <ru.rpuxa.englishtenses.view.views.Button3d
         android:id="@+id/tip"
         android:layout_width="0dp"
-        android:layout_height="@dimen/button3d_height"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"

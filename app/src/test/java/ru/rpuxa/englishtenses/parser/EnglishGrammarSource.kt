@@ -8,7 +8,7 @@ import ru.rpuxa.englishtenses.model.WordAnswer
 
 object EnglishGrammarSource : SentenceSource {
 
-    override fun loadSentences(): List<Sentence> {
+    override fun loadSentences(): List<SimpleSentence> {
         val urlS =
             "https://www.english-grammar.at/online_exercises/tenses/present-simple-progressive6.htm"
         val doc = Jsoup.connect(urlS).get()
@@ -54,7 +54,7 @@ object EnglishGrammarSource : SentenceSource {
                     .filter { it.isNotBlank() }
             }
             .map {
-                val answers = ArrayList<WordAnswer>()
+                val answers = ArrayList<SimpleAnswer>()
                 val infinitives = it.substring(it.lastIndexOf('(') + 1, it.lastIndexOf(')'))
                     .split(", ")
                     .iterator()
@@ -62,13 +62,13 @@ object EnglishGrammarSource : SentenceSource {
                 while ("%s" in s) {
                     s = s.replaceFirst("%s", "")
                     answers.add(
-                        WordAnswer(
-                            infinitives.next(),
+                        SimpleAnswer(
+                            infinitives.next().toLowerCase(),
                             words[wordId++]
                         )
                     )
                 }
-                Sentence(
+                SimpleSentence(
                     it.substring(0, it.lastIndexOf('(')).trim(),
                     answers
                 )

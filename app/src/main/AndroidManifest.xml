@@ -14,7 +14,9 @@
         <activity
             android:name=".view.activities.IrregularVerbsActivity"
             android:theme="@style/WhiteStatusBarTheme" />
-        <activity android:name=".view.activities.TestActivity" />
+        <activity android:name=".view.activities.TestActivity">
+
+        </activity>
         <activity
             android:name=".view.activities.MainActivity"
             android:theme="@style/WhiteStatusBarTheme">

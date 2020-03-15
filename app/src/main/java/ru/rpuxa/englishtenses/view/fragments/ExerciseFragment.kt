@@ -25,9 +25,10 @@ import androidx.lifecycle.observe
 import org.jetbrains.anko.support.v4.act
 import org.jetbrains.anko.support.v4.ctx
 import ru.rpuxa.englishtenses.*
+import ru.rpuxa.englishtenses.databinding.BottomMenuCorrectBinding
 import ru.rpuxa.englishtenses.databinding.FragmentExerciseBinding
 import ru.rpuxa.englishtenses.databinding.MistakeBottomMenuBinding
-import ru.rpuxa.englishtenses.model.ExerciseResult
+import ru.rpuxa.englishtenses.model.*
 import ru.rpuxa.englishtenses.view.activities.ExerciseActivity
 import ru.rpuxa.englishtenses.view.views.BottomMenu
 import ru.rpuxa.englishtenses.view.views.DummyView
@@ -54,6 +55,7 @@ class ExerciseFragment : Fragment() {
     private val answerSpaces = ArrayList<AnswerSpace>()
     private val answersDummies = ArrayList<DummyView>()
     private val answersSpacesDummies = ArrayList<DummyView>()
+    private val textDummies = ArrayList<DummyView>()
 
 
     private val listener by lazy { viewModel.answerListener }
@@ -67,7 +69,7 @@ class ExerciseFragment : Fragment() {
 
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated(unused: View, savedInstanceState: Bundle?) {
         viewModel.load(tenses, tipsEnabled)
 
         binding.tip.setOnClickListener {
@@ -77,20 +79,6 @@ class ExerciseFragment : Fragment() {
             } else {
                 check()
             }
-        }
-
-        viewModel.showWrongMenu.observe(viewLifecycleOwner) {
-            val binding = MistakeBottomMenuBinding.inflate(act.layoutInflater)
-            val menu = BottomMenu(binding.root)
-            binding.next.setOnClickListener {
-                menu.dismiss()
-                onNext?.invoke(viewModel.result)
-            }
-            binding.showCorrectAnswers.setOnClickListener {
-                showCorrectAnswers()
-                it.isVisible = false
-            }
-            menu.show(act)
         }
 
         var tipMenu: BottomMenu? = null
@@ -111,12 +99,28 @@ class ExerciseFragment : Fragment() {
             binding.check.isGone = it
         }
 
-        viewModel.allCorrect.observe(viewLifecycleOwner) {
-            if (it) {
-                var menu: BottomMenu? = null
-                menu = Menus.showCorrectMenu(act) {
-                    menu!!.dismiss()
-                    onNext?.invoke(viewModel.result)
+        viewModel.result.liveData.observe(viewLifecycleOwner) {result ->
+            if (result != null) {
+                if (result.correct) {
+                val binding = BottomMenuCorrectBinding.inflate(act.layoutInflater)
+                val menu = BottomMenu(binding.root)
+                binding.next.setOnClickListener {
+                    menu.dismiss()
+                    onNext?.invoke(result)
+                }
+                menu.show(act)
+                } else {
+                    val binding = MistakeBottomMenuBinding.inflate(act.layoutInflater)
+                    val menu = BottomMenu(binding.root)
+                    binding.next.setOnClickListener {
+                        menu.dismiss()
+                        onNext?.invoke(result)
+                    }
+                    binding.showCorrectAnswers.setOnClickListener {
+                        showCorrectAnswers()
+                        it.isVisible = false
+                    }
+                    menu.show(act)
                 }
             }
         }
@@ -144,9 +148,8 @@ class ExerciseFragment : Fragment() {
 
             viewModel.getAnswerState(index).observe(viewLifecycleOwner) {
                 val tint = when (it) {
-                    ExerciseViewModel.AnswerState.RIGHT -> R.color.colorRightAnswer
-                    ExerciseViewModel.AnswerState.WRONG -> R.color.colorWrongAnswer
-                    ExerciseViewModel.AnswerState.WRONG_SIGNAL -> {
+                    is Result -> if (it.correct) R.color.colorRightAnswer else R.color.colorWrongAnswer
+                    WrongSignal -> {
                         viewModel.resetState(index)
                         ObjectAnimator.ofInt(1, 0, 1, 0, 1, 0).apply {
                             duration = 400
@@ -163,7 +166,7 @@ class ExerciseFragment : Fragment() {
 
                         null
                     }
-                    ExerciseViewModel.AnswerState.NONE -> android.R.color.white
+                    is None -> android.R.color.white
                 }
 
                 if (tint != null)
@@ -180,6 +183,7 @@ class ExerciseFragment : Fragment() {
         viewModel.sentence.text.split(" ")
             .filter { it.isNotBlank() }
             .forEach { text ->
+                val textDummy = DummyView(ctx)
                 val view = if (text == "%s") {
                     val space = binding.sentence.inflate(R.layout.item_answer_margin) as ViewGroup
                     val dummy = DummyView(ctx)
@@ -203,12 +207,21 @@ class ExerciseFragment : Fragment() {
 
 
     private fun showCorrectAnswers() {
-        viewModel.rightAnswers.forEachIndexed { space, rightAnswer ->
-            val answer = answers.first { it.answerIndex == rightAnswer }
-            listener.onMoveToSpace(answer.answerIndex, space)
-            answer.moveToSpace(answerSpaces[space])
-            viewModel.setAllCorrect()
+        answers.forEach { answer ->
+            if (answer.spaceIndex != -1 && answer.answerIndex !in viewModel.rightAnswers)
+                answer.moveToAnswers(false)
         }
+        answers.forEach { answer ->
+            val space = viewModel.rightAnswers.indexOf(answer.answerIndex)
+            if (space != -1 && answer.spaceIndex != -1 && answer.spaceIndex != space)
+                answer.moveToSpace(answerSpaces[space])
+        }
+        viewModel.rightAnswers.forEachIndexed {  space, answerId ->
+            val answer = answers[answerId]
+            if (answer.spaceIndex != space)
+                answer.moveToSpace(answerSpaces[space])
+        }
+        viewModel.setAllCorrect()
     }
 
     fun setOnNextListener(block: (ExerciseResult) -> Unit) {
@@ -318,7 +331,7 @@ class ExerciseFragment : Fragment() {
             found?.moveToAnswers(false)
         }
 
-        fun moveToAnswers(changeSpace: Boolean = true) {
+        fun moveToAnswers(animateSpaceDummy: Boolean = true) {
             Log.d(TAG, "Move $answerIndex to answers")
             val dummyView = answersDummies[answerIndex]
             val coords = dummyView.coordinates
@@ -329,7 +342,7 @@ class ExerciseFragment : Fragment() {
             this.spaceIndex = -1
             moveAnswersWithDummies(duration, answerIndex - 1, spaceIndex)
             dummyView.requestLayout()
-            if (changeSpace)
+            if (animateSpaceDummy)
                 answersSpacesDummies[spaceIndex].animateWidth(spaceDummyMinWidth, duration)
         }
 

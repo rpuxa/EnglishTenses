@@ -4,6 +4,7 @@
     <dimen name="space_answer_min_width">90dp</dimen>
     <dimen name="button3d_depth">5dp</dimen>
     <dimen name="button3d_height">50dp</dimen>
+    <dimen name="button3d_margin">8dp</dimen>
 
     <dimen name="bottom_menu_height">100dp</dimen>
 </resources>
