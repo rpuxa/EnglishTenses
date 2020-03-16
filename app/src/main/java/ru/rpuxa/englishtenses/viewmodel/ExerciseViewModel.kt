@@ -70,7 +70,7 @@ class ExerciseViewModel @Inject constructor(
         this.tipsEnabled = tipsEnabled
         sentence = loader.load(user.sentences, set)
         shuffledAnswers =
-            (sentence.answers.map { it.forms.first() } + sentence.wrongVariants).shuffled()
+            (sentence.answers.map { it.forms.first() }).shuffled()
         rightAnswers = sentence.answers.map { shuffledAnswers.indexOf(it.forms.first()) }
 
         answerStates.value = MutableList(shuffledAnswers.size) {

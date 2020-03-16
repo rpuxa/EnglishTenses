@@ -2,6 +2,7 @@ package ru.rpuxa.englishtenses.parser
 
 import kotlinx.coroutines.CancellationException
 import ru.rpuxa.englishtenses.model.IrregularVerb
+import ru.rpuxa.englishtenses.model.Person
 import ru.rpuxa.englishtenses.model.Tense
 import java.io.*
 
@@ -25,7 +26,6 @@ lateinit var handledAns: HashMap<Ans, Person>
 @Suppress("UNCHECKED_CAST")
 fun loadHandledAns() {
     try {
-
         ObjectInputStream(FileInputStream(HANDLED_ANS_FILE)).use {
             handledAns = it.readObject() as HashMap<Ans, Person>
         }
@@ -44,27 +44,28 @@ fun main() {
     try {
         loadHandledAns()
         val s = EnglishGrammarSource.loadSentences()
-        s.toSentences()
+        s.toSentences().save("english grammar")
     } finally {
         saveHandledAns()
     }
 }
 
+fun List<SentenceToCheck>.save(name: String){
+    ObjectOutputStream( FileOutputStream(File("output/examples", name))).use {
+        it.writeObject(this)
+    }
+}
+
 val irregularVerbs = loadIrregularVerbs()
 
-enum class Person {
-    UNKNOWN,
-    FIRST, // me or you
-    ME,
-    YOU,
-    IT
-}
+
 
 data class Ans(
     val tense: Tense,
     val verb: String,
     val subject: String?,
     var person: Person,
+    var needsCheck: Boolean,
     var text: String? = null
 ) : Serializable
 
@@ -93,7 +94,8 @@ fun String.determineSingleWord(): Ans {
             Tense.PAST_SIMPLE,
             irregularVerb.first,
             null,
-            Person.UNKNOWN
+            Person.UNKNOWN,
+            true
         )
     }
 
@@ -102,7 +104,8 @@ fun String.determineSingleWord(): Ans {
             Tense.PAST_SIMPLE,
             it,
             null,
-            Person.UNKNOWN
+            Person.UNKNOWN,
+            true
         )
     }
 
@@ -121,7 +124,8 @@ fun String.determineSingleWord(): Ans {
         Tense.PRESENT_SIMPLE,
         word,
         null,
-        person
+        person,
+        person == Person.FIRST
     )
 }
 
@@ -197,7 +201,8 @@ fun List<String>.determineTense(): Ans {
                     Tense.FUTURE_CONTINUOUS,
                     last().removeContinuous(),
                     subject(1, 1),
-                    Person.UNKNOWN
+                    Person.UNKNOWN,
+                    true
                 )
             }
 
@@ -206,7 +211,8 @@ fun List<String>.determineTense(): Ans {
                     Tense.FUTURE_PERFECT_CONTINUOUS,
                     last().removeContinuous(),
                     subject(1, 3),
-                    Person.UNKNOWN
+                    Person.UNKNOWN,
+                    true
                 )
             }
             wrongTense()
@@ -218,14 +224,16 @@ fun List<String>.determineTense(): Ans {
                 Tense.FUTURE_PERFECT,
                 thirdForm,
                 subject(1, 2),
-                Person.UNKNOWN
+                Person.UNKNOWN,
+                true
             )
         } else {
             Ans(
                 Tense.FUTURE_SIMPLE,
                 last(),
                 subject(1, 1),
-                Person.UNKNOWN
+                Person.UNKNOWN,
+                true
             )
         }
     }
@@ -235,7 +243,8 @@ fun List<String>.determineTense(): Ans {
             Tense.PAST_SIMPLE,
             last(),
             subject(1, 1) ?: wrongTense(),
-            Person.UNKNOWN
+            Person.UNKNOWN,
+            true
         )
     }
 
@@ -245,7 +254,8 @@ fun List<String>.determineTense(): Ans {
                 Tense.PAST_CONTINUOUS,
                 last().removeContinuous(),
                 subject(1, 1),
-                it
+                it,
+                it != Person.IT
             )
         }
         if (first() == "had") {
@@ -253,7 +263,8 @@ fun List<String>.determineTense(): Ans {
                 Tense.PAST_PERFECT_CONTINUOUS,
                 last().removeContinuous(),
                 subject(1, 2),
-                Person.UNKNOWN
+                Person.UNKNOWN,
+                true
             )
         }
         first().isPresentToHave()?.let {
@@ -262,7 +273,8 @@ fun List<String>.determineTense(): Ans {
                     Tense.PRESENT_PERFECT_CONTINUOUS,
                     last().removeContinuous(),
                     subject(1, 2),
-                    it
+                    it,
+                    true
                 )
             }
         }
@@ -271,7 +283,8 @@ fun List<String>.determineTense(): Ans {
                 Tense.PRESENT_CONTINUOUS,
                 last().removeContinuous(),
                 subject(1, 1),
-                it
+                it,
+                it != Person.IT
             )
         }
 
@@ -284,7 +297,8 @@ fun List<String>.determineTense(): Ans {
             Tense.PAST_PERFECT,
             thirdForm,
             subject(1, 1),
-            Person.UNKNOWN
+            Person.UNKNOWN,
+            true
         )
 
     val third = last().isThirdForm()
@@ -294,7 +308,8 @@ fun List<String>.determineTense(): Ans {
                 Tense.PRESENT_PERFECT,
                 third,
                 subject(1, 1),
-                it
+                it,
+                it == Person.FIRST
             )
         }
     }
@@ -303,7 +318,8 @@ fun List<String>.determineTense(): Ans {
             Tense.PRESENT_SIMPLE,
             last(),
             subject(1, 1),
-            it
+            it,
+            it == Person.FIRST
         )
     }
 
@@ -317,6 +333,7 @@ fun Ans.determinePerson(sentence: List<String>): Person? {
         .forEach {
             val word = it.toLowerCase()
             if (word == "i") {
+                needsCheck = false
                 return if (person == Person.FIRST) Person.ME else Person.UNKNOWN
             }
             when (word) {
@@ -328,20 +345,20 @@ fun Ans.determinePerson(sentence: List<String>): Person? {
     return Person.UNKNOWN
 }
 
-fun List<SimpleSentence>.toSentences() {
-    forEach { sentence ->
+fun List<SimpleSentence>.toSentences(): List<SentenceToCheck> {
+    return map { sentence ->
         val texts = sentence.text.split("%s")
         val textLists = texts.map { it.words() }
-        sentence.answers.forEachIndexed { index, answer ->
+        val list = sentence.answers.mapIndexed { index, answer ->
             val maxBy = answer.forms.filter { '\'' !in it }.maxBy { it.length }!!
             val words = maxBy.words()
             require(words.all { it.isNotBlank() }) { maxBy }
 
             val tense = words.determineTense()
-            require(tense.verb in allWords) { "Unknown word  ${tense.verb}" }
-            if (tense.verb !in popularWords) {
-                System.err.println("Not popular word! ${tense.verb}")
-            }
+          //  require(tense.verb in allWords) { "Unknown word  ${tense.verb}" }
+            //if (tense.verb !in popularWords) {
+             //   System.err.println("Not popular word! ${tense.verb}")
+           // }
             tense.text = texts[index]
             tense.determinePerson(textLists[index])?.let { tense.person = it }
             val person = handledAns[tense]
@@ -353,9 +370,9 @@ fun List<SimpleSentence>.toSentences() {
                 println("2) YOU")
                 println("3) IT")
                 println("0) exit with exception")
-                var result: Person? = null
+                val result: Person?
                 loop@ while (true) {
-                  result = when (readLine()?.toIntOrNull()) {
+                    result = when (readLine()?.toIntOrNull()) {
                         1 -> Person.ME
                         2 -> Person.YOU
                         3 -> Person.IT
@@ -369,9 +386,15 @@ fun List<SimpleSentence>.toSentences() {
                 }
                 handledAns[tense.copy()] = result!!
                 tense.person = result
+                tense.needsCheck = false
             }
             println("$answer       <------>      $tense")
+            tense
         }
+        SentenceToCheck(
+            sentence.text,
+            list
+        )
     }
 }
 

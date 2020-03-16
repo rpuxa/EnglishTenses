@@ -9,7 +9,7 @@ class SentenceLoader(private val context: Context) {
     fun load(sentences: LearnedSentences, tenses: Set<Int>): Sentence {
 
 
-        return Sentence(
+        return TODO() /*Sentence(
             1,
             "What %s now? Where %s",
             listOf(
@@ -29,6 +29,6 @@ class SentenceLoader(private val context: Context) {
                 "has been doing",
                 "has you done"
             )
-        )
+        )*/
     }
 }
