@@ -5,7 +5,7 @@ import ru.rpuxa.englishtenses.model.Sentence
 import java.io.*
 import java.util.concurrent.CancellationException
 
-lateinit var sentences: MutableSet<SentenceToCheck>
+lateinit var sentences: MutableList<SentenceToCheck>
 
 fun main() {
     read()
@@ -17,6 +17,7 @@ fun main() {
 }
 
 fun handleUnhandled() {
+
     val it = File("output/examples/english grammar")
     ObjectInputStream(FileInputStream(it)).use {
         (it.readObject() as List<SentenceToCheck>).forEach { sentence ->
@@ -61,7 +62,7 @@ fun handleUnhandled() {
     }
 }
 
-const val FILE_NAME ="output/handledSentences"
+const val FILE_NAME = "output/handledSentences"
 fun write() {
     ObjectOutputStream(FileOutputStream(FILE_NAME)).use {
         it.writeObject(sentences)
@@ -71,9 +72,9 @@ fun write() {
 fun read() {
     sentences = try {
         ObjectInputStream(FileInputStream(FILE_NAME)).use {
-            it.readObject() as MutableSet<SentenceToCheck>
+            it.readObject() as MutableList<SentenceToCheck>
         }
     } catch (e: IOException) {
-        HashSet()
+        ArrayList()
     }
 }

@@ -8,9 +8,11 @@ import ru.rpuxa.englishtenses.model.WordAnswer
 
 object EnglishGrammarSource : SentenceSource {
 
+    //https://www.english-grammar.at/online_exercises/tenses/tenses_index.htm
     override fun loadSentences(): List<SimpleSentence> {
         val urlS =
-            "https://www.english-grammar.at/online_exercises/tenses/present-simple-progressive6.htm"
+           // "https://www.english-grammar.at/online_exercises/tenses/present-simple-progressive6.htm"
+        "https://www.english-grammar.at/online_exercises/tenses/all_tenses13.htm"
         val doc = Jsoup.connect(urlS).get()
         val code = doc.select("script").first().data()
         val array =

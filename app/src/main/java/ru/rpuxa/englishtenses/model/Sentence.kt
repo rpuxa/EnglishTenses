@@ -2,16 +2,23 @@ package ru.rpuxa.englishtenses.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.Relation
 
 data class Sentence(
-    val text: String,
-    val answers: List<WordAnswer>
-)
+    val items: List<SentenceItem>,
+    val wrongAnswers: List<String>
+) {
+    val answers get() = items.filterIsInstance<WordAnswer>()
+}
 
-@Entity(tableName = "sentences")
-class SentenceEntity(
-    @PrimaryKey
-    val id: Int,
-    val text: String
-)
+sealed class SentenceItem
 
+class Word(val text: String) : SentenceItem()
+
+data class WordAnswer(
+    val infinitive: String,
+    val correctForms: List<String>,
+    val tense: Tense
+) : SentenceItem() {
+    val correctForm get() = correctForms.first()
+}

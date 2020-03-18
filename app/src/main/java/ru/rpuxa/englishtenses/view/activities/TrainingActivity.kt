@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.add
-import kotlinx.android.synthetic.main.activity_training.view.*
 import org.jetbrains.anko.toast
 import ru.rpuxa.englishtenses.R
 import ru.rpuxa.englishtenses.databinding.ActivityTrainingBinding

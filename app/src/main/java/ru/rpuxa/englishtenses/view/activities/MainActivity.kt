@@ -17,7 +17,6 @@ import ru.rpuxa.englishtenses.viewmodel.MainViewModel
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModel()
-
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
 
@@ -85,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                 val menuBinding = TenseBottomMenuBinding.inflate(layoutInflater)
                 menuBinding.tenseName.text = name
                 menuBinding.chose.setOnClickListener {
-                    viewModel.changeState(tense.code)
+                    viewModel.changeState(viewModel.showTenseDialog.value!!.code)
                 }
                 menuBinding.theory.setOnClickListener {
 

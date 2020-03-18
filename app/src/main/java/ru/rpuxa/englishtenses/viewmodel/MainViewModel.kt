@@ -1,5 +1,6 @@
 package ru.rpuxa.englishtenses.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.rpuxa.englishtenses.SingleLiveEvent
 import ru.rpuxa.englishtenses.State
@@ -14,7 +15,7 @@ class MainViewModel @Inject constructor(
     private val _chosen = State(HashSet<Int>())
     val chosen = _chosen.liveData
 
-    val showTenseDialog = SingleLiveEvent<Tense>()
+    val showTenseDialog = MutableLiveData<Tense>()
 
     fun changeState(id: Int) {
         _chosen.update {

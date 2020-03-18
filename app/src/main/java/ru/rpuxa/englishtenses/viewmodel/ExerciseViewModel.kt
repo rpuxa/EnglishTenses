@@ -2,7 +2,6 @@ package ru.rpuxa.englishtenses.viewmodel
 
 import androidx.lifecycle.*
 import ru.rpuxa.englishtenses.State
-import ru.rpuxa.englishtenses.event
 import ru.rpuxa.englishtenses.model.*
 import ru.rpuxa.englishtenses.update
 import ru.rpuxa.englishtenses.view.fragments.ExerciseFragment
@@ -68,16 +67,16 @@ class ExerciseViewModel @Inject constructor(
 
     fun load(set: Set<Int>, tipsEnabled: Boolean) {
         this.tipsEnabled = tipsEnabled
-        sentence = loader.load(user.sentences, set)
-        shuffledAnswers =
-            (sentence.answers.map { it.forms.first() }).shuffled()
-        rightAnswers = sentence.answers.map { shuffledAnswers.indexOf(it.forms.first()) }
+        sentence = loader.load(set)
+        val answers = sentence.answers
+        shuffledAnswers = (answers.map { it.correctForm } + sentence.wrongAnswers).shuffled()
+        rightAnswers = answers.map { shuffledAnswers.indexOf(it.correctForm) }
 
         answerStates.value = MutableList(shuffledAnswers.size) {
             None()
         }
 
-        spacesStates.value = List(sentence.answers.size) { null }
+        spacesStates.value = List(answers.size) { null }
     }
 
     fun getAnswerState(id: Int) = answerStates.map { it[id] }

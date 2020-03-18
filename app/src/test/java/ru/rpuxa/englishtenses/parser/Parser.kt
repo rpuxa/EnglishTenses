@@ -1,7 +1,6 @@
 package ru.rpuxa.englishtenses.parser
 
 import kotlinx.coroutines.CancellationException
-import ru.rpuxa.englishtenses.model.IrregularVerb
 import ru.rpuxa.englishtenses.model.Person
 import ru.rpuxa.englishtenses.model.Tense
 import java.io.*
@@ -67,7 +66,9 @@ data class Ans(
     var person: Person,
     var needsCheck: Boolean,
     var text: String? = null
-) : Serializable
+) : Serializable {
+    var simpleAnswer: SimpleAnswer? = null
+}
 
 fun List<String>.subject(from: Int, to: Int): String? {
     if (from >= size - to) return null
@@ -355,10 +356,11 @@ fun List<SimpleSentence>.toSentences(): List<SentenceToCheck> {
             require(words.all { it.isNotBlank() }) { maxBy }
 
             val tense = words.determineTense()
-          //  require(tense.verb in allWords) { "Unknown word  ${tense.verb}" }
-            //if (tense.verb !in popularWords) {
-             //   System.err.println("Not popular word! ${tense.verb}")
-           // }
+            require(tense.verb in allWords) { "Unknown word  ${tense.verb}" }
+            if (tense.verb !in popularWords) {
+                System.err.println("Not popular word! ${tense.verb}")
+            }
+            tense.simpleAnswer = answer
             tense.text = texts[index]
             tense.determinePerson(textLists[index])?.let { tense.person = it }
             val person = handledAns[tense]

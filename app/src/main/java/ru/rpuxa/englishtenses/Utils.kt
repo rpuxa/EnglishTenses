@@ -142,6 +142,13 @@ inline fun View.onMeasured(crossinline block: () -> Unit) {
 
 fun Point(x: Float, y: Float) = Point(x.toInt(), y.toInt())
 
+operator fun Point.times(d: Double) = Point((x * d).toInt(), (y * d).toInt())
+
+val ZERO = Point(0, 0)
+
+val Point.length: Float
+    get() = dist(ZERO)
+
 fun Int.sqr() = this * this
 
 infix fun Point.dist(other: Point) = sqrt(((other.x - x).sqr() + (other.y - y).sqr()).toFloat())

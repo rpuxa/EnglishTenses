@@ -7,6 +7,13 @@ import java.io.DataOutputStream
 import java.io.FileInputStream
 import java.io.FileOutputStream
 
+class IrregularVerb(
+    val id: Int,
+    val first: String,
+    val second: List<String>,
+    val third: List<String>
+)
+
 fun main() {
     val doc = Jsoup.connect("http://begin-english.ru/study/irregular-verbs/")
         .get()
@@ -19,7 +26,6 @@ fun main() {
             if (index == 0) return@mapIndexed null
             if (element.childrenSize() != 4) return@mapIndexed null
 
-            println(element.text())
             IrregularVerb(
                 id++,
                 element.child(0).text().trim(),
@@ -27,11 +33,18 @@ fun main() {
                 element.child(2).text().split('/').map { it.trim() }
             )
         }
+    list.filterNotNull().forEach {
+        println(
+            "${it.first.toUpperCase()}(\"${it.first}\", listOf(${it.second.joinToString(", "){'\"' + it + '\"'}}), listOf(${it.third.joinToString(
+                ", "
+            ){'\"' + it + '\"'}})),"
+        )
+    }
 
     DataOutputStream(FileOutputStream("output/verbs.dat")).use { output ->
         val newList = list.filterNotNull()
         output.writeInt(newList.size)
-        newList.forEach { verb: IrregularVerb ->
+        newList.forEach { verb ->
             output.writeUTF(verb.first)
             output.writeInt(verb.second.size)
             verb.second.forEach { output.writeUTF(it) }
@@ -42,7 +55,7 @@ fun main() {
 }
 
 fun loadIrregularVerbs() =
-    DataInputStream(FileInputStream("output/verbs.dat")).use {input ->
+    DataInputStream(FileInputStream("output/verbs.dat")).use { input ->
         var id = 1
         val size = input.readInt()
         List(size) {
