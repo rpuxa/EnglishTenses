@@ -7,17 +7,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
 import androidx.core.graphics.component1
 import androidx.core.graphics.component2
 import androidx.core.graphics.minus
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.DiffUtil
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
+import org.jetbrains.anko.sdk27.coroutines.textChangedListener
 import ru.rpuxa.englishtenses.viewmodel.ViewModelFactory
 import kotlin.math.sqrt
 
@@ -68,17 +79,7 @@ var <T> MutableLiveData<T>.nnValue: T
 
 inline val Fragment.lazyNavController get() = lazy { findNavController() }
 
-@Suppress("UNCHECKED_CAST")
-fun <T> getEqualsDiff() = EqualsDiff as DiffUtil.ItemCallback<T>
 
-private object EqualsDiff : DiffUtil.ItemCallback<Any>() {
-
-    override fun areItemsTheSame(oldItem: Any, newItem: Any) =
-        oldItem == newItem
-
-    override fun areContentsTheSame(oldItem: Any, newItem: Any) =
-        areItemsTheSame(oldItem, newItem)
-}
 
 
 
@@ -101,6 +102,18 @@ fun Activity.openKeyboard() {
     inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
 }
 */
+
+@Suppress("UNCHECKED_CAST")
+fun <T> getEqualsDiff() = EqualsDiff as DiffUtil.ItemCallback<T>
+
+private object EqualsDiff : DiffUtil.ItemCallback<Any>() {
+
+    override fun areItemsTheSame(oldItem: Any, newItem: Any) =
+        oldItem == newItem
+
+    override fun areContentsTheSame(oldItem: Any, newItem: Any) =
+        areItemsTheSame(oldItem, newItem)
+}
 
 inline fun <T> MutableLiveData<T>.update(block: T.() -> Unit = {}) {
     val v = value
@@ -174,4 +187,11 @@ val View.viewRect: Rect
         return Rect(x, y, x + width, y + height)
     }
 
-fun event() = SingleLiveEvent<Unit>()
+@ExperimentalCoroutinesApi
+fun TextView.textChangeFlow() = callbackFlow {
+    addTextChangedListener {
+        offer(it.toString())
+    }
+    offer(text.toString())
+    awaitClose()
+}

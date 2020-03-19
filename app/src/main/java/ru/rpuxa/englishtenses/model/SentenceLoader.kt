@@ -5,7 +5,7 @@ import java.io.DataInputStream
 
 class SentenceLoader(
     private val context: Context,
-    private val sentencesHandler: SentencesHandler
+    private val sentencesHandler: SentenceStatistic
 ) {
 
 

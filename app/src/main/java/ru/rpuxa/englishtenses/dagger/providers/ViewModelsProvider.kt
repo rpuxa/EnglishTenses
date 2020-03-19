@@ -5,9 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import ru.rpuxa.englishtenses.dagger.ViewModelKey
-import ru.rpuxa.englishtenses.viewmodel.ExerciseViewModel
-import ru.rpuxa.englishtenses.viewmodel.IrregularVerbsViewModel
-import ru.rpuxa.englishtenses.viewmodel.MainViewModel
+import ru.rpuxa.englishtenses.viewmodel.*
 
 @Module
 abstract class ViewModelsProvider {
@@ -26,4 +24,15 @@ abstract class ViewModelsProvider {
     @IntoMap
     @ViewModelKey(IrregularVerbsViewModel::class)
     abstract fun verbs(v: IrregularVerbsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ExamViewModel::class)
+    abstract fun exam(v: ExamViewModel): ViewModel
+
+      @Binds
+    @IntoMap
+    @ViewModelKey(TrainingViewModel::class)
+    abstract fun training(v: TrainingViewModel): ViewModel
+
 }

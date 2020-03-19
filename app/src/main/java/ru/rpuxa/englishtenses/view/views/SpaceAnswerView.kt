@@ -19,6 +19,8 @@ class SpaceAnswerView(layoutInflater: LayoutInflater) : ResizableView {
         )*/
     }
 
+    var defaultWidth = 0
+
     val root get() = binding.root
 
     override fun setWidth(width: Int) {

@@ -17,4 +17,7 @@ class DataBaseProvider {
 
     @Provides
     fun learnedSentencesDao(db: DataBase) = db.learnedSentencesDao
+
+    @Provides
+    fun correctnessStatisticDao(db: DataBase) = db.correctnessStatisticDao
 }

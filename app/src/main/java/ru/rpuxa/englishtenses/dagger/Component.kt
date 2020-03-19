@@ -6,7 +6,7 @@ import ru.rpuxa.englishtenses.dagger.providers.ContextProvider
 import ru.rpuxa.englishtenses.dagger.providers.DataBaseProvider
 import ru.rpuxa.englishtenses.dagger.providers.MainProvider
 import ru.rpuxa.englishtenses.dagger.providers.ViewModelsProvider
-import ru.rpuxa.englishtenses.model.SentencesHandler
+import ru.rpuxa.englishtenses.model.SentenceStatistic
 import javax.inject.Singleton
 
 @Singleton
@@ -20,5 +20,5 @@ import javax.inject.Singleton
 )
 interface Component {
     fun inject(viewModelFactory: ViewModelFactory)
-    fun inject(viewModelFactory: SentencesHandler)
+    fun inject(viewModelFactory: SentenceStatistic)
 }

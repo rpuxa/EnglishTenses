@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="@dimen/answer_height"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/space_answer">
 
     <ru.rpuxa.englishtenses.view.views.DummyView
@@ -17,6 +17,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:maxLines="1"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:text="TextVasdfasdfasdfasdfasdfasdfiew" />
+        tools:text="make" />
 </FrameLayout>

@@ -6,12 +6,14 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.PorterDuff
 import android.util.AttributeSet
+import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import ru.rpuxa.englishtenses.R
 import ru.rpuxa.englishtenses.viewRect
+import kotlin.properties.Delegates
 
 
 open class Layout3d : ViewGroup {
@@ -25,7 +27,11 @@ open class Layout3d : ViewGroup {
     )
 
     protected var backTint = android.R.color.white
-    private var hasPressed = false
+    private var hasPressed by Delegates.observable(false) { _, old, new ->
+        if (old != new) {
+            requestLayout()
+        }
+    }
     private val margin = resources.getDimensionPixelSize(R.dimen.button3d_margin)
     private val buttonDepth = resources.getDimensionPixelSize(R.dimen.button3d_depth)
 
@@ -78,23 +84,45 @@ open class Layout3d : ViewGroup {
         super.setWillNotDraw(willNotDraw)
     }
 
+    private var longPressed = false
+    private val longPress = Runnable {
+        if (performLongClick()) {
+            longPressed = true
+        }
+    }
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        return when (event.action) {
-            MotionEvent.ACTION_DOWN -> true
+       return when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                handler.postDelayed(longPress, LONG_PRESS_TIME)
+                true
+            }
             MotionEvent.ACTION_MOVE -> {
                 hasPressed = viewRect.contains(event.rawX.toInt(), event.rawY.toInt())
-                requestLayout()
+                if (!hasPressed) {
+                    handler.removeCallbacks(longPress)
+                }
                 true
             }
             MotionEvent.ACTION_UP -> {
-                if (hasPressed) {
-                    hasPressed = false
+                handler.removeCallbacks(longPress)
+                if (!longPressed && hasPressed) {
                     performClick()
                 }
-                requestLayout()
+                hasPressed = false
+                longPressed = false
+                true
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                handler.removeCallbacks(longPress)
+                hasPressed = false
+                longPressed = false
                 true
             }
             else -> false
         }
+    }
+
+    companion object {
+        const val LONG_PRESS_TIME = 500L
     }
 }

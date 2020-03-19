@@ -3,12 +3,15 @@ package ru.rpuxa.englishtenses.model
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import ru.rpuxa.englishtenses.model.db.CorrectnessStatistic
+import ru.rpuxa.englishtenses.model.db.CorrectnessStatisticDao
 import ru.rpuxa.englishtenses.model.db.LearnedSentenceEntity
 import ru.rpuxa.englishtenses.model.db.LearnedSentencesDao
 import kotlin.random.Random
 
-class SentencesHandler(
-    private val learnedSentencesDao: LearnedSentencesDao
+class SentenceStatistic(
+    private val learnedSentencesDao: LearnedSentencesDao,
+    private val correctnessStatisticDao: CorrectnessStatisticDao
 ) {
     private val learnedSession = IntArray(Tense.values().size)
     private var _learned: List<MutableSet<Int>>? = null
@@ -74,7 +77,7 @@ class SentencesHandler(
                 if (answer.tense.code in tenses) {
                     val unusedTenses = tenses.toMutableSet()
                     unusedTenses -= answer.tense.code
-                    for (i in 0 until 3) {
+                    for (i in 0 until WRONG_ANSWER_AMOUNT) {
                         if (unusedTenses.isEmpty()) break
                         val random = unusedTenses.random()
                         unusedTenses -= random
@@ -105,6 +108,16 @@ class SentencesHandler(
         }
         _learned = list
         return list
+    }
+
+    fun addResult(result: List<CorrectnessStatistic>) {
+        GlobalScope.launch {
+           result.forEach {
+             val statistic =  correctnessStatisticDao.get(it.tenseCode) ?: CorrectnessStatistic(it.tenseCode, 0, 0)
+               statistic += it
+               correctnessStatisticDao.update(statistic)
+           }
+        }
     }
 
 

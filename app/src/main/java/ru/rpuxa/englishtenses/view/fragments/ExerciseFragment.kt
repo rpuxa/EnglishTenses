@@ -25,12 +25,14 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
 import org.jetbrains.anko.support.v4.act
 import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.startActivity
 import ru.rpuxa.englishtenses.*
 import ru.rpuxa.englishtenses.databinding.BottomMenuCorrectBinding
 import ru.rpuxa.englishtenses.databinding.FragmentExerciseBinding
 import ru.rpuxa.englishtenses.databinding.MistakeBottomMenuBinding
 import ru.rpuxa.englishtenses.model.*
 import ru.rpuxa.englishtenses.view.activities.ExerciseActivity
+import ru.rpuxa.englishtenses.view.activities.IrregularVerbsActivity
 import ru.rpuxa.englishtenses.view.views.*
 import ru.rpuxa.englishtenses.viewmodel.ExerciseViewModel
 import kotlin.coroutines.resume
@@ -84,6 +86,16 @@ class ExerciseFragment : Fragment() {
             }
         }
 
+        binding.irregularVerbs.setOnClickListener {
+            viewModel.irregularVerbsClick()
+        }
+
+        viewModel.showIrregularVerbTable.observe(viewLifecycleOwner) {
+            startActivity<IrregularVerbsActivity>(
+                IrregularVerbsActivity.SEARCH_QUERY to it
+            )
+        }
+
         var tipMenu: BottomMenu? = null
         viewModel.tipMode.observe(viewLifecycleOwner) {
             if (it == ExerciseViewModel.TIP_MODE_OFF) {
@@ -104,7 +116,7 @@ class ExerciseFragment : Fragment() {
 
         viewModel.result.liveData.observe(viewLifecycleOwner) { result ->
             if (result != null) {
-                if (result.correct) {
+                if (result.allCorrect) {
                     val binding = BottomMenuCorrectBinding.inflate(act.layoutInflater)
                     val menu = BottomMenu(binding.root)
                     binding.next.setOnClickListener {
@@ -202,7 +214,15 @@ class ExerciseFragment : Fragment() {
                 view.onMeasured {
                     itemDummy.width = view.width
                     itemDummy.height = view.height
+                    resizeable?.defaultWidth = view.width.coerceAtLeast(spaceDummyMinWidth)
                     binding.sentence.addView(itemDummy)
+                    if (resizeable != null) {
+                        binding.sentence.addView(
+                            DummyView(ctx).apply {
+                                width = 8.dpToPx()
+                            }
+                        )
+                    }
                     itemDummy.onMeasured {
                         FlyView(view, resizeable).follow(itemDummy)
                     }
@@ -295,10 +315,9 @@ class ExerciseFragment : Fragment() {
             dummyView.requestLayout()
             flyView.follow(dummyView)
             if (spaceIndex != -1) {
-                spaceAnswerDummies[spaceIndex].apply {
-                    width = spaceDummyMinWidth
-                    requestLayout()
-                }
+                val spaceDummyView = spaceAnswerDummies[spaceIndex]
+                spaceDummyView.width = answerSpaces[spaceIndex].view.defaultWidth
+                spaceDummyView.requestLayout()
             }
             spaceIndex = -1
         }
@@ -450,7 +469,6 @@ class ExerciseFragment : Fragment() {
 
     companion object {
         const val TIPS_ENABLED = "tips"
-        private const val FLY_SPEED = 1000.0
 
         fun create(tenses: Set<Int>, tipEnabled: Boolean) = ExerciseFragment().apply {
             arguments = bundleOf(

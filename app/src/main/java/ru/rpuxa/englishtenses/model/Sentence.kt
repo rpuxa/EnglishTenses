@@ -18,7 +18,8 @@ class Word(val text: String) : SentenceItem()
 data class WordAnswer(
     val infinitive: String,
     val correctForms: List<String>,
-    val tense: Tense
+    val tense: Tense,
+    val irregular: IrregularVerb?
 ) : SentenceItem() {
     val correctForm get() = correctForms.first()
 }

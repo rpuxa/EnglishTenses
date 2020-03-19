@@ -8,6 +8,9 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AccelerateInterpolator
+import android.view.animation.DecelerateInterpolator
 import androidx.core.content.ContextCompat
 import ru.rpuxa.englishtenses.R
 import kotlin.math.sqrt
@@ -68,13 +71,14 @@ class CustomProgressBar : View {
     }
 
     private var animator: Animator? = null
-    fun animatedProgress(needed: Float) {
+    fun animateProgress(needed: Float) {
         animator?.cancel()
-        animator = ObjectAnimator.ofFloat(0f, 1f)
+        animator = ObjectAnimator.ofFloat(progress, needed)
             .apply {
                 duration = 1000L
+                interpolator = DecelerateInterpolator()
                 addUpdateListener {
-                    progress = sqrt(it.animatedValue as Float) * needed
+                    progress = it.animatedValue as Float
                 }
                 start()
             }

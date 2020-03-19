@@ -19,6 +19,7 @@
 
     <string name="single_tip">Здесь нужно употребить %s</string>
     <string name="many_tip">%s случае нужно употребить %s</string>
+    <string name="secs">%s сек</string>
 
     <string-array name="ordinal_numbers">
         <item>В первом</item>
@@ -29,4 +30,12 @@
         <item>В шестом</item>
         <item>В седьмом</item>
     </string-array>
+
+
+    <string name="present_perfect_usage1">Experiences</string>
+    <string name="present_perfect_usage1_text1">We use the present perfect simple to talk about our experiences up to now. The time of the experiences is not important:</string>
+    <string name="present_perfect_usage1_text2">Although we do not give a specific time, we often use general time expressions like ever, never, before, in my life, so far, up until now with this use of the present perfect simple:</string>
+    <string name="present_perfect_usage1_text3">We often use ever, not … ever and never when we talk about experiences:</string>
+    <string name="present_perfect_usage1_text4">We often use the present perfect simple for a unique experience when we are using a superlative:</string>
+    <string name="present_perfect_usage1_text5">We usually use the present perfect simple with the first time when we’re talking about an immediate, continuing or recent event:</string>
 </resources>

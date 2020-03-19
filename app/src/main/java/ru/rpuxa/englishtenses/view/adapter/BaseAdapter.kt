@@ -9,9 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import ru.rpuxa.englishtenses.inflate
 
-abstract class BaseAdapter<T, Binding : ViewBinding> : RecyclerView.Adapter<BaseAdapter<T, Binding>.BaseViewHolder>() {
+abstract class BaseAdapter<T, Binding : ViewBinding> :
+    RecyclerView.Adapter<BaseAdapter<T, Binding>.BaseViewHolder>() {
 
-    protected var collection: List<T> = emptyList()
+    private var collection: List<T> = emptyList()
 
     abstract inner class BaseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         abstract fun Context.bind(item: T)
@@ -25,8 +26,9 @@ abstract class BaseAdapter<T, Binding : ViewBinding> : RecyclerView.Adapter<Base
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = with(inflater) { binding }
+        val binding = create(inflater, parent)
         val view = binding.root
+//        view.layoutParams = layoutParams
         return view.getViewHolder(binding)
     }
 
@@ -38,13 +40,19 @@ abstract class BaseAdapter<T, Binding : ViewBinding> : RecyclerView.Adapter<Base
         notifyDataSetChanged()
     }
 
-    protected abstract val LayoutInflater.binding: Binding
+//    open val layoutParams = RecyclerView.LayoutParams(
+//        RecyclerView.LayoutParams.MATCH_PARENT,
+//        RecyclerView.LayoutParams.WRAP_CONTENT
+//    )
+
+    protected abstract fun create(inflater: LayoutInflater, parent: ViewGroup): Binding
 
     protected abstract fun View.getViewHolder(binding: Binding): BaseViewHolder
 
-    protected inline fun View.bind(crossinline block: Context.(T) -> Unit) = object : BaseViewHolder(this) {
-        override fun Context.bind(item: T) {
-            block(item)
+    protected inline fun View.bind(crossinline block: Context.(T) -> Unit) =
+        object : BaseViewHolder(this) {
+            override fun Context.bind(item: T) {
+                block(item)
+            }
         }
-    }
 }

@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.observe
 import org.jetbrains.anko.startActivity
 import ru.rpuxa.englishtenses.databinding.ActivityMainBinding
-import ru.rpuxa.englishtenses.databinding.ChoseBottomMenuBinding
 import ru.rpuxa.englishtenses.databinding.TenseBottomMenuBinding
 import ru.rpuxa.englishtenses.model.Tense
 import ru.rpuxa.englishtenses.view.views.BottomMenu
@@ -45,6 +44,11 @@ class MainActivity : AppCompatActivity() {
             tenseBinding.root.setOnClickListener {
                 viewModel.tenseClick(index)
             }
+
+            tenseBinding.root.setOnLongClickListener {
+                viewModel.changeState(index)
+                true
+            }
         }
 
         viewModel.chosen.observe(this) { set ->
@@ -54,24 +58,11 @@ class MainActivity : AppCompatActivity() {
             }
             binding.choseAllCheckbox.isChecked = set.size == Tense.values().size
 
-            if (set.isEmpty()) {
-                bottomMenu?.dismiss()
-            } else if (bottomMenu.let { it == null || it.dismissed || it !is ChoseBottomMenu }) {
-                val choseBinding = ChoseBottomMenuBinding.inflate(layoutInflater)
-                choseBinding.cancel.setOnClickListener {
-                    viewModel.clearAll()
-                }
-                choseBinding.test.setOnClickListener {
-                    startActivity<ExamActivity>(
-                        ExerciseActivity.TENSES to viewModel.chosen.value
-                    )
-                }
-                choseBinding.training.setOnClickListener {
-                    startActivity<TrainingActivity>(
-                        ExerciseActivity.TENSES to viewModel.chosen.value
-                    )
-                }
-                showBottomMenu(ChoseBottomMenu(choseBinding.root))
+            val visible = set.isNotEmpty()
+            binding.test.isVisible = visible
+            binding.training.isVisible = visible
+            if (set.isNotEmpty()) {
+                dismissButtonMenu()
             }
         }
 
@@ -87,14 +78,35 @@ class MainActivity : AppCompatActivity() {
                     viewModel.changeState(viewModel.showTenseDialog.value!!.code)
                 }
                 menuBinding.theory.setOnClickListener {
-
+                    startActivity<TheoryActivity>(
+                        TheoryActivity.TENSE_CODE to viewModel.showTenseDialog.value!!.code
+                    )
+                    dismissButtonMenu()
                 }
                 showBottomMenu(TenseBottomMenu(menuBinding))
             }
         }
 
+        viewModel.correctness.observe(this) {
+            it.forEach {
+                bindings[it.tenseCode].progressBar.animateProgress(it.percent)
+            }
+        }
+
         binding.choseAll.setOnClickListener {
             viewModel.changeAllState()
+        }
+
+
+        binding.test.setOnClickListener {
+            startActivity<ExamActivity>(
+                ExerciseActivity.TENSES to viewModel.chosen.value
+            )
+        }
+        binding.training.setOnClickListener {
+            startActivity<TrainingActivity>(
+                ExerciseActivity.TENSES to viewModel.chosen.value
+            )
         }
 
         binding.irregularVerbs.setOnClickListener {
@@ -108,6 +120,11 @@ class MainActivity : AppCompatActivity() {
         bottomMenu?.dismiss()
         menu.show(this)
         bottomMenu = menu
+    }
+
+    fun dismissButtonMenu() {
+        bottomMenu?.dismiss()
+        bottomMenu = null
     }
 
     private class ChoseBottomMenu(view: View) : BottomMenu(view)

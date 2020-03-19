@@ -5,11 +5,14 @@ import androidx.room.RoomDatabase
 
 @Database(
     entities = [
-LearnedSentenceEntity::class
+        LearnedSentenceEntity::class,
+        CorrectnessStatistic::class
     ],
     version = 1
 )
 abstract class DataBase : RoomDatabase() {
 
     abstract val learnedSentencesDao: LearnedSentencesDao
+
+    abstract val correctnessStatisticDao: CorrectnessStatisticDao
 }

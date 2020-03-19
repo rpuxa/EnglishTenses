@@ -2,19 +2,18 @@ package ru.rpuxa.englishtenses.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ru.rpuxa.englishtenses.SingleLiveEvent
 import ru.rpuxa.englishtenses.State
-import ru.rpuxa.englishtenses.event
 import ru.rpuxa.englishtenses.model.Tense
+import ru.rpuxa.englishtenses.model.db.CorrectnessStatisticDao
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
-
+    private val correctnessStatisticDao: CorrectnessStatisticDao
 ) : ViewModel() {
 
     private val _chosen = State(HashSet<Int>())
     val chosen = _chosen.liveData
-
+    val correctness = correctnessStatisticDao.liveData
     val showTenseDialog = MutableLiveData<Tense>()
 
     fun changeState(id: Int) {

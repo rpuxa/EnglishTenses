@@ -21,7 +21,8 @@ class UnhandledAnswer(
 ) {
 
     fun toWordAnswer() = WordAnswer(
-        infinitive, forms, tense
+        infinitive, forms, tense,
+        IrregularVerb.byFirst(verb)
     )
 
     fun createWrongAnswer(tense: Tense): String {
