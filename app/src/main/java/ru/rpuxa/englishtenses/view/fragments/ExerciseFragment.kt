@@ -197,7 +197,7 @@ class ExerciseFragment : Fragment() {
                         spaceAnswerDummies += itemDummy
                         val spaceAnswerView = SpaceAnswerView(layoutInflater)
                         spaceAnswerView.setWidth(spaceDummyMinWidth)
-                        spaceAnswerView.setText(item.infinitive)
+                        spaceAnswerView.text = item.infinitive
                         answerSpaces += AnswerSpace(
                             answerSpaceIndex++,
                             spaceAnswerView
@@ -232,21 +232,14 @@ class ExerciseFragment : Fragment() {
 
 
     private fun showCorrectAnswers() {
+        val ids = viewModel.setAllCorrect()
+
         answers.forEach { answer ->
-            if (answer.spaceIndex != -1 && answer.answerIndex !in viewModel.rightAnswers)
-                answer.moveToAnswers()
+            val spaceIndex = ids.indexOf(answer.answerIndex)
+            if (spaceIndex != -1) {
+                answer.moveToSpace(answerSpaces[spaceIndex])
+            }
         }
-        answers.forEach { answer ->
-            val space = viewModel.rightAnswers.indexOf(answer.answerIndex)
-            if (space != -1 && answer.spaceIndex != -1 && answer.spaceIndex != space)
-                answer.moveToSpace(answerSpaces[space])
-        }
-        viewModel.rightAnswers.forEachIndexed { space, answerId ->
-            val answer = answers[answerId]
-            if (answer.spaceIndex != space)
-                answer.moveToSpace(answerSpaces[space])
-        }
-        viewModel.setAllCorrect()
     }
 
     fun setOnNextListener(block: (ExerciseResult) -> Unit) {
@@ -257,9 +250,14 @@ class ExerciseFragment : Fragment() {
         viewModel.check(answers())
     }
 
-    private fun answers(): List<Int?> =
+    private fun answers(): List<SpaceState> =
         List(answerSpaces.size) { spaceIndex ->
-            answers.find { it.spaceIndex == spaceIndex }?.answerIndex
+          val answer =  answers.find { it.spaceIndex == spaceIndex }
+            if (answer == null) {
+                SpaceState(spaceIndex)
+            } else {
+                SpaceState(spaceIndex, answer.answerIndex, answer.view.text.toString())
+            }
         }
 
     private fun lowestEmptySpace(): AnswerSpace? {
@@ -272,7 +270,7 @@ class ExerciseFragment : Fragment() {
 
     private inner class Answer(
         var answerIndex: Int,
-        val view: View,
+        val view: TextView,
         val flyView: FlyView
     ) {
         var spaceIndex by Delegates.observable(-1) { _, old, new ->
@@ -463,6 +461,19 @@ class ExerciseFragment : Fragment() {
 
         fun stopFollowing() {
             listener?.let { dummyView?.stopFollowing(it) }
+        }
+    }
+
+
+    class SpaceState(val spaceId: Int) {
+        var empty = true
+        var answerId = 0
+        lateinit var text: String
+
+        constructor(spaceId: Int, answerId: Int, text: String) : this(spaceId) {
+            this.answerId = answerId
+            this.text = text
+            empty = false
         }
     }
 

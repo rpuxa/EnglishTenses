@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".view.activities.AchievementsActivity"
+            android:theme="@style/WhiteStatusBarTheme" />
+        <activity
             android:name=".view.activities.TheoryActivity"
             android:theme="@style/WhiteStatusBarTheme" />
         <activity
@@ -22,7 +25,7 @@
         <activity
             android:name=".view.activities.TrainingActivity"
             android:theme="@style/WhiteStatusBarTheme" />
-        <activity android:name=".view.activities.TestActivity"></activity>
+        <activity android:name=".view.activities.TestActivity" />
         <activity
             android:name=".view.activities.MainActivity"
             android:theme="@style/WhiteStatusBarTheme">

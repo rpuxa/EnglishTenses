@@ -8,6 +8,7 @@
             <enum name="blue" value="3" />
             <enum name="blue_borderless" value="4" />
             <enum name="red" value="5" />
+            <enum name="golden" value="6" />
         </attr>
         <attr name="button3dText" format="string"/>
     </declare-styleable>

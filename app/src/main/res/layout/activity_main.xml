@@ -215,7 +215,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="@dimen/bottom_menu_height"
             app:button3dStyle="blue_borderless"
@@ -224,7 +224,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/training"
+            app:layout_constraintTop_toBottomOf="@+id/achievements"
             app:layout_constraintVertical_bias="1.0" />
 
         <ru.rpuxa.englishtenses.view.views.Button3d
@@ -242,6 +242,19 @@
             app:layout_constraintTop_toBottomOf="@+id/test">
 
         </ru.rpuxa.englishtenses.view.views.Button3d>
+
+        <ru.rpuxa.englishtenses.view.views.Button3d
+            android:id="@+id/achievements"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            app:button3dStyle="golden"
+            app:button3dText="Мои достижения"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/training" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

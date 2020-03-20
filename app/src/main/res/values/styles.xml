@@ -16,7 +16,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="BottomMenuAnimation">
+    <style name="BottomMenuAnimation" parent="AppTheme">
         <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
         <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
@@ -38,7 +38,13 @@
         <item name="android:padding">15dp</item>
         <item name="android:src">@drawable/cross</item>
     </style>
-<style name="DialogStyle" parent="AppTheme">
-    <item name="android:windowBackground">@drawable/dialog</item>
-</style>
+
+    <style name="RatingBarStyle" parent="AppTheme">
+        <item name="colorAccent">@color/golden</item>
+    </style>
+
+    <style name="AchievementAnimationStyle" parent="AppTheme">
+        <item name="android:windowEnterAnimation">@anim/slide_in_top</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_top</item>
+    </style>
 </resources>

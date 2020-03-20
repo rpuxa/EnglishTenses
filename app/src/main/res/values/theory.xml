@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="past_simple_usage1">Definite time in the past</string>
+    <string name="past_simple_usage1_text1">We use the past simple to talk about definite time in the past (often we specify when something happened, e.g. yesterday, three weeks ago, last year, when I was young):</string>
+    <string name="past_simple_usage2">Single or habitual events or states</string>
+    <string name="past_simple_usage2_text1">We use the past simple to talk about single or regular (habitual) events or states in the past.</string>
+    <string name="past_simple_usage2_text2">When we use the past simple to refer to habitual events, the meaning is similar to used to:</string>
+    <string name="past_simple_usage3">The past simple with no time reference</string>
+    <string name="past_simple_usage3_text1">Sometimes there is no time expression when the past simple is used. This happens especially when we know the time:</string>
+    <string name="past_simple_usage4">Past simple and the order of events</string>
+    <string name="past_simple_usage4_text1">When one past event happens after another, the first one mentioned in the past simple happened first and the second one happened next, and so on. If we change the order of the verbs, this changes the meaning.</string>
+
+
+    <string name="present_simple_usage1">General truths and facts</string>
+    <string name="present_simple_usage1_text1">We use the present simple to talk about general facts that are always true and permanent about the world:</string>
+    <string name="present_simple_usage1_text2">We use the present simple to talk about general facts that we think are true and permanent at the present time:</string>
+    <string name="present_simple_usage2">Regular and habitual events</string>
+    <string name="present_simple_usage2_text1">We use the present simple to talk about regular or habitual events. We often use always, often, usually, sometimes, never and other frequency adverbs for regular and habitual events:</string>
+    <string name="present_simple_usage3">Instructions and directions</string>
+    <string name="present_simple_usage3_text1">We use the present simple when we are giving instructions or directions. We often use ordering words, such as and, first and then with this use of the present simple:</string>
+    <string name="present_simple_usage4">Stories and commentaries</string>
+    <string name="present_simple_usage4_text1">We often use the present simple to describe a series of actions – one action after another. We see this especially in stories, summaries of stories or reviews:</string>
+    <string name="present_simple_usage4_text2">The present simple is often used by sports commentators to give commentaries or report actions as they are happening:</string>
+    <string name="present_simple_usage5">Immediate reactions</string>
+    <string name="present_simple_usage5_text1">We use the present simple, often with verbs of senses and perception, to talk about feelings and reactions at the moment of speaking:</string>
+    <string name="present_simple_usage6">I promise, I swear, I agree</string>
+    <string name="present_simple_usage6_text1">We use the present simple with speech act verbs (verbs which perform the act that they describe):</string>
+    <string name="present_simple_usage6_text2">We also use the present simple in a similar way in formal statements and in business or legal communications:</string>
+    <string name="present_simple_usage7">Timetables and plans</string>
+    <string name="present_simple_usage7_text1">We use the present simple to talk about events that are part of a future plan or timetable:</string>
+    <string name="present_simple_usage7_text2">We can also often use will in these sentences, with no change in meaning:</string>
+    <string name="present_simple_usage8">Present simple after when, before, etc.</string>
+    <string name="present_simple_usage8_text1">We use the present simple for future reference in subordinate clauses after words like when, before, as soon as, if and whether:</string>
+    <string name="present_simple_usage9">Newspaper headlines</string>
+    <string name="present_simple_usage9_text1">We often see the present simple in news headlines to report past events. It emphasises the drama or immediacy of an event:</string>
+
+
+
+    <string name="present_perfect_usage1">Experiences</string>
+    <string name="present_perfect_usage1_text1">We use the present perfect simple to talk about our experiences up to now. The time of the experiences is not important:</string>
+    <string name="present_perfect_usage1_text2">Although we do not give a specific time, we often use general time expressions like ever, never, before, in my life, so far, up until now with this use of the present perfect simple:</string>
+    <string name="present_perfect_usage1_text3">We often use ever, not … ever and never when we talk about experiences:</string>
+    <string name="present_perfect_usage1_text4">We often use the present perfect simple for a unique experience when we are using a superlative:</string>
+    <string name="present_perfect_usage1_text5">We usually use the present perfect simple with the first time when we’re talking about an immediate, continuing or recent event:</string>
+
+    <string name="present_perfect_usage2">Recent completed events</string>
+    <string name="present_perfect_usage2_text1">We use the present perfect simple to talk about a finished event or state in the very recent past. We do not give a specific time. We often use words like just or recently for events taking place a very short time before now:</string>
+
+    <string name="present_perfect_usage3">Past events, present results</string>
+    <string name="present_perfect_usage3_text1">We use the present perfect simple when a single past action has a connection with the present:</string>
+
+    <string name="present_perfect_usage4">Time + for and since</string>
+    <string name="present_perfect_usage4_text1">We use the present perfect simple with for and since to talk about a present situation that began at a specific point in the past and is still going on in the present. We are looking back from the present to a point in the past.</string>
+
+    <string name="present_perfect_usage5">How long …?</string>
+    <string name="present_perfect_usage5_text1">We often use expressions with for and since to answer the question How long …+ present perfect simple. We use the How long …? question to ask about the duration of a state or activity:</string>
+
+    <string name="present_perfect_usage6">Yet</string>
+    <string name="present_perfect_usage6_text1">We use yet + the present perfect simple, mainly in questions and negative statements, to refer to things we intend to do in the future but which are not done:</string>
+
+    <string name="present_perfect_usage7">Already</string>
+    <string name="present_perfect_usage7_text1">We use already + the present perfect simple when we want to emphasise that something is done or achieved, often before the expected time:</string>
+
+    <string name="present_perfect_usage8">Still</string>
+    <string name="present_perfect_usage8_text1">We use still + the present perfect simple when we want to emphasise that something we expected to happen continues not to happen:</string>
+
+    <string name="present_perfect_usage9">Introducing past time events</string>
+    <string name="present_perfect_usage9_text1">The present perfect simple is often used in newspaper headlines or TV news programmes to report a recent past event. It is then followed by a series of verbs in the past simple (underlined):</string>
+    <string name="present_perfect_usage9_text2">We can also use the present perfect simple to introduce an ‘open’ general point about something. We can then use the past simple (underlined) to give more detailed specific information:</string>
+
+
+</resources>

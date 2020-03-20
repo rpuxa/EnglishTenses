@@ -8,7 +8,7 @@ import ru.rpuxa.englishtenses.model.Tense
 import ru.rpuxa.englishtenses.model.Theory
 import ru.rpuxa.englishtenses.view.adapter.TheoryAdapter
 
-class TheoryActivity : AppCompatActivity() {
+class TheoryActivity : BaseActivity() {
 
     private val binding by lazy { ActivityTheoryBinding.inflate(layoutInflater) }
     private val tenseCode by lazy { intent.extras?.get(TENSE_CODE) as? Int ?: error("Code needed") }

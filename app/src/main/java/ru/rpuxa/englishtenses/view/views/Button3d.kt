@@ -50,7 +50,7 @@ class Button3d : Layout3d {
             3 -> R.color.colorBlueButton to android.R.color.white
             4 ->  android.R.color.white to R.color.colorBlueButton
             5 -> R.color.colorRedButton to android.R.color.white
-
+            6 ->  R.color.golden to android.R.color.white
             else -> error("Unknown attribute")
         }
         backTint = color

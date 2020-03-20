@@ -8,15 +8,12 @@ import ru.rpuxa.englishtenses.databinding.SpaceAnswerBinding
 
 class SpaceAnswerView(layoutInflater: LayoutInflater) : ResizableView {
     private val binding = SpaceAnswerBinding.inflate(layoutInflater)
+
     init {
         binding.root.layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
             binding.root.resources.getDimensionPixelSize(R.dimen.answer_height)
         )
-     /*   binding.text.layoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.MATCH_PARENT,
-            FrameLayout.LayoutParams.MATCH_PARENT
-        )*/
     }
 
     var defaultWidth = 0
@@ -25,7 +22,6 @@ class SpaceAnswerView(layoutInflater: LayoutInflater) : ResizableView {
 
     override fun setWidth(width: Int) {
         binding.dummyView.width = width
-//        binding.text.width = width
     }
 
     override fun setHeight(height: Int) {
@@ -34,10 +30,11 @@ class SpaceAnswerView(layoutInflater: LayoutInflater) : ResizableView {
 
     override fun requestLayout() {
         binding.dummyView.requestLayout()
-//        binding.text.requestLayout()
     }
 
-    fun setText(s: String) {
-        binding.text.text = s
-    }
+    var text: String
+        get() = binding.text.text.toString()
+        set(value) {
+            binding.text.text = value
+        }
 }

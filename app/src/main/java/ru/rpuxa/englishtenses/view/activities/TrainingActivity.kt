@@ -26,5 +26,6 @@ class TrainingActivity : ExerciseActivity(true) {
 
     override fun onResult(result: ExerciseResult) {
         viewModel.onResult(result)
+        nextExercise()
     }
 }

@@ -31,11 +31,15 @@
         <item>В седьмом</item>
     </string-array>
 
+    <string name="pass_test">Пройти %d тестов</string>
+    <string name="passed">Пройдено: %d</string>
+    <string name="open_theory">Открыть теорию</string>
+    <string name="learn_sentences">Изучить %d примеров</string>
+    <string name="learned">Изучено: %d</string>
+    <string name="pass_test_without_mistakes">Написать %d тестов без ошибок</string>
+    <string name="written">Написано: %d</string>
+    <string name="combo_test">Пройти тест %d раз подряд на 70% или выше</string>
+    <string name="rate_app">Оценить приложение</string>
 
-    <string name="present_perfect_usage1">Experiences</string>
-    <string name="present_perfect_usage1_text1">We use the present perfect simple to talk about our experiences up to now. The time of the experiences is not important:</string>
-    <string name="present_perfect_usage1_text2">Although we do not give a specific time, we often use general time expressions like ever, never, before, in my life, so far, up until now with this use of the present perfect simple:</string>
-    <string name="present_perfect_usage1_text3">We often use ever, not … ever and never when we talk about experiences:</string>
-    <string name="present_perfect_usage1_text4">We often use the present perfect simple for a unique experience when we are using a superlative:</string>
-    <string name="present_perfect_usage1_text5">We usually use the present perfect simple with the first time when we’re talking about an immediate, continuing or recent event:</string>
+
 </resources>

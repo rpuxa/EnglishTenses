@@ -10,13 +10,12 @@ import ru.rpuxa.englishtenses.view.fragments.ExerciseFragment
 import javax.inject.Inject
 
 class ExerciseViewModel @Inject constructor(
-    private val user: User,
     private val loader: SentenceLoader
 ) : ViewModel() {
 
 
     private var tipsEnabled = false
-    private val spacesStates = MutableLiveData<List<Int?>>()
+    private val spacesStates = MutableLiveData<List<ExerciseFragment.SpaceState>>()
     private val answerStates = MutableLiveData<MutableList<AnswerState>>()
     private val _tipMode = State(TIP_MODE_OFF)
     private val startTime = System.currentTimeMillis()
@@ -25,26 +24,26 @@ class ExerciseViewModel @Inject constructor(
     val tipMode = _tipMode.liveData
     var shuffledAnswers = emptyList<String>()
         private set
-    var rightAnswers = emptyList<Int>()
+    var rightAnswers = emptyList<String>()
         private set
     var result = State<ExerciseResult?>(null)
-    val showTipButton: LiveData<Boolean> = spacesStates.map { tipsEnabled && it.any { it == null } }
+    val showTipButton: LiveData<Boolean> = spacesStates.map { tipsEnabled && it.any { it.empty } }
     val showIrregularVerbTable = SingleLiveEvent<String>()
 
     val answerListener = object : ExerciseFragment.AnswersMoveListener {
         override fun onMoveToSpace(answerId: Int, spaceId: Int): Boolean {
 
-            spacesStates.value!![spaceId]?.let {
-                if (answerStates.value!![it].right) {
+            spacesStates.value!![spaceId].let {
+                if (!it.empty && answerStates.value!![it.answerId].right) {
                     return false
                 }
             }
 
             if (_tipMode.value != TIP_MODE_OFF && _tipMode.value.spaceIndex == spaceId) {
-                return if (rightAnswers[spaceId] == answerId) {
+                return if (rightAnswers[spaceId] == shuffledAnswers[answerId]) {
                     answerStates.update { this[answerId] = Result(correct = true, block = true) }
                     _tipMode.value = TIP_MODE_OFF
-                    if (rightAnswers.all { answerStates.value!![it].right }) {
+                    if (spacesStates.value!!.all { it.spaceId == spaceId || !it.empty && answerStates.value!![it.answerId].right }) {
                         setResult(sentence.answers, emptyList())
                     }
                     true
@@ -70,16 +69,16 @@ class ExerciseViewModel @Inject constructor(
 
     fun load(set: Set<Int>, tipsEnabled: Boolean) {
         this.tipsEnabled = tipsEnabled
-        sentence = loader.load(set)
+        sentence = testSentence ?: loader.load(set)
         val answers = sentence.answers
         shuffledAnswers = (answers.map { it.correctForm } + sentence.wrongAnswers).shuffled()
-        rightAnswers = answers.map { shuffledAnswers.indexOf(it.correctForm) }
+        rightAnswers = answers.map { it.correctForm }
 
         answerStates.value = MutableList(shuffledAnswers.size) {
             None()
         }
 
-        spacesStates.value = List(answers.size) { null }
+        spacesStates.value = List(answers.size) { ExerciseFragment.SpaceState(it) }
     }
 
     fun getAnswerState(id: Int) = answerStates.map { it[id] }
@@ -94,19 +93,18 @@ class ExerciseViewModel @Inject constructor(
         answerStates.value!![index] = None()
     }
 
-    fun check(spaces: List<Int?>) {
+    fun check(spaces: List<ExerciseFragment.SpaceState>) {
         val correct = ArrayList<WordAnswer>()
         val incorrect = ArrayList<WordAnswer>()
         val answers = sentence.answers
         answerStates.update {
-            spaces.forEachIndexed { spaceId, answerId ->
-                val answer =
-                    answers.first { it.correctForm == shuffledAnswers[rightAnswers[spaceId]] }
-                if (answerId == null) {
+            spaces.forEach {
+                val answer = answers[it.spaceId]
+                if (it.empty) {
                     incorrect += answer
                 } else {
-                    this[answerId] = Result(
-                        if (rightAnswers[spaceId] == answerId) {
+                    this[it.answerId] = Result(
+                        if (rightAnswers[it.spaceId] == it.text) {
                             correct += answer
                             true
                         } else {
@@ -122,15 +120,33 @@ class ExerciseViewModel @Inject constructor(
     }
 
 
-    fun setAllCorrect() {
+    fun setAllCorrect(): List<Int> {
+        val used = ArrayList<Int>()
+
         answerStates.update {
             repeat(size) {
-                this[it] = if (it in rightAnswers) Result(true, block = true) else None(true)
+                val answer = shuffledAnswers[it]
+                var index = -1
+                for (i in rightAnswers.indices) {
+                    if (i !in used && rightAnswers[i] == answer) {
+                        used += i
+                        index = i
+                        break
+                    }
+                }
+                if (index == -1) {
+                    this[it] = None(true)
+                } else {
+                    used += index
+                    this[it] = Result(true, block = true)
+                }
             }
         }
+
+        return used
     }
 
-    fun updateSpaces(answers: List<Int?>) {
+    fun updateSpaces(answers: List<ExerciseFragment.SpaceState>) {
         spacesStates.value = answers
     }
 
@@ -174,5 +190,19 @@ class ExerciseViewModel @Inject constructor(
 
     companion object {
         val TIP_MODE_OFF = TipMode(Tense.PRESENT_SIMPLE, -1)
+        private val testSentence: Sentence? = Sentence(
+            listOf(
+                Word("Hi"),
+                WordAnswer("read", listOf("read"), Tense.PAST_SIMPLE, null)
+            ),
+            listOf(
+                "read",
+                "read",
+                "read",
+                "read",
+                "read",
+                "read"
+            )
+        )
     }
 }

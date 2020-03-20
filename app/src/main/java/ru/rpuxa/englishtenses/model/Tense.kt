@@ -3,6 +3,8 @@ package ru.rpuxa.englishtenses.model
 import androidx.annotation.StringRes
 import ru.rpuxa.englishtenses.R
 
+
+// https://dictionary.cambridge.org/grammar/british-grammar/tenses-and-time
 enum class Tense(val code: Int, @StringRes val stringRes: Int) {
     PAST_SIMPLE(0, R.string.past_simple),
     PRESENT_SIMPLE(1, R.string.present_simple),

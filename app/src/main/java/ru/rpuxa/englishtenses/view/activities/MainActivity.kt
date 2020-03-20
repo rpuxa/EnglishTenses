@@ -1,7 +1,7 @@
 package ru.rpuxa.englishtenses.view.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.observe
@@ -9,11 +9,12 @@ import org.jetbrains.anko.startActivity
 import ru.rpuxa.englishtenses.databinding.ActivityMainBinding
 import ru.rpuxa.englishtenses.databinding.TenseBottomMenuBinding
 import ru.rpuxa.englishtenses.model.Tense
+import ru.rpuxa.englishtenses.view.views.AchievementNotification
 import ru.rpuxa.englishtenses.view.views.BottomMenu
 import ru.rpuxa.englishtenses.viewModel
 import ru.rpuxa.englishtenses.viewmodel.MainViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private val viewModel: MainViewModel by viewModel()
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -109,24 +110,31 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
+/*        Handler().postDelayed({
+            AchievementNotification.show(this, "afg")
+        }, 1000)*/
+
         binding.irregularVerbs.setOnClickListener {
             startActivity<IrregularVerbsActivity>()
+        }
+
+        binding.achievements.setOnClickListener {
+            startActivity<AchievementsActivity>()
         }
     }
 
 
     private var bottomMenu: BottomMenu? = null
-    fun showBottomMenu(menu: BottomMenu) {
+    private fun showBottomMenu(menu: BottomMenu) {
         bottomMenu?.dismiss()
         menu.show(this)
         bottomMenu = menu
     }
 
-    fun dismissButtonMenu() {
+    private fun dismissButtonMenu() {
         bottomMenu?.dismiss()
         bottomMenu = null
     }
 
-    private class ChoseBottomMenu(view: View) : BottomMenu(view)
     private class TenseBottomMenu(val binding: TenseBottomMenuBinding) : BottomMenu(binding.root)
 }

@@ -30,9 +30,13 @@ abstract class ViewModelsProvider {
     @ViewModelKey(ExamViewModel::class)
     abstract fun exam(v: ExamViewModel): ViewModel
 
-      @Binds
+    @Binds
     @IntoMap
     @ViewModelKey(TrainingViewModel::class)
     abstract fun training(v: TrainingViewModel): ViewModel
 
+    @Binds
+    @IntoMap
+    @ViewModelKey(AchievementViewModel::class)
+    abstract fun achievement(v: AchievementViewModel): ViewModel
 }

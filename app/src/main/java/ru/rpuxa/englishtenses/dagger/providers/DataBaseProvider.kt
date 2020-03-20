@@ -20,4 +20,7 @@ class DataBaseProvider {
 
     @Provides
     fun correctnessStatisticDao(db: DataBase) = db.correctnessStatisticDao
+
+    @Provides
+    fun achievement(db: DataBase) = db.achievementDao
 }

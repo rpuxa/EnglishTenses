@@ -9,7 +9,7 @@ import ru.rpuxa.englishtenses.R
 import ru.rpuxa.englishtenses.model.ExerciseResult
 import ru.rpuxa.englishtenses.view.fragments.ExerciseFragment
 
-abstract class ExerciseActivity(private val tipMode: Boolean) : AppCompatActivity() {
+abstract class ExerciseActivity(private val tipMode: Boolean) : BaseActivity() {
 
     abstract val binding: ViewBinding
     private var oldFragment: Fragment? = null

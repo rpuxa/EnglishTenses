@@ -10,7 +10,7 @@ import ru.rpuxa.englishtenses.viewModel
 import ru.rpuxa.englishtenses.viewmodel.IrregularVerbsViewModel
 import androidx.lifecycle.observe
 
-class IrregularVerbsActivity : AppCompatActivity() {
+class IrregularVerbsActivity : BaseActivity() {
 
     private val viewModel: IrregularVerbsViewModel by viewModel()
     private val binding by lazy { ActivityIrregularVerbsBinding.inflate(layoutInflater) }

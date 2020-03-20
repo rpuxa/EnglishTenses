@@ -45,6 +45,7 @@ class ExamActivity : ExerciseActivity(false) {
         if (examResult == null) {
             nextExercise()
         } else {
+            achievementViewModel.onTestPassed()
             finished = true
             showFragment(ExamResultFragment.create(examResult))
         }
