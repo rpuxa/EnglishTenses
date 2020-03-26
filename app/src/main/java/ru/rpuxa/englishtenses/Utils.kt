@@ -14,6 +14,7 @@ import androidx.annotation.LayoutRes
 import androidx.core.graphics.component1
 import androidx.core.graphics.component2
 import androidx.core.graphics.minus
+import androidx.core.view.updateLayoutParams
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -194,4 +195,13 @@ fun TextView.textChangeFlow() = callbackFlow {
     }
     offer(text.toString())
     awaitClose()
+}
+
+fun View.updateParams(width: Int? = null, height: Int? = null) {
+    updateLayoutParams {
+        if (width != null)
+            this.width = width
+        if (height != null)
+            this.height = height
+    }
 }

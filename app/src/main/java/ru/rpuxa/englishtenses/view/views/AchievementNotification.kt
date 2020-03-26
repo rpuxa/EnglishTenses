@@ -34,8 +34,6 @@ class AchievementNotification(
         val contentView = contentView!!
         showAsDropDown(anchor, margin, margin, Gravity.TOP or Gravity.CENTER_HORIZONTAL)
 
-        val detector = GestureDetector(anchor.context, listener)
-
         contentView.setOnTouchListener {  _, event ->
             dismiss()
             false

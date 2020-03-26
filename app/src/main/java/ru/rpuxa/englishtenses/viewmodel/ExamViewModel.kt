@@ -1,14 +1,11 @@
 package ru.rpuxa.englishtenses.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ru.rpuxa.englishtenses.State
 import ru.rpuxa.englishtenses.model.ExamResult
 import ru.rpuxa.englishtenses.model.ExerciseResult
 import ru.rpuxa.englishtenses.model.SentenceStatistic
-import ru.rpuxa.englishtenses.model.Tense
 import ru.rpuxa.englishtenses.model.db.CorrectnessStatistic
-import java.lang.Math.round
 import java.text.DecimalFormat
 import javax.inject.Inject
 import kotlin.math.roundToInt
@@ -41,9 +38,9 @@ class ExamViewModel @Inject constructor(
             val totalTenses = correctness.values.sumBy { it.all }
             val totalCorrect = correctness.values.sumBy { it.correct }
             ExamResult(
-                FORMAT.format(consumedTime.toDouble() / 1000),
+                consumedTime.toDouble() / 1000,
                 correctness.values.toList(),
-                "${(totalCorrect.toDouble() * 100 / totalTenses).roundToInt()}%",
+                (totalCorrect.toDouble() * 100 / totalTenses).roundToInt(),
                 totalTenses
             )
         } else {

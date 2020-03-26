@@ -39,4 +39,11 @@ abstract class ViewModelsProvider {
     @IntoMap
     @ViewModelKey(AchievementViewModel::class)
     abstract fun achievement(v: AchievementViewModel): ViewModel
+
+   @Binds
+    @IntoMap
+    @ViewModelKey(RateViewModel::class)
+    abstract fun rate(v: RateViewModel): ViewModel
+
+
 }

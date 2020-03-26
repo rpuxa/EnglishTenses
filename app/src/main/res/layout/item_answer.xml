@@ -7,10 +7,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:text="ahdfgsdfasdf"
     android:minWidth="@dimen/space_answer_min_width"
-    android:textSize="17sp"
+    android:textSize="@dimen/default_answer_size"
     android:gravity="center"
-    android:paddingStart="11dp"
-    android:paddingEnd="11dp"
     tools:backgroundTint="@android:color/white"
     android:backgroundTintMode="multiply"
     android:textColor="@android:color/black"/>

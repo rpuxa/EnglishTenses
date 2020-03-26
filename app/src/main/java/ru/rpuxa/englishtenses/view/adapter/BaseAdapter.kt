@@ -28,7 +28,6 @@ abstract class BaseAdapter<T, Binding : ViewBinding> :
         val inflater = LayoutInflater.from(parent.context)
         val binding = create(inflater, parent)
         val view = binding.root
-//        view.layoutParams = layoutParams
         return view.getViewHolder(binding)
     }
 
@@ -39,11 +38,6 @@ abstract class BaseAdapter<T, Binding : ViewBinding> :
         collection = list
         notifyDataSetChanged()
     }
-
-//    open val layoutParams = RecyclerView.LayoutParams(
-//        RecyclerView.LayoutParams.MATCH_PARENT,
-//        RecyclerView.LayoutParams.WRAP_CONTENT
-//    )
 
     protected abstract fun create(inflater: LayoutInflater, parent: ViewGroup): Binding
 

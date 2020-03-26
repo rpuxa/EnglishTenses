@@ -11,7 +11,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ClosedReceiveChannelException
 import kotlinx.coroutines.channels.sendBlocking
 
-open class DummyView : View, ResizableView {
+class DummyView : View, ResizableView {
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
@@ -29,6 +29,7 @@ open class DummyView : View, ResizableView {
 
     private var mWidth = 0
     private var mHeight = 0
+    var dummyParent: Parent? = null
 
 
     override fun setWidth(width: Int) {
@@ -45,11 +46,13 @@ open class DummyView : View, ResizableView {
 
     fun follow(listener: FollowListener) {
         addOnLayoutChangeListener(listener)
+        dummyParent?.addOnLayoutChangeListener(listener)
         requestLayout()
     }
 
     fun stopFollowing(listener: FollowListener) {
         removeOnLayoutChangeListener(listener)
+        dummyParent?.removeOnLayoutChangeListener(listener)
         listener.close()
     }
 
@@ -104,6 +107,10 @@ open class DummyView : View, ResizableView {
             oldRight: Int,
             oldBottom: Int
         ) {
+            onLayoutChange()
+        }
+
+        fun onLayoutChange() {
             synchronized(this) {
                 startTime = System.currentTimeMillis()
             }
@@ -114,6 +121,11 @@ open class DummyView : View, ResizableView {
         fun close() {
             job.cancel()
         }
+    }
+
+    interface Parent {
+        fun addOnLayoutChangeListener(followListener: FollowListener)
+        fun removeOnLayoutChangeListener(followListener: FollowListener)
     }
 
     companion object {

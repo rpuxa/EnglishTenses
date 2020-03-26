@@ -46,6 +46,12 @@ class ExamActivity : ExerciseActivity(false) {
             nextExercise()
         } else {
             achievementViewModel.onTestPassed()
+            if (examResult.correctnessPercent >= 70) {
+                achievementViewModel.onTest70PercentPassed()
+            }
+            if (examResult.correctnessPercent == 100) {
+                achievementViewModel.onCorrectTestPassed()
+            }
             finished = true
             showFragment(ExamResultFragment.create(examResult))
         }

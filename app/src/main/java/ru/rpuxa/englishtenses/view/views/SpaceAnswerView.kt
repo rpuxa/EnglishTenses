@@ -12,7 +12,7 @@ class SpaceAnswerView(layoutInflater: LayoutInflater) : ResizableView {
     init {
         binding.root.layoutParams = FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.WRAP_CONTENT,
-            binding.root.resources.getDimensionPixelSize(R.dimen.answer_height)
+            FrameLayout.LayoutParams.WRAP_CONTENT
         )
     }
 
@@ -20,16 +20,18 @@ class SpaceAnswerView(layoutInflater: LayoutInflater) : ResizableView {
 
     val root get() = binding.root
 
+    val dummy get() = binding.dummyView
+
     override fun setWidth(width: Int) {
-        binding.dummyView.width = width
+        dummy.width = width
     }
 
     override fun setHeight(height: Int) {
-        binding.dummyView.height = height
+        dummy.height = height
     }
 
     override fun requestLayout() {
-        binding.dummyView.requestLayout()
+        dummy.requestLayout()
     }
 
     var text: String

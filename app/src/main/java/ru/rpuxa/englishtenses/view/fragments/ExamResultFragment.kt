@@ -1,5 +1,6 @@
 package ru.rpuxa.englishtenses.view.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,9 +27,10 @@ class ExamResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View = binding.root
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.correctness.text = result.correctnessPercent
-        binding.time.text = getString(R.string.secs, result.time)
+        binding.correctness.text = "${result.correctnessPercent} %"
+        binding.time.text = getString(R.string.secs, result.time.toInt())
         binding.totalTenses.text = result.tensesNumber.toString()
         binding.exit.setOnClickListener {
             act.finish()

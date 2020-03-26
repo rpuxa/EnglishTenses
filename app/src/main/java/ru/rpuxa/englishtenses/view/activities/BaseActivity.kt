@@ -10,15 +10,12 @@ import ru.rpuxa.englishtenses.view.views.AchievementNotification
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    protected val achievementViewModel: AchievementViewModel by viewModel()
+    val achievementViewModel: AchievementViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         achievementViewModel.newAchievementEvent.observe(this) {
             AchievementNotification.show(this, it)
         }
-
-
-
     }
 }

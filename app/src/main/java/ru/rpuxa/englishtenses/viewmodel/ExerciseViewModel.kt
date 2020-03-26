@@ -137,7 +137,6 @@ class ExerciseViewModel @Inject constructor(
                 if (index == -1) {
                     this[it] = None(true)
                 } else {
-                    used += index
                     this[it] = Result(true, block = true)
                 }
             }
@@ -190,19 +189,15 @@ class ExerciseViewModel @Inject constructor(
 
     companion object {
         val TIP_MODE_OFF = TipMode(Tense.PRESENT_SIMPLE, -1)
-        private val testSentence: Sentence? = Sentence(
+        private val testSentence: Sentence? =null/*Sentence(
             listOf(
                 Word("Hi"),
+                WordAnswer("read", listOf("read"), Tense.PAST_SIMPLE, null),
                 WordAnswer("read", listOf("read"), Tense.PAST_SIMPLE, null)
             ),
             listOf(
-                "read",
-                "read",
-                "read",
-                "read",
-                "read",
-                "read"
+                "readasdfasdfasdf"
             )
-        )
+        )*/
     }
 }

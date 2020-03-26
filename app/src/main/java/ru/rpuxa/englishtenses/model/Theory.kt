@@ -21,7 +21,7 @@ enum class Theory(
             example("As children, we played all kinds of games on the street.")
             example("She looked a bit upset.")
             text(R.string.past_simple_usage2_text2)
-            example("I did a lot of travelling when I was younger.")
+            example("I did a lot of travelling when I was younger.(or I used to do a lot of travelling when I was younger.)")
         }
         usage(R.string.past_simple_usage3) {
             text(R.string.past_simple_usage3_text1)
@@ -97,6 +97,107 @@ enum class Theory(
             text(R.string.present_simple_usage9_text1)
             example("Man rescues child from lake")
             example("Taiwanese envoys arrive in China")
+        }
+    }),
+
+
+    FUTURE_SIMPLE(Tense.FUTURE_SIMPLE, {
+       usage(R.string.future_simple_usage1){
+           text(R.string.future_simple_usage1_text1)
+           example("There will be strong winds tomorrow in the south of the country.")
+           example("The year 2025 will be the four-hundredth anniversary of the founding of the university.")
+           example("We shall need an extra bedroom when the new baby arrives.")
+       }
+       usage(R.string.future_simple_usage2){
+           text(R.string.future_simple_usage2_text1)
+           example("A: Which size do you want? Medium or large?\nB: I’ll have large.")
+           example("Wait. I’ll open the door for you.")
+           example("I shall contact you again when I have further information.")
+       }
+       usage(R.string.future_simple_usage3){
+           text(R.string.future_simple_usage3_text1)
+           example("We shall never forget the holiday we had in Vietnam.")
+           text(R.string.future_simple_usage3_text2)
+           example("It’s getting late. Shall we go home?")
+           example("Shall I invite Louisa and Jill to the party?")
+       }
+    }),
+
+    PAST_CONTINUOUS(Tense.PAST_CONTINUOUS, {
+       usage(R.string.past_continuous_usage1) {
+           text(R.string.past_continuous_usage1_text1)
+           example("A: Where was Donna last night?\nB: I’m not sure. I think she was visiting her family.")
+           example("I remember that night. You were wearing that red dress.")
+       }
+       usage(R.string.past_continuous_usage2) {
+           text(R.string.past_continuous_usage2_text1)
+           example("Lisa was cycling to school when she saw the accident.")
+           example("What were you thinking about when you won the race?")
+       }
+       usage(R.string.past_continuous_usage3) {
+           text(R.string.past_continuous_usage3_text1)
+           example("A: I can’t believe you met Fran and Dave in Portugal.\nB: It was funny. They were staying in the hotel next to ours.")
+           example("I didn’t make the meeting last week; I was travelling to Rome.")
+       }
+       usage(R.string.past_continuous_usage4) {
+           text(R.string.past_continuous_usage4_text1)
+           example("She was feeding her neighbours’ cat every morning while they were on holiday. Then one morning, it was gone.")
+           example("The neighbours were making so much noise, night after night. We had to complain eventually.")
+           text(R.string.past_continuous_usage4_text2)
+           example("We were always spending so much time in traffic. That’s the main reason why we decided to move to the country and work from home.")
+           example("My boss was constantly phoning me in my last job. I hated it.")
+           example("She was forever losing her keys.")
+       }
+       usage(R.string.past_continuous_usage5) {
+           text(R.string.past_continuous_usage5_text1)
+           example("We were cooking all morning because we had 15 people coming for lunch.")
+           example("Lots of us were working at the office on Saturday because we had to finish the project by Monday.")
+       }
+    }),
+
+    PRESENT_CONTINUOUS(Tense.PRESENT_CONTINUOUS, {
+       usage(R.string.present_continuous_usage1){
+           text(R.string.present_continuous_usage1_text1)
+           example("A: What time’s dinner?\nB: I’m cooking now so it’ll be ready in about half an hour.")
+           example("She’s pressing the button but nothing is happening.")
+       }
+       usage(R.string.present_continuous_usage2){
+           text(R.string.present_continuous_usage2_text1)
+           example("Her mother’s living with her at the moment. She’s just come out of hospital.")
+           example("Who’s looking after the children while you’re here?")
+       }
+       usage(R.string.present_continuous_usage3){
+           text(R.string.present_continuous_usage3_text1)
+           example("I’m not drinking much coffee these days. I’m trying to cut down.")
+           example("She’s working a lot in London at the moment.")
+       }
+       usage(R.string.present_continuous_usage4){
+           text(R.string.present_continuous_usage4_text1)
+           example("They’re building a new stand at the football ground.")
+           example("Maria, 37, is getting better and doctors are optimistic she will make a full recovery.")
+           example("Recent evidence suggests that the economic situation is improving.")
+       }
+       usage(R.string.present_continuous_usage5){
+           text(R.string.present_continuous_usage5_text1)
+           example("My wife, she’s always throwing things out. I like to keep everything.")
+           example("I’m constantly spilling things.")
+       }
+       usage(R.string.present_continuous_usage6){
+           text(R.string.present_continuous_usage6_text1)
+           example("We’re moving to Cambridge in July.")
+           example("Sarah isn’t taking Rory to football training later. She hasn’t got the car tonight.")
+           example("Aren’t you playing tennis on Saturday?")
+       }
+    }),
+
+    FUTURE_CONTINUOUS(Tense.FUTURE_CONTINUOUS, {
+        usage(R.string.future_continuous_usage1) {
+            text(R.string.future_continuous_usage1_text1)
+            example("This time next week, I’ll be taking photographs with my new camera.")
+            example("I’ll post your letter for you. I’ll be passing a post-box.")
+            example("Next week they will be flying to Australia from Saudi Arabia.")
+            example("She will not be working on Tuesday.")
+            example("Unfortunately we won’t be attending the wedding.")
         }
     }),
 
@@ -190,7 +291,7 @@ enum class Theory(
 }
 
 
-sealed class TheoryItem()
+sealed class TheoryItem
 
 class Text(@StringRes val text: Int) : TheoryItem()
 class Example(val text: String) : TheoryItem()
@@ -201,6 +302,7 @@ class Usage(
 ) : TheoryItem()
 
 private class TheoryBuilder {
+    private var n = 0
     private val items = ArrayList<TheoryItem>()
 
     fun usage(
@@ -210,7 +312,7 @@ private class TheoryBuilder {
     ) {
         val builder = UsageBuilder()
         builder.block()
-        val (usage, items) = builder.build(name, items.size + 1)
+        val (usage, items) = builder.build(name, ++n)
         this.items += usage
         this.items += items
     }

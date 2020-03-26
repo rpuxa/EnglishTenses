@@ -35,6 +35,46 @@
     <string name="present_simple_usage9_text1">We often see the present simple in news headlines to report past events. It emphasises the drama or immediacy of an event:</string>
 
 
+    <string name="future_simple_usage1">Predictions</string>
+    <string name="future_simple_usage1_text1">We use will and shall to make predictions and to state facts about the future:</string>
+    <string name="future_simple_usage2">Decisions and offers</string>
+    <string name="future_simple_usage2_text1">Will and shall (usually in the short form ’ll) are used to announce decisions and to make offers:</string>
+    <string name="future_simple_usage3">Shall with I and we</string>
+    <string name="future_simple_usage3_text1">We can use shall instead of will with I and we in statements. Its use is more formal:</string>
+    <string name="future_simple_usage3_text2">When we use shall I and shall we in questions it is usually to make suggestions rather than to refer to future time:</string>
+
+
+    <string name="past_continuous_usage1">Events happening at a particular time in the past</string>
+    <string name="past_continuous_usage1_text1">We generally use the past continuous to talk about actions and states in progress (happening) around a particular time in the past. It can emphasise that the action or state continued for a period of time in the past:</string>
+    <string name="past_continuous_usage2">Background events</string>
+    <string name="past_continuous_usage2_text1">When one event is more important than another in the past, we can use the past continuous for the background event (the less important event) and the past simple for the main event:</string>
+    <string name="past_continuous_usage3">Reasons and contexts for events</string>
+    <string name="past_continuous_usage3_text1">We often use the past continuous to give a reason or context for an event:</string>
+    <string name="past_continuous_usage4">Ongoing and repeated events</string>
+    <string name="past_continuous_usage4_text1">We can use the past continuous to talk about repeated background events in the past. It can suggest that the situation was temporary or subject to change:</string>
+    <string name="past_continuous_usage4_text2">Adverbs such as always, constantly, forever are used with the past continuous when we talk about repeated, unplanned or undesired events:</string>
+    <string name="past_continuous_usage5">The past continuous and definite time</string>
+    <string name="past_continuous_usage5_text1">We sometimes use the past continuous to refer to a definite period of past time. This usually emphasises the event continuing over a period of time:</string>
+
+
+    <string name="present_continuous_usage1">Events at the time of speaking</string>
+    <string name="present_continuous_usage1_text1">We use the present continuous to talk about events which are in progress at the moment of speaking:</string>
+    <string name="present_continuous_usage2">Temporary states</string>
+    <string name="present_continuous_usage2_text1">We use the present continuous to talk about temporary states which are true around the moment of speaking:</string>
+    <string name="present_continuous_usage3">Repeated temporary events</string>
+    <string name="present_continuous_usage3_text1">We use the present continuous to describe actions which are repeated or regular, but which we believe to be temporary:</string>
+    <string name="present_continuous_usage4">Change</string>
+    <string name="present_continuous_usage4_text1">We use the present continuous to talk about a gradual change:</string>
+    <string name="present_continuous_usage5">Regular unplanned events</string>
+    <string name="present_continuous_usage5_text1">We often use the present continuous with words like always, constantly, continually and forever (adverbs of indefinite frequency) to describe events which are regular but not planned, and often not wanted:</string>
+    <string name="present_continuous_usage6">Plans and arrangements</string>
+    <string name="present_continuous_usage6_text1">We use the present continuous to refer to the future when we talk about plans and arrangements that have already been made:</string>
+
+
+    <string name="future_continuous_usage1">Events in the future</string>
+    <string name="future_continuous_usage1_text1">We use the future continuous to refer to temporary actions and events that will be in progress at a particular time in the future:</string>
+
+
 
     <string name="present_perfect_usage1">Experiences</string>
     <string name="present_perfect_usage1_text1">We use the present perfect simple to talk about our experiences up to now. The time of the experiences is not important:</string>
@@ -42,31 +82,21 @@
     <string name="present_perfect_usage1_text3">We often use ever, not … ever and never when we talk about experiences:</string>
     <string name="present_perfect_usage1_text4">We often use the present perfect simple for a unique experience when we are using a superlative:</string>
     <string name="present_perfect_usage1_text5">We usually use the present perfect simple with the first time when we’re talking about an immediate, continuing or recent event:</string>
-
     <string name="present_perfect_usage2">Recent completed events</string>
     <string name="present_perfect_usage2_text1">We use the present perfect simple to talk about a finished event or state in the very recent past. We do not give a specific time. We often use words like just or recently for events taking place a very short time before now:</string>
-
     <string name="present_perfect_usage3">Past events, present results</string>
     <string name="present_perfect_usage3_text1">We use the present perfect simple when a single past action has a connection with the present:</string>
-
     <string name="present_perfect_usage4">Time + for and since</string>
     <string name="present_perfect_usage4_text1">We use the present perfect simple with for and since to talk about a present situation that began at a specific point in the past and is still going on in the present. We are looking back from the present to a point in the past.</string>
-
     <string name="present_perfect_usage5">How long …?</string>
     <string name="present_perfect_usage5_text1">We often use expressions with for and since to answer the question How long …+ present perfect simple. We use the How long …? question to ask about the duration of a state or activity:</string>
-
     <string name="present_perfect_usage6">Yet</string>
     <string name="present_perfect_usage6_text1">We use yet + the present perfect simple, mainly in questions and negative statements, to refer to things we intend to do in the future but which are not done:</string>
-
     <string name="present_perfect_usage7">Already</string>
     <string name="present_perfect_usage7_text1">We use already + the present perfect simple when we want to emphasise that something is done or achieved, often before the expected time:</string>
-
     <string name="present_perfect_usage8">Still</string>
     <string name="present_perfect_usage8_text1">We use still + the present perfect simple when we want to emphasise that something we expected to happen continues not to happen:</string>
-
     <string name="present_perfect_usage9">Introducing past time events</string>
     <string name="present_perfect_usage9_text1">The present perfect simple is often used in newspaper headlines or TV news programmes to report a recent past event. It is then followed by a series of verbs in the past simple (underlined):</string>
     <string name="present_perfect_usage9_text2">We can also use the present perfect simple to introduce an ‘open’ general point about something. We can then use the past simple (underlined) to give more detailed specific information:</string>
-
-
 </resources>

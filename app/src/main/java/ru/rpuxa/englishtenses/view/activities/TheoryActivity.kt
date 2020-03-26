@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ru.rpuxa.englishtenses.databinding.ActivityTheoryBinding
 import ru.rpuxa.englishtenses.model.Tense
 import ru.rpuxa.englishtenses.model.Theory
+import ru.rpuxa.englishtenses.onMeasured
 import ru.rpuxa.englishtenses.view.adapter.TheoryAdapter
 
 class TheoryActivity : BaseActivity() {
@@ -16,7 +17,9 @@ class TheoryActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        binding.root.onMeasured {
+            achievementViewModel.onTheoryOpened()
+        }
         val adapter = TheoryAdapter()
         binding.recycler.layoutManager = LinearLayoutManager(this)
         binding.recycler.adapter = adapter

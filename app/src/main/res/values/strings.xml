@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">English Tenses</string>
+    <string name="app_name" translatable="false">English Tenses</string>
 
     <string name="present_simple">Present Simple</string>
     <string name="present_continuous">Present Continuous</string>
@@ -19,7 +19,7 @@
 
     <string name="single_tip">Здесь нужно употребить %s</string>
     <string name="many_tip">%s случае нужно употребить %s</string>
-    <string name="secs">%s сек</string>
+    <string name="secs">%d сек.</string>
 
     <string-array name="ordinal_numbers">
         <item>В первом</item>
@@ -38,8 +38,9 @@
     <string name="learned">Изучено: %d</string>
     <string name="pass_test_without_mistakes">Написать %d тестов без ошибок</string>
     <string name="written">Написано: %d</string>
-    <string name="combo_test">Пройти тест %d раз подряд на 70% или выше</string>
+    <string name="combo_test">Пройти тест %d раз подряд на 70%% или выше</string>
     <string name="rate_app">Оценить приложение</string>
+
 
 
 </resources>

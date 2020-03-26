@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="past_simple_usage1">Определение времени в прошлом</string>
+    <string name="past_simple_usage1_text1">Past simple используется, чтобы говорить об определенном времени в прошлом (обычно мы уточняем, когда это произошло, к примеру: yesterday, three weeks ago, last year, when I was young):</string>
+    <string name="past_simple_usage2">Разовые или постоянные соыбтия или состояния</string>
+    <string name="past_simple_usage2_text1">Past simple используется чтобы говорить о постоянных (привычных) или разовых событиях или состояниях в прошлом.</string>
+    <string name="past_simple_usage2_text2">Когда мы используем past simple чтобы сослаться на привычные события, смысл такой же как и у used to:</string>
+    <string name="past_simple_usage3">События в прошлом без отсылки на конкретное время</string>
+    <string name="past_simple_usage3_text1">Sometimes there is no time expression when the past simple is used. This happens especially when we know the time:</string>
+    <string name="past_simple_usage4">Past simple и порядок событий</string>
+    <string name="past_simple_usage4_text1">Когда одно прошедшее событие происходит за другим, первое, упомянутое в past simple, произошло первым, а второе произошло следующим, и так далее. Если мы изменим порядок глаголов, это поменяет смысл.</string>
+
+    <string name="present_simple_usage1">Общие факты</string>
+    <string name="present_simple_usage1_text1">Present simple изспользуется для того, чтобы говорить об общеизвестных фактах:</string>
+    <string name="present_simple_usage1_text2">Present simple изспользуется для того, чтобы говорить о фактах, которые, как мы считаем, являются верными к текущему моменту времени:</string>
+    <string name="present_simple_usage2">Регулярные или привычные события</string>
+    <string name="present_simple_usage2_text1">Present simple изспользуется для того, чтобы говорить о регулярных или привычных дейсивия. Часто используются такие наречия как: always, often, usually, sometimes, never и другие:</string>
+    <string name="present_simple_usage3">Инструкции и указания</string>
+    <string name="present_simple_usage3_text1">Мы используем present simple, когда даем инструкции или указания. Часто используются такие упорядочивающие слова как: and, first и then:</string>
+    <string name="present_simple_usage4">Истории и комментарии</string>
+    <string name="present_simple_usage4_text1">Present simple используется, чтобы описать ряд действий (одно действие за другим). Особенно это видно в рассказах, историях или обзорах:</string>
+    <string name="present_simple_usage4_text2">Present simple часто используется спортивными комментаторами, чтобы сообщать о действиях в игре в тот момент, когда они происходят:</string>
+    <string name="present_simple_usage5">Немедленные реакции</string>
+    <string name="present_simple_usage5_text1">Present simple часто используется с глаголами чувств и восприятия, чтобы говорить о реакциях в момент разговора:</string>
+    <string name="present_simple_usage6">I promise, I swear, I agree (глаголы речевого акта)</string>
+    <string name="present_simple_usage6_text1">Present simple используется с глаголами речевого акта (глаголы, которые выполняют действие, которое они описывают):</string>
+    <string name="present_simple_usage6_text2">Present simple так же используется в официальных заявлениях и в деловых или юридических сообщениях:</string>
+    <string name="present_simple_usage7">Расписания и планы</string>
+    <string name="present_simple_usage7_text1">Present simple используется, чтобы говорить о событиях, которые являются частью будущего плана или графика:</string>
+    <string name="present_simple_usage7_text2">Мы также можем использовать Future simple с тем же смыслом:</string>
+    <string name="present_simple_usage8">Present simple после when, before, итд.</string>
+    <string name="present_simple_usage8_text1">Present simple используется в будущих событиях после слов when, before, итд</string>
+    <string name="present_simple_usage9">Заголовки газет</string>
+    <string name="present_simple_usage9_text1">Present simple используется в заголовках новостей, чтобы сообщать о прошедших событиях. Это подчеркивает драму или непосредственность события:</string>
+
+    <string name="future_simple_usage1">Предсказания</string>
+    <string name="future_simple_usage1_text1">Future simple используется, чтобы делать предсказания или излагать факты о будущем:</string>
+    <string name="future_simple_usage2">Решения и предложения</string>
+    <string name="future_simple_usage2_text1">Future simple используется для предложений или собственных решений</string>
+    <string name="future_simple_usage3">Shall с I и we</string>
+    <string name="future_simple_usage3_text1">Shall может использоваться вместо will с I и We. Такое использование является более формальным:</string>
+    <string name="future_simple_usage3_text2">Shall I и shall we используется в вопросах для предложений, а не для ссылки на будущее время:</string>
+</resources>

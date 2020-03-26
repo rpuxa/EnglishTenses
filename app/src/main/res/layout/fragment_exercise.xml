@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/exercise_layouts_margin"
         android:layout_marginEnd="8dp"
         app:flexWrap="wrap"
         app:layout_constraintEnd_toEndOf="parent"
@@ -25,8 +25,9 @@
         android:id="@+id/answers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:justifyContent="space_evenly"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/exercise_layouts_margin"
         android:layout_marginEnd="8dp"
         app:flexWrap="wrap"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,13 +55,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:button3dStyle="yellow"
+        app:button3dStyle="golden"
         app:button3dText="Подсказка"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:visibility="gone" >
+        tools:visibility="gone">
 
     </ru.rpuxa.englishtenses.view.views.Button3d>
 

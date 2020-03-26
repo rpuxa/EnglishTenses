@@ -4,8 +4,8 @@ import ru.rpuxa.englishtenses.model.db.CorrectnessStatistic
 import java.io.Serializable
 
 data class ExamResult(
-    val time: String,
+    val time: Double,
     val correctness: List<CorrectnessStatistic>,
-    val correctnessPercent: String,
+    val correctnessPercent: Int,
     val tensesNumber: Int
 ) : Serializable

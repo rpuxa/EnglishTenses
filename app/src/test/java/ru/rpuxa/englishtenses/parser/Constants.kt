@@ -2,17 +2,65 @@ package ru.rpuxa.englishtenses.parser
 
 import org.jsoup.Jsoup
 import ru.rpuxa.englishtenses.model.IrregularVerb
-import java.io.DataInputStream
-import java.io.DataOutputStream
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import java.io.*
 
-class IrregularVerb(
-    val id: Int,
-    val first: String,
-    val second: List<String>,
-    val third: List<String>
+val irregularVerbs = IrregularVerb.values()
+val allWords = mutableSetOf(
+    "skied",
+    "mows",
+    "knits",
+    "interrogates",
+    "dripped",
+    "dusts",
+    "tidies",
+    "cycled",
+    "postpones",
+    "preferring"
 )
+val popularWords = run {
+    val popularWords = HashSet<String>()
+    File("output/en.txt").bufferedReader().lines().forEach {
+        val (first, second) = it.split(' ')
+        val score = second.toInt()
+        if (score > 50)
+            allWords.add(first)
+        if (score > 5000)
+            popularWords.add(first)
+    }
+    popularWords
+}
+
+
+val continuousVerbs = mapOf(
+    "writing" to "write",
+    "lying" to "lie",
+    "becoming" to "become"
+)
+
+val modalVerbs = setOf(
+    "can", "could",
+    "may", "might",
+    "shall", "should",
+    "will", "would",
+    "was", "were",
+    "must"
+)
+
+val pretexts = setOf(
+    "off",
+    "out",
+    "in",
+    "up",
+    "down",
+    "away",
+    "over",
+    "on",
+    "through",
+    "along",
+    "across",
+    "by"
+)
+/*
 
 fun main() {
     val doc = Jsoup.connect("http://begin-english.ru/study/irregular-verbs/")
@@ -27,7 +75,6 @@ fun main() {
             if (element.childrenSize() != 4) return@mapIndexed null
 
             IrregularVerb(
-                id++,
                 element.child(0).text().trim(),
                 element.child(1).text().split('/').map { it.trim() },
                 element.child(2).text().split('/').map { it.trim() }
@@ -35,9 +82,9 @@ fun main() {
         }
     list.filterNotNull().forEach {
         println(
-            "${it.first.toUpperCase()}(\"${it.first}\", listOf(${it.second.joinToString(", "){'\"' + it + '\"'}}), listOf(${it.third.joinToString(
+            "${it.first.toUpperCase()}(\"${it.first}\", listOf(${it.second.joinToString(", ") { '\"' + it + '\"' }}), listOf(${it.third.joinToString(
                 ", "
-            ){'\"' + it + '\"'}})),"
+            ) { '\"' + it + '\"' }})),"
         )
     }
 
@@ -53,17 +100,4 @@ fun main() {
         }
     }
 }
-
-fun loadIrregularVerbs() =
-    DataInputStream(FileInputStream("output/verbs.dat")).use { input ->
-        var id = 1
-        val size = input.readInt()
-        List(size) {
-            IrregularVerb(
-                id++,
-                input.readUTF(),
-                List(input.readInt()) { input.readUTF() },
-                List(input.readInt()) { input.readUTF() }
-            )
-        }
-    }
+*/

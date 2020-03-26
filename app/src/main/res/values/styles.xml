@@ -43,6 +43,10 @@
         <item name="colorAccent">@color/golden</item>
     </style>
 
+    <style name="CheckBoxStyle" parent="AppTheme">
+        <item name="colorAccent">@color/progressbar_progress</item>
+    </style>
+
     <style name="AchievementAnimationStyle" parent="AppTheme">
         <item name="android:windowEnterAnimation">@anim/slide_in_top</item>
         <item name="android:windowExitAnimation">@anim/slide_out_top</item>

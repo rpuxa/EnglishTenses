@@ -22,7 +22,7 @@ object TenseHandler {
                 }
                 if (subject.isBlank()) {
                     if (person == Person.IT) return toPresentSimpleSFrom(verb)
-                    return verb
+                    return PRESENT_SIMPLE_FIRST_PERSON_VERBS_EXCEPTIONS[verb] ?: verb
                 }
                 return "${if (person == Person.IT) "does" else "do"} $subject $verb"
             }
@@ -40,7 +40,7 @@ object TenseHandler {
                 val begin = "${have()} $subject".trim()
                 return "$begin ${thirdForm(verb)}"
             }
-            Tense.PRESENT_PERFECT_CONTINUOUS ->{
+            Tense.PRESENT_PERFECT_CONTINUOUS -> {
                 val begin = "${have()} $subject".trim()
                 return "$begin been ${addIng(verb)}"
             }
@@ -82,9 +82,12 @@ object TenseHandler {
                 return "$begin have been ${addIng(verb)}"
             }
         }
+
+
     }
 
     private fun toPresentSimpleSFrom(verb: String): String {
+        PRESENT_SIMPLE_S_VERBS_EXCEPTIONS[verb]?.let { return it }
         PRESENT_SIMPLE_ENDS.forEach {
             if (verb.endsWith(it))
                 return verb + "es"
@@ -99,6 +102,7 @@ object TenseHandler {
     }
 
     private fun addIng(verb: String): String {
+        ING_EXCEPTIONS[verb]?.let { return it }
         if (verb in MODAL_VERBS) {
             return verb
         }
@@ -122,7 +126,8 @@ object TenseHandler {
     }
 
     private fun thirdForm(verb: String) = IrregularVerb.byFirst(verb)?.third?.first() ?: addEd(verb)
-    private fun secondForm(verb: String, person: Person) = IrregularVerb.secondForm(verb, person) ?: addEd(verb)
+    private fun secondForm(verb: String, person: Person) =
+        IrregularVerb.secondForm(verb, person) ?: addEd(verb)
 
     private fun addEd(verb: String): String {
         if (verb.last() == 'e')
@@ -154,7 +159,8 @@ object TenseHandler {
     }
 
     private fun String.doubleLastConsonant(): String? {
-        if (this[lastIndex - 1].isConsonant() || last().isVowel())
+        if (this in NOT_DOUBLING_EXCEPTIONS) return null
+        if (this !in DOUBLING_EXCEPTIONS && this[lastIndex - 1].isConsonant() || last().isVowel())
             return null
         return when (last()) {
             'h', 'w', 'x', 'y' -> this
@@ -174,4 +180,78 @@ object TenseHandler {
         "must"
     )
 
+    private val NOT_DOUBLING_EXCEPTIONS = setOf(
+        "sleep",
+        "shoot",
+        "steal",
+        "book",
+        "open",
+        "feed",
+        "contain",
+        "happen",
+        "recover",
+        "look",
+        "meet",
+        "feel",
+        "sail",
+        "postpone",
+        "seem",
+        "visit",
+        "visit",
+        "discover",
+        "deliver",
+        "wear",
+        "roam",
+        "eat",
+        "discover",
+        "open",
+        "cook",
+        "rain",
+        "clean",
+        "listen",
+        "cook",
+        "spent",
+        "read",
+        "seem",
+        "happen",
+        "recover",
+        "wait",
+        "load",
+        "appear",
+        "hear",
+        "lead",
+        "sail",
+        "answer",
+        "listen",
+        "speak",
+        "appear",
+        "answer",
+        "look",
+        "postpone",
+        "contain",
+        "load",
+        "clean",
+        "deliver",
+        "wait",
+        "roam",
+        "rain",
+        "break"
+    )
+
+    private val DOUBLING_EXCEPTIONS = setOf(
+        "prefer"
+    )
+
+    private val PRESENT_SIMPLE_S_VERBS_EXCEPTIONS = mapOf(
+        "have" to "has",
+        "be" to "was"
+    )
+
+    private val PRESENT_SIMPLE_FIRST_PERSON_VERBS_EXCEPTIONS = mapOf(
+        "be" to "ware"
+    )
+
+    private val ING_EXCEPTIONS = mapOf(
+        "use" to "using"
+    )
 }

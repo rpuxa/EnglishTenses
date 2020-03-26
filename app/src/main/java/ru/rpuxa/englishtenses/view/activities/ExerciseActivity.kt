@@ -35,6 +35,7 @@ abstract class ExerciseActivity(private val tipMode: Boolean) : BaseActivity() {
     protected fun nextExercise() {
         val currentFragment = ExerciseFragment.create(tenses, tipMode)
         currentFragment.setOnNextListener {
+            achievementViewModel.onSentenceLearned()
             onResult(it)
         }
         showFragment(currentFragment)

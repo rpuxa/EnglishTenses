@@ -45,7 +45,7 @@ class AchievementViewModel @Inject constructor(
     }
 
     fun onSentenceLearned() {
-        updateAdd(LearnedSentencesAchievement.ID )
+        updateAdd(LearnedSentencesAchievement.ID)
     }
 
     fun onTest70PercentPassed() {
