@@ -15,7 +15,9 @@ val allWords = mutableSetOf(
     "tidies",
     "cycled",
     "postpones",
-    "preferring"
+    "preferring",
+    "jogged",
+    "jogs"
 )
 val popularWords = run {
     val popularWords = HashSet<String>()

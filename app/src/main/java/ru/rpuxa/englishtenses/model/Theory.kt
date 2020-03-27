@@ -102,92 +102,92 @@ enum class Theory(
 
 
     FUTURE_SIMPLE(Tense.FUTURE_SIMPLE, {
-       usage(R.string.future_simple_usage1){
-           text(R.string.future_simple_usage1_text1)
-           example("There will be strong winds tomorrow in the south of the country.")
-           example("The year 2025 will be the four-hundredth anniversary of the founding of the university.")
-           example("We shall need an extra bedroom when the new baby arrives.")
-       }
-       usage(R.string.future_simple_usage2){
-           text(R.string.future_simple_usage2_text1)
-           example("A: Which size do you want? Medium or large?\nB: I’ll have large.")
-           example("Wait. I’ll open the door for you.")
-           example("I shall contact you again when I have further information.")
-       }
-       usage(R.string.future_simple_usage3){
-           text(R.string.future_simple_usage3_text1)
-           example("We shall never forget the holiday we had in Vietnam.")
-           text(R.string.future_simple_usage3_text2)
-           example("It’s getting late. Shall we go home?")
-           example("Shall I invite Louisa and Jill to the party?")
-       }
+        usage(R.string.future_simple_usage1) {
+            text(R.string.future_simple_usage1_text1)
+            example("There will be strong winds tomorrow in the south of the country.")
+            example("The year 2025 will be the four-hundredth anniversary of the founding of the university.")
+            example("We shall need an extra bedroom when the new baby arrives.")
+        }
+        usage(R.string.future_simple_usage2) {
+            text(R.string.future_simple_usage2_text1)
+            example("A: Which size do you want? Medium or large?\nB: I’ll have large.")
+            example("Wait. I’ll open the door for you.")
+            example("I shall contact you again when I have further information.")
+        }
+        usage(R.string.future_simple_usage3) {
+            text(R.string.future_simple_usage3_text1)
+            example("We shall never forget the holiday we had in Vietnam.")
+            text(R.string.future_simple_usage3_text2)
+            example("It’s getting late. Shall we go home?")
+            example("Shall I invite Louisa and Jill to the party?")
+        }
     }),
 
     PAST_CONTINUOUS(Tense.PAST_CONTINUOUS, {
-       usage(R.string.past_continuous_usage1) {
-           text(R.string.past_continuous_usage1_text1)
-           example("A: Where was Donna last night?\nB: I’m not sure. I think she was visiting her family.")
-           example("I remember that night. You were wearing that red dress.")
-       }
-       usage(R.string.past_continuous_usage2) {
-           text(R.string.past_continuous_usage2_text1)
-           example("Lisa was cycling to school when she saw the accident.")
-           example("What were you thinking about when you won the race?")
-       }
-       usage(R.string.past_continuous_usage3) {
-           text(R.string.past_continuous_usage3_text1)
-           example("A: I can’t believe you met Fran and Dave in Portugal.\nB: It was funny. They were staying in the hotel next to ours.")
-           example("I didn’t make the meeting last week; I was travelling to Rome.")
-       }
-       usage(R.string.past_continuous_usage4) {
-           text(R.string.past_continuous_usage4_text1)
-           example("She was feeding her neighbours’ cat every morning while they were on holiday. Then one morning, it was gone.")
-           example("The neighbours were making so much noise, night after night. We had to complain eventually.")
-           text(R.string.past_continuous_usage4_text2)
-           example("We were always spending so much time in traffic. That’s the main reason why we decided to move to the country and work from home.")
-           example("My boss was constantly phoning me in my last job. I hated it.")
-           example("She was forever losing her keys.")
-       }
-       usage(R.string.past_continuous_usage5) {
-           text(R.string.past_continuous_usage5_text1)
-           example("We were cooking all morning because we had 15 people coming for lunch.")
-           example("Lots of us were working at the office on Saturday because we had to finish the project by Monday.")
-       }
+        usage(R.string.past_continuous_usage1) {
+            text(R.string.past_continuous_usage1_text1)
+            example("A: Where was Donna last night?\nB: I’m not sure. I think she was visiting her family.")
+            example("I remember that night. You were wearing that red dress.")
+        }
+        usage(R.string.past_continuous_usage2) {
+            text(R.string.past_continuous_usage2_text1)
+            example("Lisa was cycling to school when she saw the accident.")
+            example("What were you thinking about when you won the race?")
+        }
+        usage(R.string.past_continuous_usage3) {
+            text(R.string.past_continuous_usage3_text1)
+            example("A: I can’t believe you met Fran and Dave in Portugal.\nB: It was funny. They were staying in the hotel next to ours.")
+            example("I didn’t make the meeting last week; I was travelling to Rome.")
+        }
+        usage(R.string.past_continuous_usage4) {
+            text(R.string.past_continuous_usage4_text1)
+            example("She was feeding her neighbours’ cat every morning while they were on holiday. Then one morning, it was gone.")
+            example("The neighbours were making so much noise, night after night. We had to complain eventually.")
+            text(R.string.past_continuous_usage4_text2)
+            example("We were always spending so much time in traffic. That’s the main reason why we decided to move to the country and work from home.")
+            example("My boss was constantly phoning me in my last job. I hated it.")
+            example("She was forever losing her keys.")
+        }
+        usage(R.string.past_continuous_usage5) {
+            text(R.string.past_continuous_usage5_text1)
+            example("We were cooking all morning because we had 15 people coming for lunch.")
+            example("Lots of us were working at the office on Saturday because we had to finish the project by Monday.")
+        }
     }),
 
     PRESENT_CONTINUOUS(Tense.PRESENT_CONTINUOUS, {
-       usage(R.string.present_continuous_usage1){
-           text(R.string.present_continuous_usage1_text1)
-           example("A: What time’s dinner?\nB: I’m cooking now so it’ll be ready in about half an hour.")
-           example("She’s pressing the button but nothing is happening.")
-       }
-       usage(R.string.present_continuous_usage2){
-           text(R.string.present_continuous_usage2_text1)
-           example("Her mother’s living with her at the moment. She’s just come out of hospital.")
-           example("Who’s looking after the children while you’re here?")
-       }
-       usage(R.string.present_continuous_usage3){
-           text(R.string.present_continuous_usage3_text1)
-           example("I’m not drinking much coffee these days. I’m trying to cut down.")
-           example("She’s working a lot in London at the moment.")
-       }
-       usage(R.string.present_continuous_usage4){
-           text(R.string.present_continuous_usage4_text1)
-           example("They’re building a new stand at the football ground.")
-           example("Maria, 37, is getting better and doctors are optimistic she will make a full recovery.")
-           example("Recent evidence suggests that the economic situation is improving.")
-       }
-       usage(R.string.present_continuous_usage5){
-           text(R.string.present_continuous_usage5_text1)
-           example("My wife, she’s always throwing things out. I like to keep everything.")
-           example("I’m constantly spilling things.")
-       }
-       usage(R.string.present_continuous_usage6){
-           text(R.string.present_continuous_usage6_text1)
-           example("We’re moving to Cambridge in July.")
-           example("Sarah isn’t taking Rory to football training later. She hasn’t got the car tonight.")
-           example("Aren’t you playing tennis on Saturday?")
-       }
+        usage(R.string.present_continuous_usage1) {
+            text(R.string.present_continuous_usage1_text1)
+            example("A: What time’s dinner?\nB: I’m cooking now so it’ll be ready in about half an hour.")
+            example("She’s pressing the button but nothing is happening.")
+        }
+        usage(R.string.present_continuous_usage2) {
+            text(R.string.present_continuous_usage2_text1)
+            example("Her mother’s living with her at the moment. She’s just come out of hospital.")
+            example("Who’s looking after the children while you’re here?")
+        }
+        usage(R.string.present_continuous_usage3) {
+            text(R.string.present_continuous_usage3_text1)
+            example("I’m not drinking much coffee these days. I’m trying to cut down.")
+            example("She’s working a lot in London at the moment.")
+        }
+        usage(R.string.present_continuous_usage4) {
+            text(R.string.present_continuous_usage4_text1)
+            example("They’re building a new stand at the football ground.")
+            example("Maria, 37, is getting better and doctors are optimistic she will make a full recovery.")
+            example("Recent evidence suggests that the economic situation is improving.")
+        }
+        usage(R.string.present_continuous_usage5) {
+            text(R.string.present_continuous_usage5_text1)
+            example("My wife, she’s always throwing things out. I like to keep everything.")
+            example("I’m constantly spilling things.")
+        }
+        usage(R.string.present_continuous_usage6) {
+            text(R.string.present_continuous_usage6_text1)
+            example("We’re moving to Cambridge in July.")
+            example("Sarah isn’t taking Rory to football training later. She hasn’t got the car tonight.")
+            example("Aren’t you playing tennis on Saturday?")
+        }
     }),
 
     FUTURE_CONTINUOUS(Tense.FUTURE_CONTINUOUS, {
@@ -198,6 +198,36 @@ enum class Theory(
             example("Next week they will be flying to Australia from Saudi Arabia.")
             example("She will not be working on Tuesday.")
             example("Unfortunately we won’t be attending the wedding.")
+        }
+    }),
+
+    PAST_PERFECT(Tense.PAST_PERFECT, {
+        usage(R.string.past_perfect_usage1) {
+            text(R.string.past_perfect_usage1_text1)
+            example("I’d seen all of Elvis Presley’s movies by the time I was 20!")
+            example("")
+            example("")
+        }
+        usage(R.string.past_perfect_usage2) {
+            text(R.string.past_perfect_usage2_text1)
+            example("“Mr Hammond drove through a red light.”")
+            example("The policeman said Mr Hammond had driven through a red light.")
+            example("No one told me that the shop had closed.")
+            example("I phoned Katie and she said the kids had had a day off school so she’d taken them ice skating.")
+            text(R.string.past_perfect_usage2_text2)
+            example("My Dad was really angry because he heard I hadn’t come home until 3 am!")
+            example("I saw she’d bought the DVD so I asked if I could borrow it.")
+            example("The doctor felt my mother had got worse since last week.")
+        }
+        usage(R.string.past_perfect_usage3) {
+            text(R.string.past_perfect_usage3_text1)
+            example("A: Are you going anywhere today?\nB: I had planned to go to the beach but look at the rain!")
+            example("I’m very happy working as an engineer but I had wanted to be an actor when I was younger.")
+        }
+        usage(R.string.past_perfect_usage4) {
+            text(R.string.past_perfect_usage4_text1)
+            example("I would have helped to paint the house if you’d asked me.")
+            example("Sarah couldn’t come with us to the cinema. She would have loved it if she had been there")
         }
     }),
 
@@ -272,8 +302,67 @@ enum class Theory(
             text(R.string.present_perfect_usage9_text2)
             example("Have you seen any Arthur Miller plays? I saw a fantastic production of ‘The Crucible’.")
         }
-    })
+    }),
 
+
+    FUTURE_PERFECT(Tense.FUTURE_PERFECT, {
+        usage(R.string.future_perfect_usage1) {
+            text(R.string.future_perfect_usage1_text1)
+            example("Do you think she’ll have seen the doctor by four o’clock?")
+            example("Next month my parents will have been together for thirty years.")
+            example("At the end of this month, they will have been in their house for one year.")
+            example("Next month I will have worked for the company for six years.")
+            example("I think they’ll have got there by six o’clock.")
+            example("Won’t she have retired by the end of the year?")
+        }
+    }),
+
+    PAST_PERFECT_CONTINUOUS(Tense.PAST_PERFECT_CONTINUOUS, {
+        usage(R.string.past_perfect_continuous_usage1) {
+            text(R.string.past_perfect_continuous_usage1_text1)
+            example("It was so difficult to get up last Monday for school. I had been working on my essays the night before and I was very tired.")
+            example("A: Why did you decide to go travelling for a year?\nB: Well, I’d been reading an amazing book about a woman who rode a horse around South America. I was just halfway through the book when I decided I had to go travelling and that was it. I just took a year out of work and went.")
+            text(R.string.past_perfect_continuous_usage1_text2)
+            example("It had been raining and the ground was still wet.")
+        }
+    }),
+
+    PRESENT_PERFECT_CONTINUOUS(Tense.PRESENT_PERFECT_CONTINUOUS, {
+        usage(R.string.present_perfect_continuous_usage1) {
+            text(R.string.present_perfect_continuous_usage1_text1)
+            example("I’ve just been cleaning the car.")
+            example("It’s been snowing.")
+            example("What have you been buying?")
+        }
+        usage(R.string.present_perfect_continuous_usage2) {
+            text(R.string.present_perfect_continuous_usage2_text1)
+            example("I’ve been reading your book – it’s great.")
+            example("He’s been living in the village since 1995.")
+            example("She has been writing her autobiography since 1987.")
+
+        }
+        usage(R.string.present_perfect_continuous_usage3) {
+            text(R.string.present_perfect_continuous_usage3_text1)
+            example("I’ve been going to Spain on holiday every year since 1987.")
+            example("I haven’t been eating much lunch lately. I’ve been going to the gym at lunchtimes.")
+            example("She’s been playing tennis on and off for three years.")
+
+        }
+        usage(R.string.present_perfect_continuous_usage4) {
+            text(R.string.present_perfect_continuous_usage4_text1)
+            example("A: How long have you been waiting for me?\nB: About ten minutes. Not too long.")
+        }
+    }),
+
+    FUTURE_PERFECT_CONTINUOUS(Tense.FUTURE_PERFECT_CONTINUOUS, {
+        usage(R.string.future_perfect_continuous_usage1) {
+            text(R.string.future_perfect_continuous_usage1_text1)
+            example("In September the head teacher will have been teaching at the school for 20 years.")
+            example("In September, she will have been living in France for a year.")
+            example("I will have been studying English for three years by the end of this course.")
+            example("We’re late. I think they’ll have been waiting for us. We’d better go.")
+        }
+    })
     ;
 
     val tenseCode = tense.code
@@ -336,8 +425,3 @@ private class UsageBuilder {
         number
     ) to list
 }
-
-private class UsageItemsBuilder {
-
-}
-

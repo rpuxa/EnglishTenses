@@ -5,8 +5,7 @@ import androidx.room.PrimaryKey
 import androidx.room.Relation
 
 data class Sentence(
-    val items: List<SentenceItem>,
-    val wrongAnswers: List<String>
+    val items: List<SentenceItem>
 ) {
     val answers get() = items.filterIsInstance<WordAnswer>()
 }
@@ -19,7 +18,8 @@ data class WordAnswer(
     val infinitive: String,
     val correctForms: List<String>,
     val tense: Tense,
-    val irregular: IrregularVerb?
+    val irregular: IrregularVerb?,
+    val wrongVariants: List<String>
 ) : SentenceItem() {
     val correctForm get() = correctForms.first()
 }

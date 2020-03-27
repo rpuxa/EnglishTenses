@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import ru.rpuxa.englishtenses.databinding.ItemAchievementBinding
 import ru.rpuxa.englishtenses.model.Achievement
-import kotlin.math.roundToInt
 
 class AchievementAdapter : BaseAdapter<Achievement, ItemAchievementBinding>() {
 
@@ -18,8 +17,9 @@ class AchievementAdapter : BaseAdapter<Achievement, ItemAchievementBinding>() {
         bind {
             binding.ratingBar.max = it.steps.size
             binding.ratingBar.numStars = it.steps.size
-            val toFloat = it.starsCount().toFloat()
-            binding.ratingBar.rating = toFloat
+            binding.ratingBar.rating = it.starsCount().toFloat()
+
+
             binding.title.text = it.title()
             val subtitle = it.subtitle()
             binding.subtitle.isVisible = subtitle.isNotEmpty()

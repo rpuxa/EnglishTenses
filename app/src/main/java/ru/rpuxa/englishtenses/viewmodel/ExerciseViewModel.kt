@@ -71,7 +71,9 @@ class ExerciseViewModel @Inject constructor(
         this.tipsEnabled = tipsEnabled
         sentence = testSentence ?: loader.load(set)
         val answers = sentence.answers
-        shuffledAnswers = (answers.map { it.correctForm } + sentence.wrongAnswers).shuffled()
+        shuffledAnswers = answers.flatMap {
+            (it.wrongVariants + it.correctForm).shuffled()
+        }
         rightAnswers = answers.map { it.correctForm }
 
         answerStates.value = MutableList(shuffledAnswers.size) {
@@ -121,28 +123,30 @@ class ExerciseViewModel @Inject constructor(
 
 
     fun setAllCorrect(): List<Int> {
-        val used = ArrayList<Int>()
+        val usedRightAnswers = HashSet<Int>()
+        val rightAnswersIndexes = ArrayList<Int>()
 
         answerStates.update {
             repeat(size) {
                 val answer = shuffledAnswers[it]
                 var index = -1
                 for (i in rightAnswers.indices) {
-                    if (i !in used && rightAnswers[i] == answer) {
-                        used += i
+                    if (i !in usedRightAnswers && rightAnswers[i] == answer) {
                         index = i
+                        usedRightAnswers += i
                         break
                     }
                 }
                 if (index == -1) {
                     this[it] = None(true)
                 } else {
+                    rightAnswersIndexes += it
                     this[it] = Result(true, block = true)
                 }
             }
         }
 
-        return used
+        return rightAnswersIndexes
     }
 
     fun updateSpaces(answers: List<ExerciseFragment.SpaceState>) {
@@ -173,10 +177,9 @@ class ExerciseViewModel @Inject constructor(
 
     fun irregularVerbsClick() {
         val query = sentence.answers
-            .filter { it.irregular != null }
-            .joinToString(", ") {
-                it.irregular!!.first
-            }
+            .mapNotNull { it.irregular?.first }
+            .toSet()
+            .joinToString(", ")
 
         showIrregularVerbTable.value = query
     }
@@ -189,7 +192,7 @@ class ExerciseViewModel @Inject constructor(
 
     companion object {
         val TIP_MODE_OFF = TipMode(Tense.PRESENT_SIMPLE, -1)
-        private val testSentence: Sentence? =null/*Sentence(
+        private val testSentence: Sentence? = null/*Sentence(
             listOf(
                 Word("Hi"),
                 WordAnswer("read", listOf("read"), Tense.PAST_SIMPLE, null),

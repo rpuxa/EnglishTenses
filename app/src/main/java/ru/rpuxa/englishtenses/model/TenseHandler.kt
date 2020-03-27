@@ -235,7 +235,9 @@ object TenseHandler {
         "wait",
         "roam",
         "rain",
-        "break"
+        "break",
+        "heal",
+        "train"
     )
 
     private val DOUBLING_EXCEPTIONS = setOf(
@@ -248,7 +250,7 @@ object TenseHandler {
     )
 
     private val PRESENT_SIMPLE_FIRST_PERSON_VERBS_EXCEPTIONS = mapOf(
-        "be" to "ware"
+        "be" to "were"
     )
 
     private val ING_EXCEPTIONS = mapOf(

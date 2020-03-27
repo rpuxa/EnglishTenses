@@ -19,8 +19,8 @@ enum class Tense(val code: Int, @StringRes val stringRes: Int) {
     PRESENT_PERFECT(7, R.string.present_perfect),
     FUTURE_PERFECT(8, R.string.future_perfect),
 
-    PRESENT_PERFECT_CONTINUOUS(9, R.string.present_perfect_continuous),
-    PAST_PERFECT_CONTINUOUS(10, R.string.past_perfect_continuous),
+    PAST_PERFECT_CONTINUOUS(9, R.string.past_perfect_continuous),
+    PRESENT_PERFECT_CONTINUOUS(10, R.string.present_perfect_continuous),
     FUTURE_PERFECT_CONTINUOUS(11, R.string.future_perfect_continuous),
     ;
 

@@ -1,4 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">English Tenses</string>
+
+
+    <string name="single_tip">Здесь нужно употребить %s</string>
+    <string name="many_tip">%s случае нужно употребить %s</string>
+    <string name="secs">%d сек.</string>
+
+    <string-array name="ordinal_numbers">
+        <item>В первом</item>
+        <item>Во втором</item>
+        <item>В третьем</item>
+        <item>В четвертом</item>
+        <item>В пятом</item>
+        <item>В шестом</item>
+        <item>В седьмом</item>
+    </string-array>
+
+    <plurals name="pass_test">
+        <item quantity="one">Пройти %d тест</item>
+        <item quantity="few">Пройти %d теста</item>
+        <item quantity="many">Пройти %d тестов</item>
+    </plurals>
+
+    <plurals name="pass_test_without_mistakes">
+        <item quantity="one">Написать %d тест без ошибок</item>
+        <item quantity="few">Написать %d теста без ошибок</item>
+        <item quantity="many">Написать %d тестов без ошибок</item>
+    </plurals>
+
+    <plurals name="combo_test">
+        <item quantity="one">Пройти тест %d раз подряд на 70%% или выше</item>
+        <item quantity="few">Пройти тест %d раза подряд на 70%% или выше</item>
+        <item quantity="many">Пройти тест %d раз подряд на 70%% или выше</item>
+    </plurals>
+
+    <string name="passed">Пройдено: %d</string>
+    <string name="open_theory">Открыть теорию</string>
+    <string name="learn_sentences">Изучить %d примеров</string>
+    <string name="learned">Изучено: %d</string>
+    <string name="written">Написано: %d</string>
+    <string name="rate_app">Оценить приложение</string>
+
+    <string name="training">Тренировка</string>
+    <string name="my_achievements">Мои достижения</string>
+    <string name="new_achievement_got">Получено новое достижение!</string>
+    <string name="stars_got">Всего звезд собрано:</string>
+    <string name="test">Тест</string>
+    <string name="irregular_verbs">Неправильные глаголы</string>
+    <string name="search">Поиск</string>
+    <string name="chose_all">Выбрать все</string>
+    <string name="correct">Верно!</string>
+    <string name="do_you_want_abort_test">Вы хотите прекратить тест?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="test_results">Результаты тестирования</string>
+    <string name="correctness">Правильность</string>
+    <string name="consumed_time">Затраченное время</string>
+    <string name="tenses_learned">Всего времен\nрешено</string>
+    <string name="quit">Выйти</string>
+    <string name="please_rate_app">Пожалуйста, оцените приложение, чтобы сделать его лучше</string>
+    <string name="make_correct_answers">Постарайтесь дать как можно больше правильных ответов за меньшее время</string>
+    <string name="incorrect">Упс… ошибочка</string>
+    <string name="irregular_verbs_table">Таблица неправильных глаголов</string>
+    <string name="check">Проверить</string>
+    <string name="theory">Теория</string>
+    <string name="chose">Выбрать</string>
+    <string name="tip">Подсказка</string>
+    <string name="next">Дальше</string>
+    <string name="rate">Оценить</string>
+    <string name="hide">Скрыть</string>
+    <string name="begin">Начать</string>
+    <string name="show_correct_answers">Показать ответы</string>
+
 </resources>

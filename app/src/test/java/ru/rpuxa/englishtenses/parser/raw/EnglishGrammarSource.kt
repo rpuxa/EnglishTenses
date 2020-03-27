@@ -1,3 +1,4 @@
+/*
 package ru.rpuxa.englishtenses.parser.raw
 
 import org.jsoup.Jsoup
@@ -293,4 +294,4 @@ object EnglishGrammarSource {
 
 fun main() {
     EnglishGrammarSource.loadSentences("https://www.english-grammar.at/online_exercises/tenses/present-simple-progressive10.htm")
-}
+}*/

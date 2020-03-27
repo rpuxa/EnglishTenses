@@ -13,7 +13,6 @@ class SentenceStatistic(
     private val learnedSentencesDao: LearnedSentencesDao,
     private val correctnessStatisticDao: CorrectnessStatisticDao
 ) {
-    private val learnedSession = IntArray(Tense.values().size)
     private var _learned: List<MutableSet<Int>>? = null
 
     val learned: List<MutableSet<Int>>
@@ -21,13 +20,12 @@ class SentenceStatistic(
 
     fun nextSentence(tenses: Set<Int>, sizes: List<Int>): SentencePointer {
         val tensesArray = tenses.toIntArray()
-        val max = tensesArray.maxBy { learnedSession[it] }!! + 25
-        val chances = tensesArray.map { (max - learnedSession[it]).coerceAtLeast(0) }
-        val sum = chances.sum()
+        val sum = tensesArray.sumBy { sizes[it] }
+        val chances = tensesArray.map { sizes[it].toDouble() / sum }
         val randomDouble = Random.nextDouble()
         var d = 0.0
         val i = chances.indices.first {
-            d += chances[it].toDouble() / sum
+            d += chances[it]
             randomDouble < d
         }
         val tense = tensesArray[i]
@@ -52,7 +50,6 @@ class SentenceStatistic(
             }
         }
         require(result != -1)
-        learnedSession[tense]++
         learned[tense] += result
         GlobalScope.launch {
             if (clear) {
@@ -70,11 +67,11 @@ class SentenceStatistic(
     fun handle(sentence: UnhandledSentence, tenses: Set<Int>): Sentence {
         val text = sentence.text.split(' ').filter { it.isNotBlank() }.map { it.trim() }
         var index = 0
-        val wrongAnswers = ArrayList<String>()
         val items = text.map {
             if (it == "%s") {
                 val answer = sentence.answers[index++]
                 if (answer.tense.code in tenses) {
+                    val wrongAnswers = ArrayList<String>()
                     val unusedTenses = tenses.toMutableSet()
                     unusedTenses -= answer.tense.code
                     for (i in 0 until WRONG_ANSWER_AMOUNT) {
@@ -83,7 +80,7 @@ class SentenceStatistic(
                         unusedTenses -= random
                         wrongAnswers += answer.createWrongAnswer(Tense[random])
                     }
-                    answer.toWordAnswer()
+                    answer.toWordAnswer(wrongAnswers)
                 } else {
                     Word(answer.forms.first())
                 }
@@ -91,12 +88,9 @@ class SentenceStatistic(
                 Word(it)
             }
         }
-        return Sentence(items, wrongAnswers)
+        return Sentence(items)
     }
 
-    fun resetSession() = learnedSession.indices.forEach {
-        learnedSession[it] = 0
-    }
 
     suspend fun load(): List<MutableSet<Int>> {
         val list = ArrayList<MutableSet<Int>>()
@@ -112,11 +106,15 @@ class SentenceStatistic(
 
     fun addResult(result: List<CorrectnessStatistic>) {
         GlobalScope.launch {
-           result.forEach {
-             val statistic =  correctnessStatisticDao.get(it.tenseCode) ?: CorrectnessStatistic(it.tenseCode, 0, 0)
-               statistic += it
-               correctnessStatisticDao.update(statistic)
-           }
+            result.forEach {
+                val statistic = correctnessStatisticDao.get(it.tenseCode) ?: CorrectnessStatistic(
+                    it.tenseCode,
+                    0,
+                    0
+                )
+                statistic += it
+                correctnessStatisticDao.update(statistic)
+            }
         }
     }
 

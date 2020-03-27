@@ -41,7 +41,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             app:button3dStyle="blue"
-            app:button3dText="Тест"
+            app:button3dText="@string/test"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/t10" />
@@ -204,10 +204,11 @@
                 android:id="@+id/choseAllCheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:theme="@style/CheckBoxStyle"
                 android:layout_weight="1"
                 android:clickable="false"
                 android:maxLines="1"
-                android:text="Выбрать все" />
+                android:text="@string/chose_all" />
 
         </ru.rpuxa.englishtenses.view.views.Layout3d>
 
@@ -219,7 +220,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:button3dStyle="blue_borderless"
-            app:button3dText="Таблица неправильных глаголов"
+            app:button3dText="@string/irregular_verbs_table"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -233,7 +234,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:button3dStyle="blue"
-            app:button3dText="Тренировка"
+            app:button3dText="@string/training"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -249,12 +250,12 @@
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             app:button3dStyle="golden"
-            app:button3dText="Мои достижения"
+            app:button3dText="@string/my_achievements"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/training" />
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment"
             android:name="ru.rpuxa.englishtenses.view.fragments.RateFragment"
             android:layout_width="0dp"

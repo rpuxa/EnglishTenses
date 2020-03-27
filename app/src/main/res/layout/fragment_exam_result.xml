@@ -9,7 +9,7 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Результаты тестирования"
+        android:text="@string/test_results"
         android:textSize="21sp"
         app:layout_constraintBottom_toTopOf="@+id/exit"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:text="Правильность"
+        android:text="@string/correctness"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:text="30%"
+        tools:text="30%"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView8" />
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Затраченное время"
+        android:text="@string/consumed_time"
         app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -52,7 +52,7 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1 минута 15 секунд"
+        tools:text="1 минута 15 секунд"
         app:layout_constraintBottom_toBottomOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="@+id/correctness"
         app:layout_constraintTop_toTopOf="@+id/textView10" />
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="32dp"
-        android:text="Всего времен\nрешено"
+        android:text="@string/tenses_learned"
         app:layout_constraintBottom_toTopOf="@+id/exit"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -72,7 +72,7 @@
         android:id="@+id/totalTenses"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="19"
+        tools:text="19"
         app:layout_constraintBottom_toBottomOf="@+id/textView12"
         app:layout_constraintEnd_toEndOf="@+id/correctness"
         app:layout_constraintTop_toTopOf="@+id/textView12" />
@@ -81,7 +81,7 @@
         android:id="@+id/exit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:button3dText="Выйти"
+        app:button3dText="@string/quit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/totalTenses"
         app:layout_constraintHorizontal_bias="0.5"

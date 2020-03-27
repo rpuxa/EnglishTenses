@@ -20,9 +20,10 @@ class UnhandledAnswer(
     val person: Person
 ) {
 
-    fun toWordAnswer() = WordAnswer(
+    fun toWordAnswer(wrongAnswers: List<String>) = WordAnswer(
         infinitive, forms, tense,
-        IrregularVerb.byFirst(verb)
+        IrregularVerb.byFirst(verb),
+        wrongAnswers
     )
 
     fun createWrongAnswer(tense: Tense): String {

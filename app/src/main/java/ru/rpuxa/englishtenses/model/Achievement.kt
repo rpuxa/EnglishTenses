@@ -1,6 +1,7 @@
 package ru.rpuxa.englishtenses.model
 
 import android.content.Context
+import androidx.annotation.PluralsRes
 import androidx.annotation.StringRes
 import ru.rpuxa.englishtenses.R
 import ru.rpuxa.englishtenses.view.App
@@ -61,16 +62,21 @@ abstract class CountAchievement(
     id: Int,
     progress: Int,
     steps: List<Int>,
-    @StringRes
     private val title: Int,
     @StringRes
-    private val subtitle: Int
+    private val subtitle: Int,
+    private val plurals: Boolean = true
 ) : Achievement(id, progress, steps) {
 
     private fun nextStep() = steps.filter { it > progress }.min() ?: steps.last()
 
     override fun title(): String {
-        return context.getString(title, nextStep())
+        val nextStep = nextStep()
+        return if (plurals) {
+            context.resources.getQuantityString(title, nextStep, nextStep)
+        } else {
+            context.getString(title, nextStep)
+        }
     }
 
     override fun subtitle(): String {
@@ -124,7 +130,8 @@ class LearnedSentencesAchievement(
     progress,
     listOf(10, 50, 100, 250, 500, 1000, 5000),
     R.string.learn_sentences,
-    R.string.learned
+    R.string.learned,
+    false
 ) {
     companion object {
         const val ID = 3
@@ -137,7 +144,7 @@ class ComboTestAchievement(
     ID,
     progress,
     listOf(2, 4, 6, 8, 10),
-    R.string.combo_test,
+    R.plurals.combo_test,
     R.string.passed
 ) {
     companion object {
@@ -151,7 +158,7 @@ class EntireCorrectTestAchievement(
     ID,
     progress,
     listOf(1, 3, 6, 9, 15),
-    R.string.pass_test_without_mistakes,
+    R.plurals.pass_test_without_mistakes,
     R.string.written
 ) {
     companion object {
@@ -165,7 +172,7 @@ class PassTestAchievement(
     ID,
     progress,
     listOf(1, 5, 10, 25, 50, 100),
-    R.string.pass_test,
+    R.plurals.pass_test,
     R.string.passed
 ) {
     companion object {

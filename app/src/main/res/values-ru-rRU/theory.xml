@@ -33,6 +33,7 @@
     <string name="present_simple_usage9">Заголовки газет</string>
     <string name="present_simple_usage9_text1">Present simple используется в заголовках новостей, чтобы сообщать о прошедших событиях. Это подчеркивает драму или непосредственность события:</string>
 
+
     <string name="future_simple_usage1">Предсказания</string>
     <string name="future_simple_usage1_text1">Future simple используется, чтобы делать предсказания или излагать факты о будущем:</string>
     <string name="future_simple_usage2">Решения и предложения</string>
@@ -40,4 +41,45 @@
     <string name="future_simple_usage3">Shall с I и we</string>
     <string name="future_simple_usage3_text1">Shall может использоваться вместо will с I и We. Такое использование является более формальным:</string>
     <string name="future_simple_usage3_text2">Shall I и shall we используется в вопросах для предложений, а не для ссылки на будущее время:</string>
+
+
+    <string name="past_continuous_usage1">События, происходящие в определенное время в прошлом</string>
+    <string name="past_continuous_usage1_text1">Главная причина использования past continuous это разговор о событиях, которые происходят в определенный момент времени в прошлом:</string>
+    <string name="past_continuous_usage2">Фоновые события</string>
+    <string name="past_continuous_usage2_text1">Past continuous используется, если одно событие более важно чем другое (и оба произошли в прошлом). Past continuous используется для фонового (менее важного) события а past simple для главного события:</string>
+    <string name="past_continuous_usage3">Причины события</string>
+    <string name="past_continuous_usage3_text1">Past continuous часто используется, чтобы дать контекст события или объяснить причину</string>
+    <string name="past_continuous_usage4">Постоянные или повторяющиеся события</string>
+    <string name="past_continuous_usage4_text1">Past continuous используется, чтобы описать повторяющиеся события в прошлом. Также он показывает, что эта ситуация была временной:</string>
+    <string name="past_continuous_usage4_text2">Такие наречия как: always, constantly, forever используются в past continuous когда мы говорим о повторяющихся, незапланированных или нежелательных событиях:</string>
+    <string name="past_continuous_usage5">Past continuous и определенное время</string>
+    <string name="past_continuous_usage5_text1">Иногда past continuous использутеся, чтобы сослаться на определенный период времени в прошлом. Обычно это подчеркивает событие, продолжающееся в течение определенного периода времени:</string>
+
+
+    <string name="present_continuous_usage1">События, происходящие во время разговора</string>
+    <string name="present_continuous_usage1_text1">Present continuous используется, чтобы говорить о событиях, которые происходят в данный момент времени:</string>
+    <string name="present_continuous_usage2">Временные состояния</string>
+    <string name="present_continuous_usage2_text1">Present continuous используется, чтобы говорить о временных состояниях, которые верны на текстущий момент времени:</string>
+    <string name="present_continuous_usage3">Повторяющиеся временные события</string>
+    <string name="present_continuous_usage3_text1">Present continuous используется, чтобы описать повторяющиеся события, но которые, как мы верим, являюся временными:</string>
+    <string name="present_continuous_usage4">Изменение</string>
+    <string name="present_continuous_usage4_text1">Present continuous используется, чтобы описать постепенно изменяющиеся события:</string>
+    <string name="present_continuous_usage5">Регулярные незапланированные события</string>
+    <string name="present_continuous_usage5_text1">Present continuous часто используется с такими словами как: always, constantly, continually и forever (наречия неопределенной частоты), чтобы описать регулярные незапланированные события (часто нежелаемые):</string>
+    <string name="present_continuous_usage6">Планы и договоренности</string>
+    <string name="present_continuous_usage6_text1">Present continuous используется, чтобы сослаться на будущее, когда мы говорим о планах или договоренностях:</string>
+
+    <string name="future_continuous_usage1">События в будущем</string>
+    <string name="future_continuous_usage1_text1">Future continuous используется, чтобы сослаться на временные действия и события которые будут происходить в конкретный момент в будущем:</string>
+
+    <string name="past_perfect_usage1">Время до того как…</string>
+    <string name="past_perfect_usage1_text1">The past perfect refers to time up to a point in the past (time up to then), just as the present perfect refers to something that happened in the time up to the moment of speaking (time up to now):</string>
+    <string name="past_perfect_usage2">Reported clauses</string>
+    <string name="past_perfect_usage2_text1">We commonly use the past perfect in reported clauses where the reporting verb (underlined) is in the past:</string>
+    <string name="past_perfect_usage2_text2">We also use the past perfect when the reporting verb is a verb of perception and is in the past tense:</string>
+    <string name="past_perfect_usage3">Talking about changed states</string>
+    <string name="past_perfect_usage3_text1">We often use the past perfect to refer to situations which have changed. In speaking, had is often stressed:</string>
+    <string name="past_perfect_usage4">The past perfect in conditional clauses</string>
+    <string name="past_perfect_usage4_text1">We must use the past perfect when we imagine a different past in a clause with if:</string>
+
 </resources>

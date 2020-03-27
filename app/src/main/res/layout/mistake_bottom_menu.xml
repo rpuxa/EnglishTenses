@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_menu_height"
-    android:background="#FA7D7D"
+    android:background="@color/background_mistake"
     android:animateLayoutChanges="true">
 
     <TextView
@@ -14,7 +14,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:gravity="center_vertical"
-        android:text="Неверно!"
+        android:text="@string/incorrect"
         android:textColor="@color/redText"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -28,7 +28,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:button3dStyle="red"
-        app:button3dText="Дальше"
+        app:button3dText="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -39,7 +39,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         app:button3dStyle="red"
-        app:button3dText="Показать ответы"
+        app:button3dText="@string/show_correct_answers"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next" />
 </androidx.constraintlayout.widget.ConstraintLayout>

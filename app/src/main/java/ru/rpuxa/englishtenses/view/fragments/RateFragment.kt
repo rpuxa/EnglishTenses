@@ -43,6 +43,8 @@ class RateFragment : Fragment() {
             Handler().postDelayed({
                 activity.achievementViewModel.onAppRated()
             }, 1000)
+            viewModel.setDismiss()
+            view.isVisible = false
         }
     }
 }

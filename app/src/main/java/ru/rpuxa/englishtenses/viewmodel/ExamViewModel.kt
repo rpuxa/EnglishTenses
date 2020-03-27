@@ -20,10 +20,6 @@ class ExamViewModel @Inject constructor(
 
     val progress = _progress.liveData
 
-    init {
-        sentencesHandler.resetSession()
-    }
-
     fun onResult(result: ExerciseResult): ExamResult? {
         sentencesHandler.addResult(result.result)
         consumedTime += result.time

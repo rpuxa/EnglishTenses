@@ -18,7 +18,7 @@ class AchievementNotification(
     private val binding: AchievementNotificationBinding
 ) : PopupWindow(
     binding.root,
-    ActionBar.LayoutParams.WRAP_CONTENT,
+    ActionBar.LayoutParams.MATCH_PARENT,
     ActionBar.LayoutParams.WRAP_CONTENT
 ) {
 
@@ -32,9 +32,11 @@ class AchievementNotification(
     fun show(anchor: View) {
         binding.text.text = text
         val contentView = contentView!!
-        showAsDropDown(anchor, margin, margin, Gravity.TOP or Gravity.CENTER_HORIZONTAL)
+        val width = contentView.width - margin * 4
+        showAsDropDown(anchor, margin, margin)
+        update(width, ViewGroup.LayoutParams.WRAP_CONTENT)
 
-        contentView.setOnTouchListener {  _, event ->
+        contentView.setOnTouchListener { _, _ ->
             dismiss()
             false
         }
@@ -46,21 +48,6 @@ class AchievementNotification(
         super.dismiss()
     }
 
-    private val listener = object : GestureDetector.SimpleOnGestureListener() {
-        override fun onFling(
-            e1: MotionEvent,
-            e2: MotionEvent,
-            velocityX: Float,
-            velocityY: Float
-        ): Boolean {
-            val dist = e1.rawY - e2.rawY
-            Log.d("NotificationMyDebug", dist.toString())
-            if (dist > 40) {
-                dismiss()
-            }
-            return true
-        }
-    }
     private val dismissRunnable = Runnable {
         dismiss()
     }

@@ -26,7 +26,6 @@ fun main() {
         RAW_FILE_NAMES.flatMap { ObjectInputStream(FileInputStream(it)).use { it.readObject() as List<RawSentence> } }
     try {
         loadCache()
-        var toHandle = 0
         val result = list.map { sentence ->
             val texts = sentence.text.split("%s")
             val textLists = texts.map { it.words() }
@@ -37,6 +36,7 @@ fun main() {
 
                 val answer = words.determineTense(sentence)
                 answer.verb = rawAnswer.infinitive.words().last()
+                answer.person = rawAnswer.person
                 if (answer.verb !in allWords) {
                     System.err.println("Unknown word ${answer.verb}   $rawAnswer")
                 }
@@ -50,17 +50,6 @@ fun main() {
 
                 answer.simpleAnswer = rawAnswer
                 answer.text = texts[index]
-                answer.determinePerson(textLists[index])?.let { answer.person = it }
-                val person = cacheTenses[answer]
-                if (person != null) {
-                    answer.person = person
-                } else if (answer.person == Person.UNKNOWN || answer.person == Person.FIRST) {
-                    //  println(rawAnswer.forms)
-                    //  println(sentence.text)
-                    //   handleManually(answer)
-                    toHandle++
-                    answer.person = Person.YOU
-                }
                 answer
             }
 
@@ -79,7 +68,6 @@ fun main() {
         ObjectOutputStream(FileOutputStream(HANDLED_FILE_NAME)).use {
             it.writeObject(result)
         }
-        println(toHandle)
     } finally {
         saveCache()
     }

@@ -8,6 +8,8 @@
     tools:text="ahdfgsdfasdf"
     android:minWidth="@dimen/space_answer_min_width"
     android:textSize="@dimen/default_answer_size"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
     android:gravity="center"
     tools:backgroundTint="@android:color/white"
     android:backgroundTintMode="multiply"

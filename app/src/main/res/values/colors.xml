@@ -23,6 +23,7 @@
     <color name="redText">#EF1F10</color>
     <color name="golden">#fecb02</color>
     <color name="light_golden">#FFFAE1</color>
+    <color name="background_mistake">#FF9696</color>
 
 
 </resources>

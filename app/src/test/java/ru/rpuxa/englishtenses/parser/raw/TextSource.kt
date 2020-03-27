@@ -1,5 +1,6 @@
 package ru.rpuxa.englishtenses.parser.raw
 
+import ru.rpuxa.englishtenses.model.Person
 import ru.rpuxa.englishtenses.parser.handler.words
 import java.io.File
 import java.nio.charset.Charset
@@ -18,12 +19,12 @@ object TextSource {
         .toString(Charset.defaultCharset())
 
     val regexTexts = Regex(
-        "(\\r\\n){4,}|(_+)|(\\((.+?)\\))|(\\.)|([,\\-”?!:])|(((?=[^.])[A-Za-z0-9])+)|(\\s+)",
+        "(\\r\\n){4,}|(_+)|(\\((.+?)\\))|(\\.)|([,\\-“”?!:])|(((?=[^.])[A-Za-z0-9])+)|(\\s+)",
         RegexOption.DOT_MATCHES_ALL
     )
     val regexTests =
         Regex(
-            "(\\r\\n){4,}|(_+)|(\\((.+?)\\))|(\\d+\\.)|([,\\-”?!:])|(((?=[^.])[A-Za-z0-9])+)|(\\s+)",
+            "(\\r\\n){4,}|(_+)|(\\((.+?)\\))|(\\d+\\.)|([,\\-“”?!:])|(((?=[^.])[A-Za-z0-9])+)|(\\s+)",
             RegexOption.DOT_MATCHES_ALL
         )
 
@@ -130,15 +131,20 @@ object TextSource {
                 } else {
                     sentence += it.toString()
                     if (it is FullAnswer) {
-                        answers += RawAnswer(it.infinitive!!, listOf(it.correct))
+                        val infinitive = it.infinitive!!.trim()
+                        val substring = infinitive.substring(0, infinitive.length - 1)
+                        require(substring.all { !it.isDigit() })
+                        val person = when (val c = infinitive.last()) {
+                            '1' -> Person.ME
+                            '2' -> Person.YOU
+                            '3' -> Person.IT
+                            else -> error("Unknown person $infinitive  $c")
+                        }
+                        answers += RawAnswer(person, substring, listOf(it.correct))
                     }
                 }
             }
 
-        }
-
-        for (s in sentences) {
-            require(s.text.first() == '%' || s.text.first { it.isLetter() }.isUpperCase()) { s }
         }
 
         return sentences

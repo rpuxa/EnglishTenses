@@ -9,10 +9,6 @@ class TrainingViewModel @Inject constructor(
     private val sentencesHandler: SentenceStatistic
 ) : ViewModel() {
 
-    init {
-        sentencesHandler.resetSession()
-    }
-
     fun onResult(result: ExerciseResult) {
         sentencesHandler.addResult(result.result)
     }
