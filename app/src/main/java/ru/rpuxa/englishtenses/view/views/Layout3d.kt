@@ -10,7 +10,9 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
+import org.jetbrains.anko.attr
 import ru.rpuxa.englishtenses.R
 import ru.rpuxa.englishtenses.viewRect
 import kotlin.properties.Delegates
@@ -19,14 +21,19 @@ import kotlin.properties.Delegates
 open class Layout3d : ViewGroup {
 
     constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        attrs(context, attrs)
+    }
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
         context,
         attrs,
         defStyleAttr
-    )
+    ) {
+        attrs(context,attrs)
+    }
 
-    protected var backTint = android.R.color.white
+    @ColorInt
+    protected var backTint = 0
     private var hasPressed by Delegates.observable(false) { _, old, new ->
         if (old != new) {
             requestLayout()
@@ -40,7 +47,18 @@ open class Layout3d : ViewGroup {
         setWillNotDraw(false)
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+    private fun attrs(context: Context, attrs: AttributeSet) {
+        val obtainStyledAttributes = context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.Layout3d,
+            0,
+            0
+        )
+
+        backTint = obtainStyledAttributes.getColor(R.styleable.Layout3d_layout3dColor, ContextCompat.getColor(context, android.R.color.white))
+    }
+
+        override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val widthMode = MeasureSpec.getMode(widthMeasureSpec)
         val heightMode = MeasureSpec.getMode(heightMeasureSpec)
         val width = MeasureSpec.getSize(widthMeasureSpec)
@@ -64,7 +82,7 @@ open class Layout3d : ViewGroup {
             if (hasPressed) R.drawable.button3d_pressed else R.drawable.button3d_unpressed
         )!!
         drawable.setTintMode(PorterDuff.Mode.MULTIPLY)
-        drawable.setTint(ContextCompat.getColor(context, backTint))
+        drawable.setTint(backTint)
         drawable.setBounds(0, if (hasPressed) buttonDepth else 0, width, height)
         drawable.draw(canvas)
     }

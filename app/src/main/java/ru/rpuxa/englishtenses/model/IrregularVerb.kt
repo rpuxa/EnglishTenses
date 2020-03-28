@@ -279,7 +279,7 @@ enum class IrregularVerb(
 
         fun secondForm(verb: String, person: Person): String? {
             return when (verb) {
-                "be" -> if (person == Person.IT) "was" else "were"
+                "be" -> if (person == Person.YOU) "were" else "was"
                 else -> byFirst(verb)?.second?.first()
             }
         }

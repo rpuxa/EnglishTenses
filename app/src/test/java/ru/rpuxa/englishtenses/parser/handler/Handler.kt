@@ -16,7 +16,7 @@ object Handler {
     @JvmStatic
     fun main(a: Array<String>) {
         println(
-            "can not answer".words().determineTense(null)
+            "will children be playing".words().determineTense(null)
         )
     }
 }
@@ -302,7 +302,7 @@ fun List<String>.determineTense(sentence: RawSentence?): HandledAnswer {
                 return HandledAnswer(
                     Tense.FUTURE_CONTINUOUS,
                     last().removeContinuous(),
-                    subject(1, 1),
+                    subject(1, 2),
                     Person.UNKNOWN,
                     true
                 )

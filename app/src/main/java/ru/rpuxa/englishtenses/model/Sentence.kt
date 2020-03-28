@@ -12,7 +12,9 @@ data class Sentence(
 
 sealed class SentenceItem
 
-class Word(val text: String) : SentenceItem()
+class Word(val text: String) : SentenceItem() {
+    override fun toString(): String  = text
+}
 
 data class WordAnswer(
     val infinitive: String,
@@ -22,4 +24,6 @@ data class WordAnswer(
     val wrongVariants: List<String>
 ) : SentenceItem() {
     val correctForm get() = correctForms.first()
+
+    override fun toString(): String  = correctForm
 }

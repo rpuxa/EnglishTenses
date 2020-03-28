@@ -19,12 +19,12 @@ object TextSource {
         .toString(Charset.defaultCharset())
 
     val regexTexts = Regex(
-        "(\\r\\n){4,}|(_+)|(\\((.+?)\\))|(\\.)|([,\\-“”?!:])|(((?=[^.])[A-Za-z0-9])+)|(\\s+)",
+        "(\\r\\n){4,}|(_+)|(\\((.+?)\\))|(\\.)|([,\\-“”?!:’])|(((?=[^.])[A-Za-z0-9])+)|(\\s+)",
         RegexOption.DOT_MATCHES_ALL
     )
     val regexTests =
         Regex(
-            "(\\r\\n){4,}|(_+)|(\\((.+?)\\))|(\\d+\\.)|([,\\-“”?!:])|(((?=[^.])[A-Za-z0-9])+)|(\\s+)",
+            "(\\r\\n){4,}|(_+)|(\\((.+?)\\))|(\\d+\\.)|([,\\-“”?!:’.])|(((?=[^.])[A-Za-z0-9])+)|(\\s+)",
             RegexOption.DOT_MATCHES_ALL
         )
 
@@ -85,14 +85,6 @@ object TextSource {
             val result = Stack<TextElement>()
             first.forEach {
                 when (it) {
-                    is PunctuationMark -> {
-                        val last = result.last()
-                        if (last is Word) {
-                            last.text += it.char
-                        } else {
-                            result += it
-                        }
-                    }
                     is SpaceAnswer -> {
                         val f = FullAnswer()
                         f.correct = asterisks.next().text()
@@ -122,14 +114,24 @@ object TextSource {
                 if (it is Point || it is NewText) {
                     if (sentence.isNotEmpty() && answers.isNotEmpty()) {
                         sentences += RawSentence(
-                            sentence.joinToString(" "),
+                            sentence.joinToString(""),
                             answers.clone() as ArrayList<RawAnswer>
                         )
                     }
                     sentence.clear()
                     answers.clear()
                 } else {
-                    sentence += it.toString()
+                    val toString = it.toString()
+                    if (toString == "." || toString == "," || toString == "-" || toString == "“" || toString == "”" || toString == "?" || toString == "!" || toString == ":" || toString == "’") {
+                        if (sentence.lastOrNull()?.endsWith(" ") == true) {
+                            val s = sentence.removeAt(sentence.lastIndex)
+                            sentence.add(s.substring(0, s.length - 1))
+                        }
+                    }
+                    sentence += toString
+                    if (toString != "’" && toString != "“") {
+                        sentence += " "
+                    }
                     if (it is FullAnswer) {
                         val infinitive = it.infinitive!!.trim()
                         val substring = infinitive.substring(0, infinitive.length - 1)

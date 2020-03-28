@@ -22,11 +22,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
 import kotlinx.coroutines.*
+import kotlinx.coroutines.NonCancellable.cancel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.sendBlocking
-import org.jetbrains.anko.support.v4.act
-import org.jetbrains.anko.support.v4.ctx
-import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.*
+import org.jetbrains.anko.yesButton
 import ru.rpuxa.englishtenses.*
 import ru.rpuxa.englishtenses.databinding.BottomMenuCorrectBinding
 import ru.rpuxa.englishtenses.databinding.FragmentExerciseBinding
@@ -143,6 +143,9 @@ class ExerciseFragment : Fragment() {
                         menu.dismiss()
                         onNext?.invoke(result)
                     }
+                    binding.complaint.setOnClickListener {
+                        showComplaint()
+                    }
                     menu.show(act)
                 } else {
                     val binding = MistakeBottomMenuBinding.inflate(act.layoutInflater)
@@ -154,6 +157,9 @@ class ExerciseFragment : Fragment() {
                     binding.showCorrectAnswers.setOnClickListener {
                         showCorrectAnswers()
                         it.isVisible = false
+                    }
+                    binding.complaint.setOnClickListener {
+                        showComplaint()
                     }
                     menu.show(act)
                 }
@@ -337,6 +343,21 @@ class ExerciseFragment : Fragment() {
         }
     }
 
+    private fun showComplaint() {
+        alert {
+            titleResource = R.string.complaint_dialog_title
+            messageResource = R.string.complaint_dialog_message
+
+            positiveButton(R.string.send) {
+                viewModel.sendComplaint()
+                longToast(R.string.complaint_thanks)
+                it.dismiss()
+            }
+            negativeButton(R.string.cancel) {
+                it.dismiss()
+            }
+        }.show()
+    }
 
     private fun showCorrectAnswers() {
         val ids = viewModel.setAllCorrect()

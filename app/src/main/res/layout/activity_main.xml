@@ -196,6 +196,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="4dp"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title">
@@ -204,11 +205,11 @@
                 android:id="@+id/choseAllCheckbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/CheckBoxStyle"
                 android:layout_weight="1"
                 android:clickable="false"
                 android:maxLines="1"
-                android:text="@string/chose_all" />
+                android:text="@string/chose_all"
+                android:theme="@style/CheckBoxStyle" />
 
         </ru.rpuxa.englishtenses.view.views.Layout3d>
 

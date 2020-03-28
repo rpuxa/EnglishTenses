@@ -53,7 +53,7 @@ class Button3d : Layout3d {
             6 ->  R.color.golden to android.R.color.white
             else -> error("Unknown attribute")
         }
-        backTint = color
+        backTint = ContextCompat.getColor(context, color)
         text.textColor = ContextCompat.getColor(context, textColor)
 
         addView(text)

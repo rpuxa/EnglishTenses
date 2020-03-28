@@ -12,4 +12,8 @@
         </attr>
         <attr name="button3dText" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="Layout3d">
+        <attr name="layout3dColor" format="color"/>
+    </declare-styleable>
 </resources>

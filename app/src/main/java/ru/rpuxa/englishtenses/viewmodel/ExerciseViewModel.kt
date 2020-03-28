@@ -184,6 +184,11 @@ class ExerciseViewModel @Inject constructor(
         showIrregularVerbTable.value = query
     }
 
+    fun sendComplaint() {
+        val text = sentence.items.joinToString(" ")
+
+    }
+
     class TipMode(
         val tense: Tense,
         val spaceIndex: Int

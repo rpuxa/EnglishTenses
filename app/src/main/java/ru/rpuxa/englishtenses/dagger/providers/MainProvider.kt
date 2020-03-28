@@ -3,10 +3,7 @@ package ru.rpuxa.englishtenses.dagger.providers
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import ru.rpuxa.englishtenses.model.Prefs
-import ru.rpuxa.englishtenses.model.SentenceLoader
-import ru.rpuxa.englishtenses.model.SentenceStatistic
-import ru.rpuxa.englishtenses.model.User
+import ru.rpuxa.englishtenses.model.*
 import ru.rpuxa.englishtenses.model.db.CorrectnessStatisticDao
 import ru.rpuxa.englishtenses.model.db.LearnedSentencesDao
 import javax.inject.Singleton
@@ -29,4 +26,5 @@ class MainProvider {
     @Singleton
     @Provides
     fun sentenceStatistic(l: LearnedSentencesDao, c: CorrectnessStatisticDao) = SentenceStatistic(l, c)
+
 }

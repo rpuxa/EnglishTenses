@@ -6,6 +6,8 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.lifecycle.observe
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
+import ru.rpuxa.englishtenses.R
 import ru.rpuxa.englishtenses.databinding.ActivityMainBinding
 import ru.rpuxa.englishtenses.databinding.TenseBottomMenuBinding
 import ru.rpuxa.englishtenses.model.Tense
@@ -100,19 +102,19 @@ class MainActivity : BaseActivity() {
 
 
         binding.test.setOnClickListener {
-            startActivity<ExamActivity>(
-                ExerciseActivity.TENSES to viewModel.chosen.value
-            )
+            if (canStartExercise()) {
+                startActivity<ExamActivity>(
+                    ExerciseActivity.TENSES to viewModel.chosen.value
+                )
+            }
         }
         binding.training.setOnClickListener {
-            startActivity<TrainingActivity>(
-                ExerciseActivity.TENSES to viewModel.chosen.value
-            )
+            if (canStartExercise()) {
+                startActivity<TrainingActivity>(
+                    ExerciseActivity.TENSES to viewModel.chosen.value
+                )
+            }
         }
-
-/*        Handler().postDelayed({
-            AchievementNotification.show(this, "afg")
-        }, 1000)*/
 
         binding.irregularVerbs.setOnClickListener {
             startActivity<IrregularVerbsActivity>()
@@ -134,6 +136,14 @@ class MainActivity : BaseActivity() {
     private fun dismissButtonMenu() {
         bottomMenu?.dismiss()
         bottomMenu = null
+    }
+
+    private fun canStartExercise(): Boolean {
+        if (viewModel.chosen.value!!.size < 2) {
+            toast(R.string.cant_start_exercise)
+            return false
+        }
+        return true
     }
 
     private class TenseBottomMenu(val binding: TenseBottomMenuBinding) : BottomMenu(binding.root)

@@ -205,8 +205,6 @@ enum class Theory(
         usage(R.string.past_perfect_usage1) {
             text(R.string.past_perfect_usage1_text1)
             example("I’d seen all of Elvis Presley’s movies by the time I was 20!")
-            example("")
-            example("")
         }
         usage(R.string.past_perfect_usage2) {
             text(R.string.past_perfect_usage2_text1)

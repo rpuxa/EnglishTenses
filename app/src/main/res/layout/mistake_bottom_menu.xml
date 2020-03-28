@@ -42,4 +42,23 @@
         app:button3dText="@string/show_correct_answers"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/next" />
+
+    <ru.rpuxa.englishtenses.view.views.Layout3d
+        android:id="@+id/complaint"
+        android:layout_width="54dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout3dColor="@color/colorRedButton"
+        app:layout_constraintBottom_toBottomOf="@+id/showCorrectAnswers"
+        app:layout_constraintEnd_toStartOf="@+id/showCorrectAnswers"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/showCorrectAnswers">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/flag" />
+    </ru.rpuxa.englishtenses.view.views.Layout3d>
 </androidx.constraintlayout.widget.ConstraintLayout>

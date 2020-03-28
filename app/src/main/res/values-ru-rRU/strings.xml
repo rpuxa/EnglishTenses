@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">English Tenses</string>
+    <string name="app_name">Английские времена</string>
 
 
     <string name="single_tip">Здесь нужно употребить %s</string>
@@ -72,5 +72,11 @@
     <string name="hide">Скрыть</string>
     <string name="begin">Начать</string>
     <string name="show_correct_answers">Показать ответы</string>
+    <string name="complaint_dialog_title">Жалоба</string>
+    <string name="complaint_dialog_message">Данный пример содержит ошибку? Хотите отправить жалобу?</string>
+    <string name="complaint_thanks">Спасибо! Ошибка будет исправлена в следующем обновлении.</string>
+    <string name="send">Отправить</string>
+    <string name="cancel">Отмена</string>
+    <string name="cant_start_exercise">Выберите 2 или более времени, чтобы начать упражнение</string>
 
 </resources>

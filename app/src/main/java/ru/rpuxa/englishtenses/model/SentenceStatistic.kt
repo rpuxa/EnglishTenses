@@ -68,7 +68,7 @@ class SentenceStatistic(
         val text = sentence.text.split(' ').filter { it.isNotBlank() }.map { it.trim() }
         var index = 0
         val items = text.map {
-            if (it == "%s") {
+            if (it.startsWith("%s")) {
                 val answer = sentence.answers[index++]
                 if (answer.tense.code in tenses) {
                     val wrongAnswers = ArrayList<String>()
@@ -94,7 +94,7 @@ class SentenceStatistic(
 
     suspend fun load(): List<MutableSet<Int>> {
         val list = ArrayList<MutableSet<Int>>()
-        Tense.values().forEach {
+        repeat(Tense.values().count()) {
             list.add(HashSet())
         }
         learnedSentencesDao.getAll().forEach {

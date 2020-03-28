@@ -22,4 +22,4 @@ fun main() {
     }
 }
 
-fun String.clearNewLines() = replace('\n', ' ').replace('\r', ' ')
+fun String.clearNewLines() = replace('\n', ' ').replace('\r', ' ').trim()

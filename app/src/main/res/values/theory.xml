@@ -77,7 +77,7 @@
     <string name="past_perfect_usage1">Time up to then</string>
     <string name="past_perfect_usage1_text1">The past perfect refers to time up to a point in the past (time up to then), just as the present perfect refers to something that happened in the time up to the moment of speaking (time up to now):</string>
     <string name="past_perfect_usage2">Reported clauses</string>
-    <string name="past_perfect_usage2_text1">We commonly use the past perfect in reported clauses where the reporting verb (underlined) is in the past:</string>
+    <string name="past_perfect_usage2_text1">We commonly use the past perfect in reported clauses where the reporting verb is in the past:</string>
     <string name="past_perfect_usage2_text2">We also use the past perfect when the reporting verb is a verb of perception and is in the past tense:</string>
     <string name="past_perfect_usage3">Talking about changed states</string>
     <string name="past_perfect_usage3_text1">We often use the past perfect to refer to situations which have changed. In speaking, had is often stressed:</string>
@@ -106,8 +106,8 @@
     <string name="present_perfect_usage8">Still</string>
     <string name="present_perfect_usage8_text1">We use still + the present perfect simple when we want to emphasise that something we expected to happen continues not to happen:</string>
     <string name="present_perfect_usage9">Introducing past time events</string>
-    <string name="present_perfect_usage9_text1">The present perfect simple is often used in newspaper headlines or TV news programmes to report a recent past event. It is then followed by a series of verbs in the past simple (underlined):</string>
-    <string name="present_perfect_usage9_text2">We can also use the present perfect simple to introduce an ‘open’ general point about something. We can then use the past simple (underlined) to give more detailed specific information:</string>
+    <string name="present_perfect_usage9_text1">The present perfect simple is often used in newspaper headlines or TV news programmes to report a recent past event. It is then followed by a series of verbs in the past simple:</string>
+    <string name="present_perfect_usage9_text2">We can also use the present perfect simple to introduce an ‘open’ general point about something. We can then use the past simple to give more detailed specific information:</string>
 
 
     <string name="future_perfect_usage1">Events finished by a certain time in the future</string>

@@ -6,7 +6,7 @@
     <string name="past_simple_usage2_text1">Past simple используется чтобы говорить о постоянных (привычных) или разовых событиях или состояниях в прошлом.</string>
     <string name="past_simple_usage2_text2">Когда мы используем past simple чтобы сослаться на привычные события, смысл такой же как и у used to:</string>
     <string name="past_simple_usage3">События в прошлом без отсылки на конкретное время</string>
-    <string name="past_simple_usage3_text1">Sometimes there is no time expression when the past simple is used. This happens especially when we know the time:</string>
+    <string name="past_simple_usage3_text1">Иногда нет выражения времени, когда используется past simple. Это происходит особенно когда мы знаем время</string>
     <string name="past_simple_usage4">Past simple и порядок событий</string>
     <string name="past_simple_usage4_text1">Когда одно прошедшее событие происходит за другим, первое, упомянутое в past simple, произошло первым, а второе произошло следующим, и так далее. Если мы изменим порядок глаголов, это поменяет смысл.</string>
 
@@ -73,13 +73,62 @@
     <string name="future_continuous_usage1_text1">Future continuous используется, чтобы сослаться на временные действия и события которые будут происходить в конкретный момент в будущем:</string>
 
     <string name="past_perfect_usage1">Время до того как…</string>
-    <string name="past_perfect_usage1_text1">The past perfect refers to time up to a point in the past (time up to then), just as the present perfect refers to something that happened in the time up to the moment of speaking (time up to now):</string>
-    <string name="past_perfect_usage2">Reported clauses</string>
-    <string name="past_perfect_usage2_text1">We commonly use the past perfect in reported clauses where the reporting verb (underlined) is in the past:</string>
-    <string name="past_perfect_usage2_text2">We also use the past perfect when the reporting verb is a verb of perception and is in the past tense:</string>
-    <string name="past_perfect_usage3">Talking about changed states</string>
-    <string name="past_perfect_usage3_text1">We often use the past perfect to refer to situations which have changed. In speaking, had is often stressed:</string>
-    <string name="past_perfect_usage4">The past perfect in conditional clauses</string>
-    <string name="past_perfect_usage4_text1">We must use the past perfect when we imagine a different past in a clause with if:</string>
+    <string name="past_perfect_usage1_text1">Past perfect используется для того, чтобы сослаться на время до того как что-то произошло в прошлом. Так же как и present perfect отсылает на что-то, что уже произошло на момент разговора:</string>
+    <string name="past_perfect_usage2">Отчеты</string>
+    <string name="past_perfect_usage2_text1">Past perfect обычно используется в отчетах или объяснениях:</string>
+    <string name="past_perfect_usage2_text2">Past perfect также используется, когда отчетный глагол является глаголом восприятия(к примеру - видел, слышал, чувствовал) и находится в прошедшем времени:</string>
+    <string name="past_perfect_usage3">Разговор об измененных состояниях</string>
+    <string name="past_perfect_usage3_text1">Past perfect часто используется, чтобы сослаться на ситуации, которые уже изменились:</string>
+    <string name="past_perfect_usage4">Past perfect в условных выражениях</string>
+    <string name="past_perfect_usage4_text1">Past perfect должен использоваться, когда мы представляем другое прошлое используя if:</string>
+
+
+    <string name="present_perfect_usage1">Опыт</string>
+    <string name="present_perfect_usage1_text1">Present perfect используется, чтобы говорить о своем опыте к текущему моменту времени. Время, когда произшло событие, не важно:</string>
+    <string name="present_perfect_usage1_text2">Хотя мы не даем конкретное время, но мы можем использовать такие слова как: ever, never, before, in my life, so far, up until now:</string>
+    <string name="present_perfect_usage1_text3">Часто используется ever, not … ever и never, когда мы говорим о опыте:</string>
+    <string name="present_perfect_usage1_text4">Так же present perfect используется, чтобы описать уникальный опыт в превосходной степени:</string>
+    <string name="present_perfect_usage1_text5">Present perfect часто используется с first time, когда мы говорим о продолжающихся или недваних событиях:</string>
+    <string name="present_perfect_usage2">Недавно законченные действия</string>
+    <string name="present_perfect_usage2_text1">Present perfect используется, чтобы говорить о законченных событиях в совсем недавнем прошлом. Мы не указываем конкретное время. Часто используются такие слова как just или recently для совесем недавних событий:</string>
+    <string name="present_perfect_usage3">Прошедшие события, текущий результат</string>
+    <string name="present_perfect_usage3_text1">Present perfect используется, когда прошедшие событие имеет связь с настоящим:</string>
+    <string name="present_perfect_usage4">Время + for и since</string>
+    <string name="present_perfect_usage4_text1">Present perfect используется, чтобы говорить о текущих ситуациях, которые начались в определенный момент в прошлом и до сих пор продолжаются. Мы оглядываемся из настоящего в прошлое.</string>
+    <string name="present_perfect_usage5">How long …?</string>
+    <string name="present_perfect_usage5_text1">Часто используются выражения с for или since чтобы ответить на вопрос: How long …+ present perfect. Вопрос How long …? используется, чтобы спросить о длительности события:</string>
+    <string name="present_perfect_usage6">Yet</string>
+    <string name="present_perfect_usage6_text1">Yet + present perfect обычно используется в вопросах или отрицательных предложениях, чтобы сослаться на вещи, которые мы намереваемся сделать в будущем:</string>
+    <string name="present_perfect_usage7">Already</string>
+    <string name="present_perfect_usage7_text1">Already + present perfect используется, когда мы хотим подчеркнуть, что что-то достигли или выполнили (часто раньше ожидаемого времени):</string>
+    <string name="present_perfect_usage8">Still</string>
+    <string name="present_perfect_usage8_text1">Still + present perfect используется, когда мы хотим подчеркнуть, что что-то, как мы ожидали, должно было произойти, но это продолжает не происходить:</string>
+    <string name="present_perfect_usage9">Представляя события прошлого времени</string>
+    <string name="present_perfect_usage9_text1">Present perfect часто используется в заголовках газет или TV программах, чтобы сообщить о недавних событиях. Часто сопровождается серией глаголов в past simple:</string>
+    <string name="present_perfect_usage9_text2">Также Present perfect используется, чтобы предоставить «открытый» общий вопрос о чем-то. А past simple используется, чтобы представить более подробную информацию:</string>
+
+
+    <string name="future_perfect_usage1">События, завершенные к определенному времени в будущем</string>
+    <string name="future_perfect_usage1_text1">Future perfect используется, когда мы смотрим в прошлое из будущего. Часто используется такие фразы как: by tomorrow, for three years итд:</string>
+
+
+    <string name="past_perfect_continuous_usage1">Продолжающиеся события в прошлом</string>
+    <string name="past_perfect_continuous_usage1_text1">Past perfect continuous используется, чтобы говорить о событиях, которые начались в определенный момент в прошлом и все еще продолжаются к другому моменту в прошлом:</string>
+    <string name="past_perfect_continuous_usage1_text2">Past perfect continuous может использоваться, чтобы говорить о событиях, которые начались в прошлом и уже закончились, но имеют важный эффект для прошлого:</string>
+
+
+    <string name="present_perfect_continuous_usage1">Недавние прошедшие действия</string>
+    <string name="present_perfect_continuous_usage1_text1">Present perfect continuous используется, чтобы говорить о законченных действиях в недавнем прошлом. Использование present perfect continuous фокусирует нас на действии.\nТак же мы не даем какое-то определенное время. И даже если действие завершено, мы можем увидеть результат в настоящем:</string>
+    <string name="present_perfect_continuous_usage2">Одно продолжающееся событие</string>
+    <string name="present_perfect_continuous_usage2_text1">Present perfect continuous используется для того, чтобы описать действие, которое началось в прошлом и до сих пор продолжается:</string>
+    <string name="present_perfect_continuous_usage3">Повторные продолжающиеся события</string>
+    <string name="present_perfect_continuous_usage3_text1">Present perfect continuous используется, чтобы говорить о повторяющихся действиях, которые начались в конкретное время в прошлом и продолжаются до сих пор:</string>
+    <string name="present_perfect_continuous_usage4">Как долго…?</string>
+    <string name="present_perfect_continuous_usage4_text1">Present perfect continuous часто используется, чтобы спросить или ответить о длительности действия. How long …+ present perfect continuous:</string>
+
+
+    <string name="future_perfect_continuous_usage1">Подчеркнуть длительность события в будущем</string>
+    <string name="future_perfect_continuous_usage1_text1">Future perfect continuous используеьтся, когда мы смотрим в прошлое из будущего и хотим подчеркнуть длительность события:</string>
+
 
 </resources>
