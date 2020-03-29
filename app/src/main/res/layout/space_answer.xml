@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/space_answer">
 
-    <ru.rpuxa.englishtenses.view.views.DummyView
+    <english.tenses.practice.view.views.DummyView
         android:id="@+id/dummyView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

@@ -60,7 +60,7 @@
     <string name="test">Test</string>
     <string name="irregular_verbs">Irregular verbs</string>
     <string name="search">Search</string>
-    <string name="chose_all">Chose all</string>
+    <string name="chose_all">Choose all</string>
     <string name="correct">Correct!</string>
     <string name="do_you_want_abort_test">Do you want abort the test?</string>
     <string name="yes">Yes</string>
@@ -76,7 +76,7 @@
     <string name="irregular_verbs_table">Irregular verbs table</string>
     <string name="check">Check</string>
     <string name="theory">Theory</string>
-    <string name="chose">Chose</string>
+    <string name="chose">Choose</string>
     <string name="tip">Hint</string>
     <string name="next">Next</string>
     <string name="rate">Rate</string>
@@ -88,6 +88,6 @@
     <string name="complaint_thanks">Thank you!</string>
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
-    <string name="cant_start_exercise">Chose 2 or more tenses to start exercise</string>
+    <string name="cant_start_exercise">Choose 2 or more tenses to start exercise</string>
 
 </resources>

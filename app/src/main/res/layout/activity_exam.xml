@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ru.rpuxa.englishtenses.view.activities.ExamActivity">
+    tools:context="english.tenses.practice.view.activities.ExamActivity">
 
     <TextView
         android:id="@+id/textView4"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView4"
         app:srcCompat="@drawable/cross" />
 
-    <ru.rpuxa.englishtenses.view.views.CustomProgressBar
+    <english.tenses.practice.view.views.CustomProgressBar
         android:id="@+id/customProgressBar"
         android:layout_width="0dp"
         android:layout_height="15dp"

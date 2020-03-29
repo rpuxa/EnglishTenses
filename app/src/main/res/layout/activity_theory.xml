@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ru.rpuxa.englishtenses.view.activities.TheoryActivity">
+    tools:context="english.tenses.practice.view.activities.TheoryActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

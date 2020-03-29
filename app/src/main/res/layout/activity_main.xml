@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:overScrollMode="never"
-    tools:context="ru.rpuxa.englishtenses.view.activities.MainActivity">
+    tools:context="english.tenses.practice.view.activities.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/choseAll" />
 
-        <ru.rpuxa.englishtenses.view.views.Button3d
+        <english.tenses.practice.view.views.Button3d
             android:id="@+id/test"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ru.rpuxa.englishtenses.view.views.Layout3d
+        <english.tenses.practice.view.views.Layout3d
             android:id="@+id/choseAll"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -211,9 +211,9 @@
                 android:text="@string/chose_all"
                 android:theme="@style/CheckBoxStyle" />
 
-        </ru.rpuxa.englishtenses.view.views.Layout3d>
+        </english.tenses.practice.view.views.Layout3d>
 
-        <ru.rpuxa.englishtenses.view.views.Button3d
+        <english.tenses.practice.view.views.Button3d
             android:id="@+id/irregularVerbs"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -227,7 +227,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/achievements" />
 
-        <ru.rpuxa.englishtenses.view.views.Button3d
+        <english.tenses.practice.view.views.Button3d
             android:id="@+id/training"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -241,9 +241,9 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/test">
 
-        </ru.rpuxa.englishtenses.view.views.Button3d>
+        </english.tenses.practice.view.views.Button3d>
 
-        <ru.rpuxa.englishtenses.view.views.Button3d
+        <english.tenses.practice.view.views.Button3d
             android:id="@+id/achievements"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -258,7 +258,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment"
-            android:name="ru.rpuxa.englishtenses.view.fragments.RateFragment"
+            android:name="english.tenses.practice.view.fragments.RateFragment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"

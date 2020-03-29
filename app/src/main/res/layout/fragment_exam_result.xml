@@ -77,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="@+id/correctness"
         app:layout_constraintTop_toTopOf="@+id/textView12" />
 
-    <ru.rpuxa.englishtenses.view.views.Button3d
+    <english.tenses.practice.view.views.Button3d
         android:id="@+id/exit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

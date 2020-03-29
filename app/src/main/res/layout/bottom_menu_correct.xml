@@ -6,7 +6,7 @@
     android:layout_height="@dimen/bottom_menu_height"
     android:background="@color/bottomMenuRight">
 
-    <ru.rpuxa.englishtenses.view.views.Layout3d
+    <english.tenses.practice.view.views.Layout3d
         android:id="@+id/complaint"
         android:layout_width="57dp"
         android:layout_height="0dp"
@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/flag" />
-    </ru.rpuxa.englishtenses.view.views.Layout3d>
+    </english.tenses.practice.view.views.Layout3d>
 
     <TextView
         android:id="@+id/text"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:textStyle="bold" />
 
-    <ru.rpuxa.englishtenses.view.views.Button3d
+    <english.tenses.practice.view.views.Button3d
         android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,6 +52,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".5">
 
-    </ru.rpuxa.englishtenses.view.views.Button3d>
+    </english.tenses.practice.view.views.Button3d>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

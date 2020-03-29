@@ -34,7 +34,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sentence" />
 
-    <ru.rpuxa.englishtenses.view.views.Button3d
+    <english.tenses.practice.view.views.Button3d
         android:id="@+id/check"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ru.rpuxa.englishtenses.view.views.Button3d
+    <english.tenses.practice.view.views.Button3d
         android:id="@+id/tip"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -62,9 +62,9 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:visibility="gone">
 
-    </ru.rpuxa.englishtenses.view.views.Button3d>
+    </english.tenses.practice.view.views.Button3d>
 
-    <ru.rpuxa.englishtenses.view.views.Button3d
+    <english.tenses.practice.view.views.Button3d
         android:id="@+id/irregularVerbs"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
