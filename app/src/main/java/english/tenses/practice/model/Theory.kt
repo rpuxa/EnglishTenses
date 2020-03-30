@@ -285,7 +285,7 @@ enum class Theory(
         usage(R.string.present_perfect_usage7) {
             text(R.string.present_perfect_usage7_text1)
             example("I’ve already booked my flight home.")
-            example("A: Will you go and clean your teeth!\n B: I’ve already cleaned them.")
+            example("A: Will you go and clean your teeth!\nB: I’ve already cleaned them.")
 
         }
         usage(R.string.present_perfect_usage8) {

@@ -333,7 +333,6 @@ ago. (live2)
 18. We ________________________ very cold weather this year (have2)
 19. Where ________________________ the money? (you, hide2)
 20. At last ,my favourite team ________________________ against its most important rival (win3)
-21. I ________________________ for 6 years. (marry1)
 22. Dad ________________________ a number of jobs in the last few years (have3).
 23. The bank is still closed. It ________________________ yet. (not open3)
 24. Our daughter ___________________________ lipstick since she was 16 (wear3).
@@ -376,7 +375,6 @@ deliver2)
 18. We have been having very cold weather this year (have)
 19. Where have you hidden the money? (you, hide)
 20. At last ,my favourite team has won against its most important rival (win)
-21. I have been married for 6 years. (marry)
 22. Dad has had a number of jobs in the last few years (have).
 23. The bank is still closed. It has not opened yet. (not open)
 24. Our daughter has been wearing lipstick since she was 16 (wear).
@@ -513,7 +511,7 @@ anything since then.
 17. Two people died in a fire on Elm Street last night.
 18. It took ages to repair the car. I am glad we are finished now.
 19. I have found the wallet I lost yesterday.
-20. The runner broke the world record in Frankfurt. Two days later he an even faster.
+20. The runner broke the world record in Frankfurt. Two days later he ran even faster.
 
 
 
@@ -930,8 +928,6 @@ ___________________________ (already write3) his first computer programme six ye
 (hit3) a young man. He ___________________ (ride3) his bike when someone in front of him
 suddenly ___________________ (open3) a car door. Many people ___________________ (see2) the
 accident. The police ___________________ (interrogate2) them last night.
-7. Mrs Smith said that one day she ________________________ (retire3) from teaching. She said that
-she ___________________ (spend3) her new free time learning about computers.
 8. I ______________________ (not sleep1) at all last night. Someone ___________________ (listen3)
 to music all night.
 
@@ -973,8 +969,6 @@ garage.
 6. An accident happened (happen) near my house last night. A car hit (hit) a young man. He was
 riding (ride) his bike when someone in front of him suddenly opened (open) a car door. Many
 people saw (see) the accident. The police interrogated (interrogate) them last night.
-7. Mrs Smith said that one day she would retire (retire) from teaching. She said that she would spend
-(spend) her new free time learning about computers.
 8. I did not sleep (not sleep) at all last night. Someone was listening (listen) to music all night.
 10. The judge sentenced the man to eight years in prison because he had robbed (rob) a bank.
 11. They had been standing (stand) in the queue for over an hour when the manager told (tell) them
