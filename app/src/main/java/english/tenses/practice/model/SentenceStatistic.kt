@@ -7,6 +7,7 @@ import english.tenses.practice.model.db.CorrectnessStatistic
 import english.tenses.practice.model.db.CorrectnessStatisticDao
 import english.tenses.practice.model.db.LearnedSentenceEntity
 import english.tenses.practice.model.db.LearnedSentencesDao
+import english.tenses.practice.random
 import kotlin.random.Random
 
 class SentenceStatistic(
@@ -19,16 +20,7 @@ class SentenceStatistic(
         get() = _learned ?: runBlocking { load() }
 
     fun nextSentence(tenses: Set<Int>, sizes: List<Int>): SentencePointer {
-        val tensesArray = tenses.toIntArray()
-        val sum = tensesArray.sumBy { sizes[it] }
-        val chances = tensesArray.map { sizes[it].toDouble() / sum }
-        val randomDouble = Random.nextDouble()
-        var d = 0.0
-        val i = chances.indices.first {
-            d += chances[it]
-            randomDouble < d
-        }
-        val tense = tensesArray[i]
+        val tense = random(tenses.map { it to sizes[it].toDouble() })
         val learnedTense = learned[tense]
         val size = sizes[tense]
         val clear = learnedTense.size >= size
@@ -64,11 +56,11 @@ class SentenceStatistic(
         return SentencePointer(tense, result)
     }
 
-    fun handle(sentence: UnhandledSentence, tenses: Set<Int>): Sentence {
+    fun handle(sentence: UnhandledSentence, tenses: Set<Int>, sizes: List<Int>): Sentence {
         val text = sentence.text.split(' ').filter { it.isNotBlank() }.map { it.trim() }
         var index = 0
         val items = text.map {
-            if (it.startsWith("%s")) {
+            if (it == "%s") {
                 val answer = sentence.answers[index++]
                 if (answer.tense.code in tenses) {
                     val wrongAnswers = ArrayList<String>()
@@ -76,7 +68,7 @@ class SentenceStatistic(
                     unusedTenses -= answer.tense.code
                     for (i in 0 until WRONG_ANSWER_AMOUNT) {
                         if (unusedTenses.isEmpty()) break
-                        val random = unusedTenses.random()
+                        val random = random(unusedTenses.map { it to sizes[it].toDouble() })
                         unusedTenses -= random
                         wrongAnswers += answer.createWrongAnswer(Tense[random])
                     }

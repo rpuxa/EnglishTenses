@@ -27,6 +27,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import english.tenses.practice.viewmodel.ViewModelFactory
 import kotlin.math.sqrt
+import kotlin.random.Random
 
 
 /*
@@ -199,4 +200,17 @@ fun View.updateParams(width: Int? = null, height: Int? = null) {
         if (height != null)
             this.height = height
     }
+}
+
+
+fun <T> random(weights: List<Pair<T, Double>>): T {
+    val sum = weights.sumByDouble { it.second }
+    val chances = weights.map { it.second / sum }
+    val randomDouble = Random.nextDouble()
+    var d = 0.0
+    val i = chances.indices.first {
+        d += chances[it]
+        randomDouble < d
+    }
+    return weights[i].first
 }

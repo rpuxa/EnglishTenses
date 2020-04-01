@@ -26,6 +26,4 @@ class UnhandledAnswer(
         require(this.tense != tense)
         return TenseHandler.createWrongAnswer(tense, verb, subject, person)
     }
-
-
 }

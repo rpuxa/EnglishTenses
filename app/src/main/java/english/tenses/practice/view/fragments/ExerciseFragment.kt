@@ -114,12 +114,13 @@ class ExerciseFragment : Fragment() {
             )
         }
 
-        var tipMenu: BottomMenu? = null
         viewModel.tipMode.observe(viewLifecycleOwner) {
             if (it == ExerciseViewModel.TIP_MODE_OFF) {
-                tipMenu?.dismiss()
+               dismissMenu()
             } else {
-                tipMenu = Menus.showTipMenu(act, it.tense, it.spaceIndex, answerSpaces.size > 1)
+                showMenu(
+                    Menus.showTipMenu(act, it.tense, it.spaceIndex, answerSpaces.size > 1)
+                )
             }
         }
 
@@ -136,20 +137,18 @@ class ExerciseFragment : Fragment() {
             if (result != null) {
                 if (result.allCorrect) {
                     val binding = BottomMenuCorrectBinding.inflate(act.layoutInflater)
-                    val menu = BottomMenu(binding.root)
                     binding.next.setOnClickListener {
-                        menu.dismiss()
+                        dismissMenu()
                         onNext?.invoke(result)
                     }
                     binding.complaint.setOnClickListener {
                         showComplaint()
                     }
-                    menu.show(act)
+                    showMenu(BottomMenu(binding.root))
                 } else {
                     val binding = MistakeBottomMenuBinding.inflate(act.layoutInflater)
-                    val menu = BottomMenu(binding.root)
                     binding.next.setOnClickListener {
-                        menu.dismiss()
+                        dismissMenu()
                         onNext?.invoke(result)
                     }
                     binding.showCorrectAnswers.setOnClickListener {
@@ -159,7 +158,7 @@ class ExerciseFragment : Fragment() {
                     binding.complaint.setOnClickListener {
                         showComplaint()
                     }
-                    menu.show(act)
+                    showMenu(BottomMenu(binding.root))
                 }
             }
         }
@@ -339,6 +338,16 @@ class ExerciseFragment : Fragment() {
                 dimensions.scale *= .9f
             }
         }
+    }
+
+    private var menu: BottomMenu? = null
+    fun showMenu(menu: BottomMenu) {
+        this.menu = menu
+        menu.show(act)
+    }
+
+    fun dismissMenu() {
+        menu?.dismiss()
     }
 
     private fun showComplaint() {

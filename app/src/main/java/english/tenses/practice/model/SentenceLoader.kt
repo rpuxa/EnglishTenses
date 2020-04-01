@@ -46,7 +46,7 @@ class SentenceLoader(
             )
         }
 
-        return sentencesHandler.handle(sentence, tenses)
+        return sentencesHandler.handle(sentence, tenses, sizes)
     }
 
     companion object {

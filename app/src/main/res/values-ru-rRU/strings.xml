@@ -78,5 +78,6 @@
     <string name="send">Отправить</string>
     <string name="cancel">Отмена</string>
     <string name="cant_start_exercise">Выберите 2 или более времени, чтобы начать упражнение</string>
+    <string name="skip">Пропустить</string>
 
 </resources>

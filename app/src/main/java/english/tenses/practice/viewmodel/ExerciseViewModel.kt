@@ -10,7 +10,8 @@ import english.tenses.practice.view.fragments.ExerciseFragment
 import javax.inject.Inject
 
 class ExerciseViewModel @Inject constructor(
-    private val loader: SentenceLoader
+    private val loader: SentenceLoader,
+    private val sentenceStatistic: SentenceStatistic
 ) : ViewModel() {
 
 
@@ -167,11 +168,14 @@ class ExerciseViewModel @Inject constructor(
             }
             add(correct, true)
             add(incorrect, false)
-            result.value = ExerciseResult(
+            val exerciseResult = ExerciseResult(
                 correctness.values.toList(),
                 incorrect.isEmpty(),
                 System.currentTimeMillis() - startTime
             )
+
+            sentenceStatistic.addResult(exerciseResult.result)
+            result.value = exerciseResult
         }
     }
 

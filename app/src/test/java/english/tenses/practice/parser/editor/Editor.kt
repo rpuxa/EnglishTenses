@@ -10,14 +10,31 @@ import english.tenses.practice.parser.handler.words
 import java.io.*
 
 fun main() {
-    try {
-        read()
-        checkAllTenses()
-    } finally {
-        write()
-    }
+    read()
+    checkAllTenses()
+    checkDoubleVerbs()
 }
 
+fun checkDoubleVerbs() {
+    val regex = Regex("\\S+")
+
+    sentences.forEach {
+        it.answers.forEach { answer ->
+            Tense.values().forEach { tense ->
+                val wrongAnswer = TenseHandler.createWrongAnswer(
+                    tense,
+                    answer.verb,
+                    answer.subject ?: "",
+                    answer.person
+                )
+                val sequence = regex.findAll(wrongAnswer).map { it.groups[0]!!.value }
+                if (sequence.count { it == "have" } > 1 || sequence.count { it == "been" } > 1 || sequence.count { it == "will" } > 1) {
+                    println(wrongAnswer)
+                }
+            }
+        }
+    }
+}
 
 fun checkAllTenses() {
     val unknownWords = HashSet<String>()

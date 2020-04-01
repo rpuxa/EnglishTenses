@@ -19,7 +19,7 @@ class AchievementsActivity : BaseActivity() {
         val adapter = AchievementAdapter()
         achievementViewModel.all.observe(this) {
             adapter.submitList(it)
-            binding.allStarsAmout.text = it.sumBy { it.starsCount() }.toString()
+            binding.allStarsAmount.text = it.sumBy { it.starsCount() }.toString()
         }
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = LinearLayoutManager(this)

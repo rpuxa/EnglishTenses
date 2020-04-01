@@ -11,7 +11,6 @@ import javax.inject.Inject
 import kotlin.math.roundToInt
 
 class ExamViewModel @Inject constructor(
-    private val sentencesHandler: SentenceStatistic
 ) : ViewModel() {
     private var exerciseNumber = 0
     private var consumedTime = 0L
@@ -21,7 +20,6 @@ class ExamViewModel @Inject constructor(
     val progress = _progress.liveData
 
     fun onResult(result: ExerciseResult): ExamResult? {
-        sentencesHandler.addResult(result.result)
         consumedTime += result.time
         exerciseNumber++
         result.result.forEach {

@@ -32,8 +32,8 @@
     </string-array>
 
     <plurals name="pass_test">
-       <item quantity="one">Pass %d test</item>
-       <item quantity="other">Pass %d tests</item>
+        <item quantity="one">Pass %d test</item>
+        <item quantity="other">Pass %d tests</item>
     </plurals>
 
     <string name="passed">Passed: %d</string>
@@ -43,7 +43,7 @@
 
     <plurals name="pass_test_without_mistakes">
         <item quantity="one">Pass %d test without mistakes</item>
-        <item quantity="other">Pass %d tests</item>
+        <item quantity="other">Pass %d tests without mistakes</item>
     </plurals>
 
     <string name="written">Passed: %d</string>
@@ -89,5 +89,6 @@
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
     <string name="cant_start_exercise">Choose 2 or more tenses to start exercise</string>
+    <string name="skip">Skip</string>
 
 </resources>

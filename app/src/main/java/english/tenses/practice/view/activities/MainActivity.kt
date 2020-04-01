@@ -1,6 +1,7 @@
 package english.tenses.practice.view.activities
 
 import android.os.Bundle
+import android.util.Log
 import androidx.core.view.isVisible
 import androidx.lifecycle.observe
 import english.tenses.practice.BuildConfig
@@ -145,4 +146,8 @@ class MainActivity : BaseActivity() {
     }
 
     private class TenseBottomMenu(val binding: TenseBottomMenuBinding) : BottomMenu(binding.root)
+
+    companion object {
+        const val TAG = "MainActivityDebug"
+    }
 }

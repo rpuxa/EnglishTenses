@@ -9,7 +9,7 @@ import org.junit.runner.RunWith
 import org.junit.Assert.*
 
 /**
- * Instrumented test, which will execute on an Android device.
+ * Instrumented achievement_item, which will execute on an Android device.
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
@@ -17,7 +17,7 @@ import org.junit.Assert.*
 class ExampleInstrumentedTest {
     @Test
     fun useAppContext() {
-        // Context of the app under test.
+        // Context of the app under achievement_item.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("english.tenses.englishtenses", appContext.packageName)
     }

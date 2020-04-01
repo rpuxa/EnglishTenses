@@ -1,6 +1,6 @@
 package english.tenses.practice.parser.raw
 
-import english.tenses.practice.model.Person
+import english.tenses.practice.model.*
 import java.io.File
 import java.nio.charset.Charset
 import java.util.*
@@ -36,6 +36,7 @@ object TextSource {
             values[5].isNotEmpty() -> Point
             values[6].isNotEmpty() -> PunctuationMark(values[6])
             values[7].isNotEmpty() -> Word(values[7])
+            values[9].isNotEmpty() -> WhiteSpace
             else -> null
         }
     }
@@ -49,6 +50,7 @@ object TextSource {
             values[5].isNotEmpty() -> Point
             values[6].isNotEmpty() -> PunctuationMark(values[6])
             values[7].isNotEmpty() -> Word(values[7])
+            values[9].isNotEmpty() -> WhiteSpace
             else -> null
         }
     }
@@ -81,19 +83,19 @@ object TextSource {
                 error("Wrong determine")
             }
 
-            val result = Stack<TextElement>()
+            val stack = Stack<TextElement>()
             first.forEach {
                 when (it) {
                     is SpaceAnswer -> {
                         val f = FullAnswer()
                         f.correct = asterisks.next().text()
-                        result.add(f)
+                        stack.add(f)
                     }
                     is Answer -> {
                         val words = it.text.split(",").map { it.trim() }
                         val wordsIterator = words.reversed().iterator()
-                        val count = result.count { it is FullAnswer && it.infinitive == null }
-                        val resultIterator = result.reversed().iterator()
+                        val count = stack.count { it is FullAnswer && it.infinitive == null }
+                        val resultIterator = stack.reversed().iterator()
                         while (resultIterator.hasNext() && wordsIterator.hasNext()) {
                             val answer = resultIterator.next() as? FullAnswer ?: continue
                             if (count == 1) {
@@ -104,12 +106,26 @@ object TextSource {
                         }
                         require(count == 1 || !wordsIterator.hasNext())
                     }
-                    else -> result += it
+                    else -> stack += it
                 }
             }
+
+            val textElements = ArrayList<TextElement>()
+            stack.forEach {
+                if (textElements.lastOrNull() is FullAnswer) {
+                    textElements.add(WhiteSpace)
+                }
+                if (it is FullAnswer && textElements.isNotEmpty() && textElements.last() != WhiteSpace) {
+                    textElements.add(WhiteSpace)
+                }
+                if (it != WhiteSpace || textElements.lastOrNull() != WhiteSpace)
+                    textElements.add(it)
+            }
+            textElements.add(NewText)
+
             val sentence = ArrayList<String>()
             val answers = ArrayList<RawAnswer>()
-            (result + NewText).forEach {
+            textElements.forEach {
                 if (it is Point || it is NewText) {
                     if (sentence.isNotEmpty() && answers.isNotEmpty()) {
                         sentences += RawSentence(
@@ -120,17 +136,7 @@ object TextSource {
                     sentence.clear()
                     answers.clear()
                 } else {
-                    val toString = it.toString()
-                    if (toString == "." || toString == "," || toString == "-" || toString == "“" || toString == "”" || toString == "?" || toString == "!" || toString == ":" || toString == "’") {
-                        if (sentence.lastOrNull()?.endsWith(" ") == true) {
-                            val s = sentence.removeAt(sentence.lastIndex)
-                            sentence.add(s.substring(0, s.length - 1))
-                        }
-                    }
-                    sentence += toString
-                    if (toString != "’" && toString != "“") {
-                        sentence += " "
-                    }
+                    sentence += it.toString()
                     if (it is FullAnswer) {
                         val infinitive = it.infinitive!!.trim()
                         val substring = infinitive.substring(0, infinitive.length - 1)
@@ -196,6 +202,10 @@ object TextSource {
 
 sealed class TextElement
 
+object WhiteSpace : TextElement() {
+    override fun toString() = " "
+}
+
 object SpaceAnswer : TextElement() {
     override fun toString() = "______"
 }
@@ -225,7 +235,13 @@ class FullAnswer : TextElement() {
 }
 
 fun main() {
-    println(
-        TextSource.parse().joinToString("\n")
+    println( Tense.values().map {
+        TenseHandler.createWrongAnswer(
+            it,
+            "be",
+            "",
+            Person.IT
+        )
+    }.joinToString(", ")
     )
 }

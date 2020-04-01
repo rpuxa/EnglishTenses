@@ -7,35 +7,37 @@
     android:layout_marginStart="8dp"
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="8dp"
-    android:background="@drawable/button3d_unpressed"
-    android:backgroundTint="@android:color/white"
-    tools:backgroundTintMode="multiply"
+    android:background="@drawable/achievement_item"
     tools:context=".view.activities.AchievementsActivity">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:gravity="center"
-        tools:text="Пройти 10 тестов"
         android:textColor="@android:color/black"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Пройти 10 тестов" />
 
     <TextView
         android:id="@+id/subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        tools:text="Пройдено: 9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+        tools:text="Пройдено: 9" />
 
     <RatingBar
         android:id="@+id/ratingBar"

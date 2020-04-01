@@ -246,11 +246,11 @@ object TenseHandler {
 
     private val PRESENT_SIMPLE_S_VERBS_EXCEPTIONS = mapOf(
         "have" to "has",
-        "be" to "was"
+        "be" to "is"
     )
 
     private val PRESENT_SIMPLE_FIRST_PERSON_VERBS_EXCEPTIONS = mapOf(
-        "be" to "were"
+        "be" to "are"
     )
 
     private val ING_EXCEPTIONS = mapOf(

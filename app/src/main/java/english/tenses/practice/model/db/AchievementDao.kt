@@ -3,7 +3,7 @@ package english.tenses.practice.model.db
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import androidx.room.*
-import english.tenses.practice.model.Achievement
+import english.tenses.practice.model.*
 
 @Dao
 interface AchievementDao {
@@ -21,12 +21,9 @@ interface AchievementDao {
 
     val all: LiveData<List<Achievement>>
         get() = getExisting().map {
-            val existing = ArrayList(it)
-            Achievement.IDS.forEach { id ->
-                if (it.all { it.id != id }) {
-                    existing += AchievementEntity(id, 0)
-                }
+           Achievement.IDS.map { id ->
+                val entity = it.find { it.id == id } ?: AchievementEntity(id, 0)
+                Achievement.create(entity.id, entity.progress)
             }
-            existing.map { Achievement.create(it.id, it.progress) }
         }
 }
