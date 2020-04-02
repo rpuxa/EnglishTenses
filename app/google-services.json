@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "265671778692",
+    "firebase_url": "https://englishtenses-837b4.firebaseio.com",
+    "project_id": "englishtenses-837b4",
+    "storage_bucket": "englishtenses-837b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265671778692:android:1d7d5b6b5e8ca013c87dd1",
+        "android_client_info": {
+          "package_name": "english.tenses.practice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "265671778692-fr33v5gahv61bdpk4sfuapj8rcd1nr6f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtWpRzsdKIYx8Ak1yvsanWvHu5YVBd2Bw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "265671778692-fr33v5gahv61bdpk4sfuapj8rcd1nr6f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
