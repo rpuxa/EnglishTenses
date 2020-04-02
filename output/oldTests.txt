@@ -476,7 +476,7 @@ last week.
 (try1) it when I ___________________ (be1) in high school but I ___________________ (not bake1)
 anything since then.
 15. Janet ___________________ (be3) very ill three years ago.
-16. We ___________________ (move2) here in 1993. We ___________________ (be2) here for a long
+16. We ___________________ (move2) here in 1993 . We ___________________ (be2) here for a long
 time now.
 17. Two people ___________________ (die2) in a fire on Elm Street last night.
 18. It ___________________ (take3) ages to repair the car. I am glad we are finished now.
@@ -507,7 +507,7 @@ ___________________ (run3) even faster.
 14. Have you ever baked your own bread? –Yes I tried it when I was in high school but I have not baked
 anything since then.
 15. Janet was very ill three years ago.
-16. We moved here in 1993. We have been here for a long time now.
+16. We moved here in 1993 . We have been here for a long time now.
 17. Two people died in a fire on Elm Street last night.
 18. It took ages to repair the car. I am glad we are finished now.
 19. I have found the wallet I lost yesterday.
@@ -1221,12 +1221,12 @@ say a word and I did not say a word either.
 
 
 
-1. The train __________ (arrive3) at 12:30.
+1. The train __________ (arrive3) at 12:30
 3. It __________(snow3) in Brighton tomorrow evening.
 4. On Friday at 8 o’clock I __________ (meet1) my friend.
 5. Paul __________ (fly3) to London on Monday morning.
 6. Wait! I __________ (drive1) you to the station.
-7. The English lesson __________ (start3) at 8:45.
+7. The English lesson __________ (start3) at 8:45
 8. Are you still writing your essay? If you __________ (finish2) by 4pm, we can go for
 a walk.
 11.When they __________ (get2) married in March, they __________ (be2)
@@ -1265,12 +1265,12 @@ ticket machine.
 
 
 
-1. The train arrives at 12:30.
+1. The train arrives at 12:30
 3. It will snow in Brighton tomorrow evening.
 4. On Friday at 8 o’clock I am meeting my friend.
 5. Paul is flying to London on Monday morning.
 6. Wait! I will drive you to the station.
-7. The English lesson starts at 8:45.
+7. The English lesson starts at 8:45
 8. Are you still writing your essay? If you finish by 4pm, we can go for a walk.
 11.When they get married in March, they will have been together for six years.
 12.You are carrying too much. I will open the door for you.
@@ -1464,7 +1464,7 @@ redundant.
 1.He __ (drink3) milk out the carton when Mom walked into the kitchen.
 2.I __(work1) at the company for five years when I got the promotion.
 3.Martha __ (walk3) three miles a day before she broke her leg.
-4.The program that was terminated __(work3) well since 1945.
+4.The program that was terminated __(work3) well since 1945
 5.Cathy __ (play3) the piano for 35 years when she was finally asked to do a solo with the local orchestra.
 6.He __ (throw3) rocks at her window for five minutes before she finally came out on the balcony and said, “Hey, Romeo.”
 7. You __ (wait2) there for more than two hours when she finally arrived.
@@ -1483,7 +1483,7 @@ redundant.
 1.He had been drinking milk out the carton when Mom walked into the kitchen.
 2.I had been working at the company for five years when I got the promotion.
 3.Martha had been walking three miles a day before she broke her leg.
-4.The program that was terminated had been working well since 1945.
+4.The program that was terminated had been working well since 1945
 5.Cathy had been playing the piano for 35 years when she was finally asked to do a solo with the local orchestra.
 6.He had been throwing rocks at her window for five minutes before she finally came out on the balcony and said, “Hey, Romeo.”
 7. You had been waiting there for more than two hours when she finally arrived.
@@ -1677,7 +1677,7 @@ redundant.
 
 
 
-1.Let’s meet at the park tomorrow, I _ (walk1) with my dog from 9 to 9:30.
+1.Let’s meet at the park tomorrow, I _ (walk1) with my dog from 9 to 9:30
 1. Don’t call me after ten, I _ (sleep1)
 1. I _ (do1) my homework tonight
 1.I _ (not jog1) this evening because I’m sick
@@ -1688,7 +1688,7 @@ redundant.
 
 
 
-1.Let’s meet at the park tomorrow, I will be walking with my dog from 9 to 9:30.
+1.Let’s meet at the park tomorrow, I will be walking with my dog from 9 to 9:30
 1.Don’t call me after ten, I will be sleeping
 1.I will not be doing my homework tonight
 1.I will not be jogging this evening because I’m sick

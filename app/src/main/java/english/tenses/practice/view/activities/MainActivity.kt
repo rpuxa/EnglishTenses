@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.core.view.isVisible
 import androidx.lifecycle.observe
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import english.tenses.practice.BuildConfig
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
@@ -14,6 +16,9 @@ import english.tenses.practice.model.Tense
 import english.tenses.practice.view.views.BottomMenu
 import english.tenses.practice.viewModel
 import english.tenses.practice.viewmodel.MainViewModel
+import kotlinx.coroutines.runBlocking
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
 class MainActivity : BaseActivity() {
 
