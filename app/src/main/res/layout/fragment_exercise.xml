@@ -5,6 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <english.tenses.practice.view.views.WrappedDummyView
+        android:id="@+id/startTranslatePoint"
+        android:layout_width="@dimen/button3d_height"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/irregularVerbs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/irregularVerbs">
+    </english.tenses.practice.view.views.WrappedDummyView>
+
+
+    <english.tenses.practice.view.views.WrappedDummyView
+        android:id="@+id/endTranslatePoint"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="66dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/answers" />
+
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/sentence"
         android:layout_width="match_parent"
@@ -70,11 +94,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginBottom="66dp"
         app:button3dStyle="blue_borderless"
         app:button3dText="@string/irregular_verbs_table"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/startTranslatePoint"
         app:layout_constraintStart_toStartOf="parent" />
 
     <FrameLayout

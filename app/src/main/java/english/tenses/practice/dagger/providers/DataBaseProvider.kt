@@ -14,7 +14,7 @@ class DataBaseProvider {
 
     @Provides
     @Singleton
-    fun db(context: Context) = Room.databaseBuilder(context, DataBase::class.java, "database.db").build()
+    fun db(context: Context) = DataBase.create(context)
 
     @Provides
     fun learnedSentencesDao(db: DataBase) = db.learnedSentencesDao
@@ -26,6 +26,5 @@ class DataBaseProvider {
     fun achievement(db: DataBase) = db.achievementDao
 
     @Provides
-    @Singleton
-    fun complaintSender() = ComplaintSender()
+    fun translates(db: DataBase) = db.translatesDao
 }
