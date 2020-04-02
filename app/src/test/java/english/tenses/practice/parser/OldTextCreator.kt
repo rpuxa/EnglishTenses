@@ -50,7 +50,7 @@ fun main() {
                 sentence.answers.forEach {
                     text = text.replaceFirst(
                         "%s",
-                        "____ (${it.subject}${if (it.subject.isEmpty()) "" else " "}${it.infinitive}${it.person.c})"
+                        "____ (${it.infinitive}${it.person.c})"
                     )
                 }
                 if (text.last().isLetter()) {

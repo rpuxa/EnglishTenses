@@ -7,57 +7,34 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 object TextSource {
-
-    val textsString = File("output/texts.txt")
-        .inputStream()
-        .readBytes()
-        .toString(Charset.defaultCharset())
-    val testsString = File("output/tests.txt")
+    private val string = File("output/tests.txt")
         .inputStream()
         .readBytes()
         .toString(Charset.defaultCharset())
 
-    val regexTexts = Regex(
-        "(\\r\\n){4,}|(_+)|(\\((.+?)\\))|(\\.)|([,\\-“”?!:’])|(((?=[^.])[A-Za-z0-9])+)|(\\s+)",
-        RegexOption.DOT_MATCHES_ALL
-    )
-    val regexTests =
+    private val regex =
         Regex(
             "(\\r\\n){4,}|(_+)|(\\((.+?)\\))|(\\d+\\.)|([,\\-“”?!:’.])|(((?=[^.])[A-Za-z0-9])+)|(\\s+)",
             RegexOption.DOT_MATCHES_ALL
         )
 
-    val textsLexemes = regexTexts.findAll(textsString).mapNotNull {
+    private val lexemes = regex.findAll(string).mapNotNull {
         val values = it.groupValues
         when {
             values[1].isNotEmpty() -> NewText
             values[2].isNotEmpty() -> SpaceAnswer
             values[4].isNotEmpty() -> Answer(values[4])
-            values[5].isNotEmpty() -> Point
+            values[5].isNotEmpty() ->
+                NewSentence(values[5].substring(0, values[5].length - 1).toInt())
             values[6].isNotEmpty() -> PunctuationMark(values[6])
             values[7].isNotEmpty() -> Word(values[7])
             values[9].isNotEmpty() -> WhiteSpace
             else -> null
         }
     }
-
-    val testsLexemes = regexTests.findAll(testsString).mapNotNull {
-        val values = it.groupValues
-        when {
-            values[1].isNotEmpty() -> NewText
-            values[2].isNotEmpty() -> SpaceAnswer
-            values[4].isNotEmpty() -> Answer(values[4])
-            values[5].isNotEmpty() -> Point
-            values[6].isNotEmpty() -> PunctuationMark(values[6])
-            values[7].isNotEmpty() -> Word(values[7])
-            values[9].isNotEmpty() -> WhiteSpace
-            else -> null
-        }
-    }
-
-    val lexemes = testsLexemes + textsLexemes
 
     fun parse(): List<RawSentence> {
+        if ('@' in string || '#' in string) error("Reserved symbols!")
         val lexemesIterator = lexemes.iterator()
         fun take(): List<TextElement>? {
             val list = ArrayList<TextElement>()
@@ -76,8 +53,8 @@ object TextSource {
             val first = take() ?: break
             val second = take()!!
             val asterisks = determine(
-                first.filter { it is Word || it is SpaceAnswer || it is Point || it is NewText } + Point,
-                second.filter { it is Word || it is SpaceAnswer || it is Point || it is NewText } + Point
+                first.filter { it is Word || it is SpaceAnswer || it is NewSentence || it is NewText } + NewText,
+                second.filter { it is Word || it is SpaceAnswer || it is NewSentence || it is NewText } + NewText
             )?.iterator() ?: kotlin.run {
                 println(first.joinToString(" ") + "\n\n\n" + second.joinToString(" "))
                 error("Wrong determine")
@@ -125,13 +102,19 @@ object TextSource {
 
             val sentence = ArrayList<String>()
             val answers = ArrayList<RawAnswer>()
+            var currentId = -1
             textElements.forEach {
-                if (it is Point || it is NewText) {
+                if (it is NewSentence || it is NewText) {
                     if (sentence.isNotEmpty() && answers.isNotEmpty()) {
+                        require(currentId > 0)
                         sentences += RawSentence(
+                            currentId,
                             sentence.joinToString(""),
                             answers.clone() as ArrayList<RawAnswer>
                         )
+                    }
+                    if (it is NewSentence) {
+                        currentId = it.id
                     }
                     sentence.clear()
                     answers.clear()
@@ -184,18 +167,8 @@ object TextSource {
                     }
                 }
             }
-            val textElement = mask[j++]
-            val textElement1 = sequence[i++]
-            if (textElement != textElement1) {
-                if (textElement is Word && textElement1 is Word && textElement.text.equals(
-                        textElement1.text,
-                        true
-                    )
-                ) {
-                    System.err.println("EQUALS  $textElement  $textElement1")
-                }
+            if (mask[j++] != sequence[i++])
                 return null
-            }
         }
     }
 }
@@ -211,8 +184,8 @@ object SpaceAnswer : TextElement() {
 }
 
 object NewText : TextElement()
-object Point : TextElement() {
-    override fun toString() = "."
+data class NewSentence(val id: Int) : TextElement() {
+    override fun toString() = "$id."
 }
 
 data class Word(var text: String) : TextElement() {
@@ -235,13 +208,14 @@ class FullAnswer : TextElement() {
 }
 
 fun main() {
-    println( Tense.values().map {
-        TenseHandler.createWrongAnswer(
-            it,
-            "be",
-            "",
-            Person.IT
-        )
-    }.joinToString(", ")
+    println(
+        Tense.values().map {
+            TenseHandler.createWrongAnswer(
+                it,
+                "be",
+                "",
+                Person.IT
+            )
+        }.joinToString(", ")
     )
 }

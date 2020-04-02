@@ -12,6 +12,7 @@ import org.jetbrains.anko.toast
 import english.tenses.practice.R
 import english.tenses.practice.databinding.ActivityMainBinding
 import english.tenses.practice.databinding.TenseBottomMenuBinding
+import english.tenses.practice.model.RemoteSentenceLoader
 import english.tenses.practice.model.Tense
 import english.tenses.practice.view.views.BottomMenu
 import english.tenses.practice.viewModel

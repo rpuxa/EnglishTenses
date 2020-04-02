@@ -54,6 +54,7 @@ fun main() {
             }
 
             HandledSentence(
+                sentence.id,
                 sentence.text,
                 list
             )
