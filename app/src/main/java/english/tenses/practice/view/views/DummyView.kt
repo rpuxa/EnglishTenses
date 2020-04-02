@@ -38,12 +38,6 @@ class DummyView : View, ResizableView {
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        if (MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.EXACTLY) {
-            mWidth = MeasureSpec.getSize(widthMeasureSpec)
-        }
-        if (MeasureSpec.getMode(heightMeasureSpec) == MeasureSpec.EXACTLY) {
-            mHeight = MeasureSpec.getSize(heightMeasureSpec)
-        }
         setMeasuredDimension(mWidth, mHeight)
     }
 
