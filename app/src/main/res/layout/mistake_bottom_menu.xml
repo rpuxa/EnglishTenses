@@ -47,7 +47,7 @@
         android:id="@+id/complaint"
         android:layout_width="54dp"
         android:layout_height="0dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout3dColor="@color/colorRedButton"
         app:layout_constraintBottom_toBottomOf="@+id/showCorrectAnswers"
         app:layout_constraintEnd_toStartOf="@+id/showCorrectAnswers"

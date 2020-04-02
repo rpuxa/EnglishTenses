@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import english.tenses.practice.model.ComplaintSender
 import english.tenses.practice.model.db.DataBase
 import javax.inject.Singleton
 
@@ -23,4 +24,8 @@ class DataBaseProvider {
 
     @Provides
     fun achievement(db: DataBase) = db.achievementDao
+
+    @Provides
+    @Singleton
+    fun complaintSender() = ComplaintSender()
 }

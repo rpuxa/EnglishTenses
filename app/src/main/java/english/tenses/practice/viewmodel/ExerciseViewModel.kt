@@ -11,7 +11,8 @@ import javax.inject.Inject
 
 class ExerciseViewModel @Inject constructor(
     private val loader: SentenceLoader,
-    private val sentenceStatistic: SentenceStatistic
+    private val sentenceStatistic: SentenceStatistic,
+    private val complaintSender: ComplaintSender
 ) : ViewModel() {
 
 
@@ -190,7 +191,7 @@ class ExerciseViewModel @Inject constructor(
 
     fun sendComplaint() {
         val text = sentence.items.joinToString(" ")
-
+        complaintSender.send(text)
     }
 
     class TipMode(

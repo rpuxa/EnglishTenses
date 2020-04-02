@@ -11,7 +11,7 @@
         android:layout_width="57dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
-        android:visibility="gone"
+        android:visibility="visible"
         app:layout3dColor="@color/colorGreenButton"
         app:layout_constraintBottom_toBottomOf="@+id/next"
         app:layout_constraintEnd_toStartOf="@+id/next"
