@@ -71,8 +71,8 @@ class RemoteSentenceLoader(
 
     private fun CoroutineScope.update(newHash: String) = produce<Float>(capacity = Channel.UNLIMITED) {
         Log.d(TAG, "Updating...")
-        val total = 4f
-        var result = 0f
+        val total = 5f
+        var result = 1f
         suspend fun count() {
             val progress = ++result / total
             send(progress)

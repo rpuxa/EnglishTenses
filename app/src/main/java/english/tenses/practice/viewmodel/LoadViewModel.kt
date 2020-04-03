@@ -21,7 +21,7 @@ class LoadViewModel @Inject constructor(
 
     fun load() {
         if (prefs.sentencesHash.isEmpty())
-            _progress.value = 0f
+            _progress.value = 1 / 5f
         viewModelScope.launch {
             loader.load().collect {
                 _progress.value = it
