@@ -26,7 +26,7 @@ class Translator(
         loader?.cancel()
         val loader = GlobalScope.launch {
             try {
-                if (translatesDao.getRandom(language) != null) {
+                if (language == Language.ENGLISH || translatesDao.getRandom(language) != null) {
                     return@launch
                 }
                 updateTranslations(language, false)
@@ -42,7 +42,7 @@ class Translator(
         Log.d(TAG, "Updating $language")
         val translates = loadDataBase(language.code).toTranslateEntities(language)
         translatesDao.update(translates, clear)
-        Log.d(TAG, "Done!")
+        Log.d(TAG, "Done $language!")
     }
 
     private fun String.toTranslateEntities(language: Language): List<TranslateEntity> {

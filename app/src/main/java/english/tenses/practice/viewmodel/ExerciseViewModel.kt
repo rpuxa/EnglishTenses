@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import english.tenses.practice.SingleLiveEvent
 import english.tenses.practice.State
+import english.tenses.practice.model.db.Prefs
 import english.tenses.practice.model.db.entity.CorrectnessStatistic
 import english.tenses.practice.model.enums.*
 import english.tenses.practice.model.logic.ComplaintSender
@@ -21,7 +22,8 @@ class ExerciseViewModel @Inject constructor(
     private val loader: SentenceStatistic,
     private val sentenceStatistic: SentenceStatistic,
     private val complaintSender: ComplaintSender,
-    private val translator: Translator
+    private val translator: Translator,
+    private val prefs: Prefs
 ) : ViewModel() {
 
 
@@ -110,6 +112,9 @@ class ExerciseViewModel @Inject constructor(
 
         spacesStates.value = List(answers.size) { ExerciseFragment.SpaceState(it) }
     }
+
+    fun showTranslate(): Boolean = prefs.nativeLanguage != Language.ENGLISH.code
+
 
     fun getAnswerState(id: Int) = answerStates.map { it[id] }
 
@@ -232,7 +237,7 @@ class ExerciseViewModel @Inject constructor(
         if (translate.value != null) return
 
         viewModelScope.launch {
-            _translate.value = translator.translate(sentenceToString)
+            _translate.value = translator.translate(sentence.id)
         }
     }
 

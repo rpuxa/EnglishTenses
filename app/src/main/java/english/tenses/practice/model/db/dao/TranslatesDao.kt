@@ -1,13 +1,12 @@
 package english.tenses.practice.model.db.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.*
+import english.tenses.practice.model.db.TypeConverter
 import english.tenses.practice.model.db.entity.TranslateEntity
 import english.tenses.practice.model.enums.Language
 
 @Dao
+@TypeConverters(TypeConverter::class)
 abstract class TranslatesDao {
 
     @Query("SELECT * FROM translates WHERE language = :language")

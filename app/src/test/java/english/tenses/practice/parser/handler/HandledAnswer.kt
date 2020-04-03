@@ -1,5 +1,6 @@
 package english.tenses.practice.parser.handler
 
+import english.tenses.practice.model.enums.Person
 import english.tenses.practice.model.enums.Tense
 import english.tenses.practice.parser.raw.RawAnswer
 import java.io.Serializable

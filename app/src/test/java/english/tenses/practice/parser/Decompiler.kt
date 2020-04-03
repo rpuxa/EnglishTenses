@@ -1,3 +1,4 @@
+/*
 package english.tenses.practice.parser
 
 import english.tenses.practice.model.enums.Person
@@ -93,4 +94,4 @@ val Person.c
         Person.YOU -> 2
         Person.IT -> 3
         else -> error("")
-    }
+    }*/

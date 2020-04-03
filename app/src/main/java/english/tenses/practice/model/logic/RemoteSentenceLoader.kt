@@ -69,16 +69,16 @@ class RemoteSentenceLoader(
         }
     }
 
-    private fun CoroutineScope.update(newHash: String) = produce(capacity = Channel.UNLIMITED) {
+    private fun CoroutineScope.update(newHash: String) = produce<Float>(capacity = Channel.UNLIMITED) {
         Log.d(TAG, "Updating...")
-        send(1f)
         val total = 4f
-        var result = 1f
+        var result = 0f
         suspend fun count() {
             val progress = ++result / total
             send(progress)
             Log.d(TAG, "Progress $progress")
         }
+        count()
         val sentencesString = loadDataBase("sentences")
         count()
         translator.updateTranslations(Language[prefs.nativeLanguage], true)

@@ -22,14 +22,14 @@ fun main() {
             var text = sentence.text
             sentence.answers.forEach {
                 require("%s" in text)
-                text = text.replaceFirst("%s", it.simpleAnswer!!.infinitive)
+                text = text.replaceFirst("%s", it.simpleAnswer!!.forms.first())
             }
             text = text.first().toUpperCase() + text.substring(1)
 
             Language.values().forEach {
                 val dataOutputStream = translates[it]!!
                 dataOutputStream.writeInt(sentence.id)
-                dataOutputStream.writeUTF(text) // make translate
+                dataOutputStream.writeUTF("$it   $text") // make translate
             }
         }
     } finally {

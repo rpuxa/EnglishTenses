@@ -32,17 +32,17 @@ class MainProvider {
 
     @Provides
     @Singleton
-    fun remote(prefs: Prefs, sentencesDao: SentencesDao, translatesDao: TranslatesDao, answersDao: AnswersDao) =
+    fun remote(prefs: Prefs, sentencesDao: SentencesDao, translator: Translator, answersDao: AnswersDao) =
         RemoteSentenceLoader(
             prefs,
             sentencesDao,
-            translatesDao,
-            answersDao
+            answersDao,
+            translator
         )
 
     @Provides
     @Singleton
-    fun translator(
-    ) = Translator(
+    fun translator(prefs: Prefs, translatesDao: TranslatesDao) = Translator(
+        prefs, translatesDao
     )
 }

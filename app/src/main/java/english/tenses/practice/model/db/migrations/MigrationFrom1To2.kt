@@ -19,6 +19,5 @@ object MigrationFrom1To2 : Migration(1, 2) {
                 ")")
         database.execSQL("CREATE TABLE IF NOT EXISTS `translates` (`id` INTEGER NOT NULL PRIMARY KEY, `sentenceId` INTEGER NOT NULL, `language` TEXT NOT NULL, `text` TEXT NOT NULL)")
         database.execSQL("CREATE TABLE IF NOT EXISTS `learned_sentences2` (`id` INTEGER NOT NULL PRIMARY KEY)")
-        database.execSQL("CREATE TABLE IF NOT EXISTS `translates` (`sentence` TEXT NOT NULL PRIMARY KEY, `translate` TEXT NOT NULL)")
     }
 }

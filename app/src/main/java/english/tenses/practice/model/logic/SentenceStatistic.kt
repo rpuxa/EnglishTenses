@@ -106,7 +106,7 @@ class SentenceStatistic(
                 Word(it)
             }
         }
-        return Sentence(items)
+        return Sentence(sentence.sentence.id, items)
     }
 
 

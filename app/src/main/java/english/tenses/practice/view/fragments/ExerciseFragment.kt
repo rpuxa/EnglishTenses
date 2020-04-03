@@ -341,41 +341,46 @@ class ExerciseFragment : Fragment() {
             }
         }
 
-        binding.field.addView(translateView.root)
-        val translateFlyView = FlyView(translateView.root, translateView)
-        binding.startTranslatePoint.dummyView.apply {
-            val d = resources.getDimensionPixelSize(R.dimen.button3d_height)
-            width = d
-            height = d
-            requestLayout()
-        }
-        binding.endTranslatePoint.dummyView.apply {
-            updateParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.MATCH_PARENT
-            )
-            requestLayout()
-        }
-        binding.startTranslatePoint.dummyView.doOnLayout {
-            translateView.root.coordinates = binding.startTranslatePoint.dummyView.coordinates
-            translateFlyView.follow(binding.startTranslatePoint.dummyView)
-        }
-        translateView.onCollapseClick {
-            translateFlyView.follow(binding.startTranslatePoint.dummyView)
-            translateView.collapse()
-        }
-        translateView.onOpenClick {
-            viewModel.translate()
-            translateFlyView.follow(binding.endTranslatePoint.dummyView)
-            translateView.open()
-        }
-
-        viewModel.translate.observe(viewLifecycleOwner) {
-            if (it == null) {
-                translateView.error()
-            } else {
-                translateView.translate(it)
+        if (viewModel.showTranslate()) {
+            binding.field.addView(translateView.root)
+            val translateFlyView = FlyView(translateView.root, translateView)
+            binding.startTranslatePoint.dummyView.apply {
+                val d = resources.getDimensionPixelSize(R.dimen.button3d_height)
+                width = d
+                height = d
+                requestLayout()
             }
+            binding.endTranslatePoint.dummyView.apply {
+                updateParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+                requestLayout()
+            }
+            binding.startTranslatePoint.dummyView.doOnLayout {
+                translateView.root.coordinates = binding.startTranslatePoint.dummyView.coordinates
+                translateFlyView.follow(binding.startTranslatePoint.dummyView)
+            }
+            translateView.onCollapseClick {
+                translateFlyView.follow(binding.startTranslatePoint.dummyView)
+                translateView.collapse()
+            }
+            translateView.onOpenClick {
+                viewModel.translate()
+                translateFlyView.follow(binding.endTranslatePoint.dummyView)
+                translateView.open()
+            }
+
+            viewModel.translate.observe(viewLifecycleOwner) {
+                if (it == null) {
+                    translateView.error()
+                } else {
+                    translateView.translate(it)
+                }
+            }
+        } else {
+            binding.startTranslatePoint.isVisible = false
+            binding.endTranslatePoint.isVisible = false
         }
     }
 
