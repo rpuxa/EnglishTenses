@@ -1,6 +1,6 @@
 package english.tenses.practice.parser.compiler
 
-import english.tenses.practice.model.enums.Languages
+import english.tenses.practice.model.enums.Language
 import english.tenses.practice.parser.handler.HANDLED_FILE_NAME
 import english.tenses.practice.parser.handler.HandledSentence
 import java.io.*
@@ -39,7 +39,7 @@ fun main() {
             append("@#")
         }
         append("\",\n")
-        Languages.values().forEachIndexed { index, lang ->
+        Language.values().forEachIndexed { index, lang ->
             val name = "output/translates/${lang.code}"
             DataInputStream(FileInputStream(name)).use {
                 append("\"${lang.code}\" : \"")

@@ -40,7 +40,7 @@ abstract class ViewModelsProvider {
     @ViewModelKey(AchievementViewModel::class)
     abstract fun achievement(v: AchievementViewModel): ViewModel
 
-   @Binds
+    @Binds
     @IntoMap
     @ViewModelKey(RateViewModel::class)
     abstract fun rate(v: RateViewModel): ViewModel
@@ -49,4 +49,9 @@ abstract class ViewModelsProvider {
     @IntoMap
     @ViewModelKey(LoadViewModel::class)
     abstract fun load(v: LoadViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SettingsViewModel::class)
+    abstract fun settings(v: SettingsViewModel): ViewModel
 }

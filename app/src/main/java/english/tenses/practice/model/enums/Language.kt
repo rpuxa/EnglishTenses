@@ -1,10 +1,9 @@
 package english.tenses.practice.model.enums
 
-enum class Languages(val code: String) {
+enum class Language(val code: String) {
     GERMAN("de"),
     NORWEGIAN("no"),
     RUSSIAN("ru"),
-    BELARUSIAN("be"),
     FINNISH("fi"),
     PORTUGUESE("pt"),
     BULGARIAN("bg"),
@@ -13,12 +12,8 @@ enum class Languages(val code: String) {
     CROATIAN("hr"),
     FRENCH("fr"),
     HUNGARIAN("hu"),
-    ARMENIAN("hy"),
-    UKRAINIAN("uk"),
     SLOVAK("sk"),
     SLOVENIAN("sl"),
-    CATALAN("ca"),
-    MACEDONIAN("mk"),
     ALBANIAN("sq"),
     SERBIAN("sr"),
     SWEDISH("sv"),
@@ -28,7 +23,6 @@ enum class Languages(val code: String) {
     SPANISH("es"),
     ESTONIAN("et"),
     CZECH("cs"),
-    AZERBAIJANI("az"),
     POLISH("pl"),
     ROMANIAN("ro"),
     DANISH("da"),
@@ -38,5 +32,6 @@ enum class Languages(val code: String) {
 
     companion object {
         operator fun get(code: String) = values().first { it.code == code }
+        fun getOrNull(code: String) = values().find { it.code == code }
     }
 }

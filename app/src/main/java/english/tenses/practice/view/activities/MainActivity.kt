@@ -12,6 +12,7 @@ import english.tenses.practice.model.enums.Tense
 import english.tenses.practice.view.views.BottomMenu
 import english.tenses.practice.viewModel
 import english.tenses.practice.viewmodel.MainViewModel
+import english.tenses.practice.viewmodel.SettingsViewModel
 
 class MainActivity : BaseActivity() {
 
@@ -119,6 +120,10 @@ class MainActivity : BaseActivity() {
 
         binding.achievements.setOnClickListener {
             startActivity<AchievementsActivity>()
+        }
+
+        binding.settings.setOnClickListener {
+            startActivity<SettingsActivity>()
         }
     }
 

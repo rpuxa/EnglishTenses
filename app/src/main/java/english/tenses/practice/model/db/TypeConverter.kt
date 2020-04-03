@@ -1,7 +1,7 @@
 package english.tenses.practice.model.db
 
 import androidx.room.TypeConverter
-import english.tenses.practice.model.enums.Languages
+import english.tenses.practice.model.enums.Language
 import english.tenses.practice.model.enums.Person
 import english.tenses.practice.model.enums.Tense
 
@@ -20,8 +20,8 @@ class TypeConverter {
     fun Int.toTense() = Tense[this]
 
     @TypeConverter
-    fun Languages.toInt() = code
+    fun Language.toInt() = code
 
     @TypeConverter
-    fun String.toLanguages() = Languages[this]
+    fun String.toLanguages() = Language[this]
 }

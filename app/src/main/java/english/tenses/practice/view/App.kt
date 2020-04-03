@@ -16,6 +16,8 @@ import english.tenses.practice.model.db.entity.LearnedSentence2
 import english.tenses.practice.model.db.dao.LearnedSentencesDao2
 import english.tenses.practice.model.db.dao.LearnedSentencesDao
 import english.tenses.practice.model.db.dao.SentencesDao
+import english.tenses.practice.model.enums.Language
+import english.tenses.practice.model.logic.Translator
 import english.tenses.practice.toMask
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -24,21 +26,18 @@ class App : Application() {
 
     @Inject
     lateinit var prefs: Prefs
-
     @Inject
     lateinit var oldLearnedSentencesDao: LearnedSentencesDao
-
     @Inject
     lateinit var learnedSentencesDao: LearnedSentencesDao2
-
     @Inject
     lateinit var assetsLoader: AssetsLoader
-
     @Inject
     lateinit var sentenceStatistic: SentenceStatistic
-
     @Inject
     lateinit var sentencesDao: SentencesDao
+    @Inject
+    lateinit var translator: Translator
 
     override fun onCreate() {
         super.onCreate()
@@ -51,6 +50,7 @@ class App : Application() {
 
         migrateLearnedSentences()
         sentenceStatistic.load()
+        translator.load(Language[prefs.nativeLanguage])
         prefs.appOpens++
     }
 

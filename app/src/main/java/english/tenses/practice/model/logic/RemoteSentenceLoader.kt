@@ -9,6 +9,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.database.ktx.getValue
 import com.google.firebase.ktx.Firebase
+import english.tenses.practice.dataBaseFlow
+import english.tenses.practice.loadDataBase
 import english.tenses.practice.model.db.Prefs
 import english.tenses.practice.model.db.dao.AnswersDao
 import english.tenses.practice.model.db.dao.SentencesDao
@@ -16,9 +18,10 @@ import english.tenses.practice.model.db.dao.TranslatesDao
 import english.tenses.practice.model.db.entity.AnswerEntity
 import english.tenses.practice.model.db.entity.SentenceEntity
 import english.tenses.practice.model.db.entity.TranslateEntity
-import english.tenses.practice.model.enums.Languages
+import english.tenses.practice.model.enums.Language
 import english.tenses.practice.model.enums.Person
 import english.tenses.practice.model.enums.Tense
+import english.tenses.practice.nextString
 import english.tenses.practice.toMask
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
@@ -32,8 +35,8 @@ import kotlin.coroutines.suspendCoroutine
 class RemoteSentenceLoader(
     private val prefs: Prefs,
     private val sentencesDao: SentencesDao,
-    private val translatesDao: TranslatesDao,
-    private val answersDao: AnswersDao
+    private val answersDao: AnswersDao,
+    private val translator: Translator
 ) {
 
     fun load(): Flow<Float> {
@@ -68,9 +71,9 @@ class RemoteSentenceLoader(
 
     private fun CoroutineScope.update(newHash: String) = produce(capacity = Channel.UNLIMITED) {
         Log.d(TAG, "Updating...")
-        send(0f)
-        val total = Languages.values().size + 2f
-        var result = 0
+        send(1f)
+        val total = 4f
+        var result = 1f
         suspend fun count() {
             val progress = ++result / total
             send(progress)
@@ -78,34 +81,14 @@ class RemoteSentenceLoader(
         }
         val sentencesString = loadDataBase("sentences")
         count()
-        val translatesString = Languages.values().map {
-            val tmp = loadDataBase(it.code)
-            count()
-            tmp
-        }
+        translator.updateTranslations(Language[prefs.nativeLanguage], true)
+        count()
         val (sentences, answers) = sentencesString.parseSentences()
         sentencesDao.update(sentences)
         answersDao.update(answers)
-        translatesString.forEachIndexed { index, it ->
-            translatesDao.update(it.toTranslateEntities(Languages.values()[index]))
-        }
         prefs.sentencesHash = newHash
         count()
         Log.d(TAG, "Update done!")
-    }
-
-    private fun String.toTranslateEntities(language: Languages): List<TranslateEntity> {
-        val iterator = iterator()
-        val builder = StringBuilder()
-        val translates = ArrayList<TranslateEntity>()
-        while (iterator.hasNext()) {
-            val id = iterator.nextString(builder, '#').toInt()
-            val text = iterator.nextString(builder, '#')
-            translates += TranslateEntity(
-                id, language, text
-            )
-        }
-        return translates
     }
 
     private fun String.parseSentences(): Pair<List<SentenceEntity>, List<AnswerEntity>> {
@@ -142,48 +125,6 @@ class RemoteSentenceLoader(
 
         return sentences to answers
     }
-
-    private fun CharIterator.nextString(builder: StringBuilder, delimiter: Char): String {
-        while (hasNext()) {
-            val char = next()
-            if (char == delimiter)
-                break
-            builder.append(char)
-        }
-        val string = builder.toString()
-        builder.clear()
-        return string
-    }
-
-    private suspend fun loadDataBase(name: String): String {
-        return suspendCoroutine {
-            Firebase.database.getReference(name)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
-                        it.resumeWithException(p0.toException())
-                    }
-
-                    override fun onDataChange(p0: DataSnapshot) {
-                        it.resume(p0.getValue<String>()!!)
-                    }
-                })
-        }
-    }
-
-    private fun dataBaseFlow(name: String): Flow<String> =
-        callbackFlow {
-            Firebase.database.getReference(name)
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
-                        close(p0.toException())
-                    }
-
-                    override fun onDataChange(p0: DataSnapshot) {
-                        offer(p0.getValue<String>()!!)
-                    }
-                })
-            awaitClose()
-        }
 
     companion object {
         private const val TAG = "RemoteSentenceLoaderD"

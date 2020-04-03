@@ -1,6 +1,6 @@
 package english.tenses.practice.parser
 
-import english.tenses.practice.model.enums.Languages
+import english.tenses.practice.model.enums.Language
 import english.tenses.practice.parser.handler.HANDLED_FILE_NAME
 import english.tenses.practice.parser.handler.HandledSentence
 import java.io.DataOutputStream
@@ -13,7 +13,7 @@ fun main() {
         it.readObject() as List<HandledSentence>
     }
 
-    val translates = Languages.values()
+    val translates = Language.values()
         .map { it to DataOutputStream(FileOutputStream("output/translates/${it.code}")) }.toMap()
 
 
@@ -26,7 +26,7 @@ fun main() {
             }
             text = text.first().toUpperCase() + text.substring(1)
 
-            Languages.values().forEach {
+            Language.values().forEach {
                 val dataOutputStream = translates[it]!!
                 dataOutputStream.writeInt(sentence.id)
                 dataOutputStream.writeUTF(text) // make translate

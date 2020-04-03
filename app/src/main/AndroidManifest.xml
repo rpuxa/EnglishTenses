@@ -13,13 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".view.activities.SplashActivity" android:theme="@style/SplashTheme">
+        <activity
+            android:name=".view.activities.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity android:name=".view.activities.SettingsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteStatusBarTheme" />
         <activity
             android:name=".view.activities.AchievementsActivity"
             android:screenOrientation="portrait"
@@ -43,9 +50,7 @@
         <activity
             android:name=".view.activities.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteStatusBarTheme">
-
-        </activity>
+            android:theme="@style/WhiteStatusBarTheme" />
     </application>
 
 </manifest>

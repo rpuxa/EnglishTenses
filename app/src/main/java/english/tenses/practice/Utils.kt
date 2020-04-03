@@ -1,3 +1,5 @@
+@file:Suppress("EXPERIMENTAL_API_USAGE")
+
 package english.tenses.practice
 
 import android.content.res.Resources
@@ -22,11 +24,21 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.database.ktx.getValue
+import com.google.firebase.ktx.Firebase
 import english.tenses.practice.model.enums.Tense
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 import english.tenses.practice.viewmodel.ViewModelFactory
+import kotlinx.coroutines.flow.Flow
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 import kotlin.math.sqrt
 import kotlin.random.Random
 
@@ -224,4 +236,47 @@ fun <T> random(weights: List<Pair<T, Double>>): T {
         randomDouble < d
     }
     return weights[i].first
+}
+
+
+suspend fun loadDataBase(name: String): String {
+    return suspendCoroutine {
+        Firebase.database.getReference(name)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    it.resumeWithException(p0.toException())
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    it.resume(p0.getValue<String>()!!)
+                }
+            })
+    }
+}
+
+fun dataBaseFlow(name: String): Flow<String> =
+    callbackFlow {
+        Firebase.database.getReference(name)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    close(p0.toException())
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    offer(p0.getValue<String>()!!)
+                }
+            })
+        awaitClose()
+    }
+
+fun CharIterator.nextString(builder: StringBuilder, delimiter: Char): String {
+    while (hasNext()) {
+        val char = next()
+        if (char == delimiter)
+            break
+        builder.append(char)
+    }
+    val string = builder.toString()
+    builder.clear()
+    return string
 }
