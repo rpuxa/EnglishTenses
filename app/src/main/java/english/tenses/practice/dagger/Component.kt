@@ -9,6 +9,7 @@ import english.tenses.practice.dagger.providers.ViewModelsProvider
 import english.tenses.practice.model.Achievement
 import english.tenses.practice.model.SentenceStatistic
 import english.tenses.practice.view.App
+import english.tenses.practice.view.activities.SplashActivity
 import javax.inject.Singleton
 
 @Singleton
@@ -25,4 +26,5 @@ interface Component {
     fun inject(viewModelFactory: SentenceStatistic)
     fun inject(achievement: Achievement)
     fun inject(app: App)
+    fun inject(splashActivity: SplashActivity)
 }

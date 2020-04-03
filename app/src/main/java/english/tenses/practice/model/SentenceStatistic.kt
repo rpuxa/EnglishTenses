@@ -1,63 +1,67 @@
 package english.tenses.practice.model
 
+import english.tenses.practice.model.db.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import english.tenses.practice.model.db.CorrectnessStatistic
-import english.tenses.practice.model.db.CorrectnessStatisticDao
-import english.tenses.practice.model.db.LearnedSentenceEntity
-import english.tenses.practice.model.db.LearnedSentencesDao
 import english.tenses.practice.random
+import english.tenses.practice.toMask
 import kotlin.random.Random
 
 class SentenceStatistic(
-    private val learnedSentencesDao: LearnedSentencesDao,
-    private val correctnessStatisticDao: CorrectnessStatisticDao
+    private val learnedSentencesDao: LearnedSentencesDao2,
+    private val correctnessStatisticDao: CorrectnessStatisticDao,
+    private val sentencesDao: SentencesDao
 ) {
-    private var _learned: List<MutableSet<Int>>? = null
-
-    val learned: List<MutableSet<Int>>
-        get() = _learned ?: runBlocking { load() }
-
-    fun nextSentence(tenses: Set<Int>, sizes: List<Int>): SentencePointer {
-        val tense = random(tenses.map { it to sizes[it].toDouble() })
-        val learnedTense = learned[tense]
-        val size = sizes[tense]
-        val clear = learnedTense.size >= size
-        if (clear) {
-            learnedTense.clear()
+    private var _learned: HashSet<LearnedSentence2>? = null
+    private val learned: HashSet<LearnedSentence2>
+        get() {
+            if (_learned == null) {
+                load()
+            }
+            return _learned!!
         }
-        require(size > 0)
-        val randomIndex = Random.nextInt(size - learnedTense.size)
-        var index = 0
-        var result = -1
-        for (id in 0 until size) {
-            if (id !in learnedTense) {
-                if (index == randomIndex) {
-                    result = id
-                    break
-                } else {
-                    index++
-                }
+
+    suspend fun nextSentence(tenses: Set<Int>): Sentence {
+        val sizes = sentencesDao.sizes()
+        val tense = random(tenses.map { it to sizes[it].toDouble() })
+        val clear = learned.size >= sizes[tense]
+        val tenseMask = toMask(tense)
+        if (clear) {
+            learned.removeAll { it.tenseMask and tenseMask != 0 }
+        }
+        val learnedTense = HashSet<Int>()
+        learned.forEach {
+            if (it.tenseMask and tenseMask != 0) {
+                learnedTense += it.id
             }
         }
-        require(result != -1)
-        learned[tense] += result
+        val randomIndex = Random.nextInt(sizes[tense] - learnedTense.size)
+        val all = sentencesDao.getAllByTense(tenseMask)
+
+        var index = 0
+        val result = all.first { it !in learnedTense && randomIndex == index++ }
+        val sentence = sentencesDao.getById(result)
+        val learnedSentence2 = LearnedSentence2(
+            sentence.sentence.id,
+            sentence.sentence.tenseMask
+        )
         GlobalScope.launch {
             if (clear) {
                 learnedSentencesDao.clear(tense)
             }
-            learnedSentencesDao.insert(
-                LearnedSentenceEntity(
-                    result, tense
-                )
-            )
+            learnedSentencesDao.insert(learnedSentence2)
         }
-        return SentencePointer(tense, result)
+        learned.add(learnedSentence2)
+        return handle(sentence, tenses, sizes)
     }
 
-    fun handle(sentence: UnhandledSentence, tenses: Set<Int>, sizes: List<Int>): Sentence {
-        val text = sentence.text.split(' ').filter { it.isNotBlank() }.map { it.trim() }
+    private fun handle(
+        sentence: SentenceWithAnswers,
+        tenses: Set<Int>,
+        sizes: List<Int>
+    ): Sentence {
+        val text = sentence.sentence.text.split(' ').filter { it.isNotBlank() }.map { it.trim() }
         var index = 0
         val items = text.map {
             if (it == "%s") {
@@ -70,11 +74,22 @@ class SentenceStatistic(
                         if (unusedTenses.isEmpty()) break
                         val random = random(unusedTenses.map { it to sizes[it].toDouble() })
                         unusedTenses -= random
-                        wrongAnswers += answer.createWrongAnswer(Tense[random])
+                        wrongAnswers += TenseHandler.createWrongAnswer(
+                            Tense[random],
+                            answer.verb,
+                            answer.subject,
+                            answer.person
+                        )
                     }
-                    answer.toWordAnswer(wrongAnswers)
+                    WordAnswer(
+                        answer.infinitive,
+                        listOf(answer.correct),
+                        answer.tense,
+                        IrregularVerb.byFirst(answer.verb),
+                        wrongAnswers
+                    )
                 } else {
-                    Word(answer.forms.first())
+                    Word(answer.correct)
                 }
             } else {
                 Word(it)
@@ -84,16 +99,10 @@ class SentenceStatistic(
     }
 
 
-    suspend fun load(): List<MutableSet<Int>> {
-        val list = ArrayList<MutableSet<Int>>()
-        repeat(Tense.values().count()) {
-            list.add(HashSet())
+    fun load() {
+        _learned = runBlocking {
+            learnedSentencesDao.getAll().toHashSet()
         }
-        learnedSentencesDao.getAll().forEach {
-            list[it.tenseCode].add(it.id)
-        }
-        _learned = list
-        return list
     }
 
     fun addResult(result: List<CorrectnessStatistic>) {
@@ -109,12 +118,6 @@ class SentenceStatistic(
             }
         }
     }
-
-
-    data class SentencePointer(
-        val tenseCode: Int,
-        val id: Int
-    )
 
     companion object {
         const val WRONG_ANSWER_AMOUNT = 3

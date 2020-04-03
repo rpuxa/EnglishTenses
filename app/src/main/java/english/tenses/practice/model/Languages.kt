@@ -34,4 +34,9 @@ enum class Languages(val code: String) {
     DANISH("da"),
     TURKISH("tr"),
     DUTCH("nl")
+    ;
+
+    companion object {
+        operator fun get(code: String) = values().first { it.code == code }
+    }
 }

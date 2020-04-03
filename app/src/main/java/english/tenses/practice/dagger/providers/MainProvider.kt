@@ -4,8 +4,7 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import english.tenses.practice.model.*
-import english.tenses.practice.model.db.CorrectnessStatisticDao
-import english.tenses.practice.model.db.LearnedSentencesDao
+import english.tenses.practice.model.db.*
 import javax.inject.Singleton
 
 @Module
@@ -21,10 +20,15 @@ class MainProvider {
 
     @Singleton
     @Provides
-    fun sentenceLoader(context: Context, sentencesHandler: SentenceStatistic) = SentenceLoader(context, sentencesHandler)
+    fun assetLoader(context: Context) = AssetsLoader(context)
 
     @Singleton
     @Provides
-    fun sentenceStatistic(l: LearnedSentencesDao, c: CorrectnessStatisticDao) = SentenceStatistic(l, c)
+    fun sentenceStatistic(l: LearnedSentencesDao2, c: CorrectnessStatisticDao, s: SentencesDao) = SentenceStatistic(l, c, s)
+
+    @Singleton
+    @Provides
+    fun remote(prefs: Prefs, sentencesDao: SentencesDao, translatesDao: TranslatesDao, answersDao: AnswersDao) =
+        RemoteSentenceLoader(prefs, sentencesDao, translatesDao, answersDao)
 
 }

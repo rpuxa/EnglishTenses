@@ -25,5 +25,8 @@
     <color name="light_golden">#FFFAE1</color>
     <color name="background_mistake">#FF9696</color>
 
+    <color name="progressbar_light_progress">#1FD527</color>
+    <color name="progressbar_light_flare">#16E31C</color>
+
 
 </resources>

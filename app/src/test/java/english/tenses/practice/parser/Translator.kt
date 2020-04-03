@@ -18,16 +18,18 @@ fun main() {
 
 
     try {
-        list.forEach {
-            var text = it.text
-            it.answers.forEach {
+        list.forEach {sentence ->
+            var text = sentence.text
+            sentence.answers.forEach {
                 require("%s" in text)
                 text = text.replaceFirst("%s", it.simpleAnswer!!.infinitive)
             }
             text = text.first().toUpperCase() + text.substring(1)
 
             Languages.values().forEach {
-                translates[it]!!.writeUTF(text) // make translate
+                val dataOutputStream = translates[it]!!
+                dataOutputStream.writeInt(sentence.id)
+                dataOutputStream.writeUTF(text) // make translate
             }
         }
     } finally {

@@ -13,7 +13,7 @@ abstract class ViewModelsProvider {
     @Binds
     @IntoMap
     @ViewModelKey(ExerciseViewModel::class)
-    abstract fun load(v: ExerciseViewModel): ViewModel
+    abstract fun exercise(v: ExerciseViewModel): ViewModel
 
     @Binds
     @IntoMap
@@ -45,5 +45,8 @@ abstract class ViewModelsProvider {
     @ViewModelKey(RateViewModel::class)
     abstract fun rate(v: RateViewModel): ViewModel
 
-
+    @Binds
+    @IntoMap
+    @ViewModelKey(LoadViewModel::class)
+    abstract fun load(v: LoadViewModel): ViewModel
 }

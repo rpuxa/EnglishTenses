@@ -4,9 +4,7 @@ import english.tenses.practice.model.Person
 import english.tenses.practice.model.Tense
 import english.tenses.practice.model.UnhandledAnswer
 import english.tenses.practice.model.UnhandledSentence
-import java.io.DataInputStream
-import java.io.EOFException
-import java.io.FileInputStream
+import java.io.*
 import java.lang.Exception
 
 fun main() {
@@ -83,6 +81,10 @@ fun main() {
         }
     }
 
+    ObjectOutputStream(FileOutputStream("output/compiler/NewIds")).use {
+        val array = oldIds.map { it.toIntArray() }.toTypedArray()
+        it.writeObject(array)
+    }
 
 }
 

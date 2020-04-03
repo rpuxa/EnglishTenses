@@ -1,5 +1,6 @@
 package english.tenses.practice.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import english.tenses.practice.SingleLiveEvent
 import english.tenses.practice.State
@@ -7,10 +8,12 @@ import english.tenses.practice.model.*
 import english.tenses.practice.model.db.CorrectnessStatistic
 import english.tenses.practice.update
 import english.tenses.practice.view.fragments.ExerciseFragment
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
+import kotlin.system.measureTimeMillis
 
 class ExerciseViewModel @Inject constructor(
-    private val loader: SentenceLoader,
+    private val loader: SentenceStatistic,
     private val sentenceStatistic: SentenceStatistic,
     private val complaintSender: ComplaintSender
 ) : ViewModel() {
@@ -71,7 +74,13 @@ class ExerciseViewModel @Inject constructor(
 
     fun load(set: Set<Int>, tipsEnabled: Boolean) {
         this.tipsEnabled = tipsEnabled
-        sentence = testSentence ?: loader.load(set)
+        sentence = testSentence ?: runBlocking {
+            val start = System.currentTimeMillis()
+            val result= loader.nextSentence(set)
+            Log.d("LoadingSentenceTime", (System.currentTimeMillis() - start).toString())
+            result
+        }
+
         val answers = sentence.answers
         shuffledAnswers = answers.flatMap {
             (it.wrongVariants + it.correctForm).shuffled()

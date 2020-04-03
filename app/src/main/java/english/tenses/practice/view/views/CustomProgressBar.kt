@@ -27,9 +27,12 @@ class CustomProgressBar : View {
         }
     }
 
-    private val backgroundColor = ContextCompat.getColor(context, R.color.progressbar_background)
-    private val progressColor = ContextCompat.getColor(context, R.color.progressbar_progress)
-    private val flareColor = ContextCompat.getColor(context, R.color.progressbar_flare)
+    var animationDuration = 1000L
+    var light = false
+
+    private val backgroundColor = ContextCompat.getColor(context,  R.color.progressbar_background)
+    private val progressColor = ContextCompat.getColor(context, if (light) R.color.progressbar_light_progress else R.color.progressbar_progress)
+    private val flareColor = ContextCompat.getColor(context, if (light) R.color.progressbar_light_flare else R.color.progressbar_flare)
 
     private val paint = Paint()
     override fun onDraw(canvas: Canvas) {
@@ -71,7 +74,7 @@ class CustomProgressBar : View {
         animator?.cancel()
         animator = ObjectAnimator.ofFloat(progress, needed)
             .apply {
-                duration = 1000L
+                duration = animationDuration
                 interpolator = DecelerateInterpolator()
                 addUpdateListener {
                     progress = it.animatedValue as Float

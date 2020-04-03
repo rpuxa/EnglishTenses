@@ -14,4 +14,7 @@ interface LearnedSentencesDao {
 
     @Query("DELETE FROM learned_sentences WHERE tenseCode = :tense")
     suspend fun clear(tense: Int)
+
+    @Query("DELETE FROM learned_sentences")
+    suspend fun clearAll()
 }

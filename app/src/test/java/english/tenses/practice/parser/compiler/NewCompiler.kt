@@ -16,22 +16,28 @@ fun main() {
         append("{\n")
         append("\"sentences\" : \"")
         list.forEach { sentence ->
+            append(sentence.id)
+            append("#")
             append(sentence.text)
             append("#")
-            sentence.answers.joinToString("@") {
-                append(it.simpleAnswer!!.infinitive)
-                append("#")
-                append(it.simpleAnswer!!.forms.first())
-                append("#")
-                append(it.tense.code.toString(16))
-                append("#")
-                append(it.verb)
-                append("#")
-                append(it.subject ?: "")
-                append("#")
-                append(it.person.code)
-            }
-            append("@")
+            append(
+                sentence.answers.joinToString("@") {
+                    buildString {
+                        append(it.simpleAnswer!!.infinitive)
+                        append("#")
+                        append(it.simpleAnswer!!.forms.first())
+                        append("#")
+                        append(it.tense.code.toString(16))
+                        append("#")
+                        append(it.verb)
+                        append("#")
+                        append(it.subject ?: "")
+                        append("#")
+                        append(it.person.code)
+                    }
+                }
+            )
+            append("@#")
         }
         append("\",\n")
         Languages.values().forEachIndexed { index, lang ->
@@ -41,11 +47,11 @@ fun main() {
                 val list = ArrayList<String>()
                 try {
                     while (true) {
-                        list += it.readUTF()
+                        list += "${it.readInt()}#${it.readUTF()}#"
                     }
                 } catch (e: EOFException) {
                 }
-                append(list.joinToString("#"))
+                append(list.joinToString(""))
                 append('"')
                 append(',')
                 append('\n')

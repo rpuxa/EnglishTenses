@@ -22,6 +22,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
+import english.tenses.practice.model.Tense
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
@@ -201,6 +202,16 @@ fun View.updateParams(width: Int? = null, height: Int? = null) {
             this.height = height
     }
 }
+
+fun Iterable<Tense>.toMask(): Int {
+    var mask = 0
+    forEach {
+        mask = mask or (1 shl it.code)
+    }
+    return mask
+}
+
+fun toMask(i: Int) = 1 shl i
 
 
 fun <T> random(weights: List<Pair<T, Double>>): T {
