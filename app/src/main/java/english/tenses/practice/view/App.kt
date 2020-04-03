@@ -26,16 +26,22 @@ class App : Application() {
 
     @Inject
     lateinit var prefs: Prefs
+
     @Inject
     lateinit var oldLearnedSentencesDao: LearnedSentencesDao
+
     @Inject
     lateinit var learnedSentencesDao: LearnedSentencesDao2
+
     @Inject
     lateinit var assetsLoader: AssetsLoader
+
     @Inject
     lateinit var sentenceStatistic: SentenceStatistic
+
     @Inject
     lateinit var sentencesDao: SentencesDao
+
     @Inject
     lateinit var translator: Translator
 
@@ -56,16 +62,19 @@ class App : Application() {
 
     private fun migrateLearnedSentences() {
         runBlocking {
+            val all = oldLearnedSentencesDao.getAll()
+            if (all.isEmpty()) return@runBlocking
             val map = SparseIntArray()
-            oldLearnedSentencesDao.getAll().forEach {
+            all.forEach {
                 val id = assetsLoader.newIds[it.tenseCode][it.id]
                 map[id] = map[id] or toMask(it.tenseCode)
             }
             val list = ArrayList<LearnedSentence2>()
-            map.forEach { key, value -> list += LearnedSentence2(
-                key,
-                value
-            )
+            map.forEach { key, value ->
+                list += LearnedSentence2(
+                    key,
+                    value
+                )
             }
             learnedSentencesDao.insert(list)
             oldLearnedSentencesDao.clearAll()

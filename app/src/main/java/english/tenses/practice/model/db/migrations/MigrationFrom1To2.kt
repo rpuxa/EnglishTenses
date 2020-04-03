@@ -6,7 +6,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 object MigrationFrom1To2 : Migration(1, 2) {
 
     override fun migrate(database: SupportSQLiteDatabase) {
-        database.execSQL("CREATE TABLE IF NOT EXISTS `sentences` (`id` INTEGER NOT NULL PRIMARY KEY, `text` TEXT NOT NULL)")
+        database.execSQL("CREATE TABLE IF NOT EXISTS `sentences` (`id` INTEGER NOT NULL PRIMARY KEY, `text` TEXT NOT NULL, `tenseMask` INTEGER NOT NULL)")
         database.execSQL("CREATE TABLE IF NOT EXISTS `answers` (" +
                 "`id` INTEGER NOT NULL PRIMARY KEY," +
                 "`sentenceId` INTEGER NOT NULL," +
@@ -18,6 +18,6 @@ object MigrationFrom1To2 : Migration(1, 2) {
                 "`person` INTEGER NOT NULL" +
                 ")")
         database.execSQL("CREATE TABLE IF NOT EXISTS `translates` (`id` INTEGER NOT NULL PRIMARY KEY, `sentenceId` INTEGER NOT NULL, `language` TEXT NOT NULL, `text` TEXT NOT NULL)")
-        database.execSQL("CREATE TABLE IF NOT EXISTS `learned_sentences2` (`id` INTEGER NOT NULL PRIMARY KEY)")
+        database.execSQL("CREATE TABLE IF NOT EXISTS `learned_sentences2` (`id` INTEGER NOT NULL PRIMARY KEY, `tenseMask` INTEGER NOT NULL)")
     }
 }
