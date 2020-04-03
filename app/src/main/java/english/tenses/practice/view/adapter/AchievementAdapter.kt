@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import english.tenses.practice.databinding.ItemAchievementBinding
-import english.tenses.practice.model.Achievement
+import english.tenses.practice.model.enums.Achievement
 
 class AchievementAdapter : BaseAdapter<Achievement, ItemAchievementBinding>() {
 

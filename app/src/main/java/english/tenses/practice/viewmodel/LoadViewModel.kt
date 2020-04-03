@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import english.tenses.practice.model.Prefs
-import english.tenses.practice.model.RemoteSentenceLoader
+import english.tenses.practice.model.db.Prefs
+import english.tenses.practice.model.logic.RemoteSentenceLoader
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject

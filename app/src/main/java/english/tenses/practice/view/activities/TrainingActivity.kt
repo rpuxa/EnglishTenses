@@ -2,7 +2,7 @@ package english.tenses.practice.view.activities
 
 import android.os.Bundle
 import english.tenses.practice.databinding.ActivityTrainingBinding
-import english.tenses.practice.model.ExerciseResult
+import english.tenses.practice.model.pojo.ExerciseResult
 
 
 class TrainingActivity : ExerciseActivity(true) {

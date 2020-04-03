@@ -1,11 +1,10 @@
 package english.tenses.practice.parser
 
-import english.tenses.practice.model.Person
-import english.tenses.practice.model.Tense
+import english.tenses.practice.model.enums.Person
+import english.tenses.practice.model.enums.Tense
 import english.tenses.practice.model.UnhandledAnswer
 import english.tenses.practice.model.UnhandledSentence
 import java.io.*
-import java.lang.Exception
 
 fun main() {
     val sentences = ArrayList<UnhandledSentence>()

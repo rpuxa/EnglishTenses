@@ -1,6 +1,8 @@
 package english.tenses.practice.parser.raw
 
-import english.tenses.practice.model.*
+import english.tenses.practice.model.enums.Person
+import english.tenses.practice.model.enums.Tense
+import english.tenses.practice.model.logic.TenseHandler
 import java.io.File
 import java.nio.charset.Charset
 import java.util.*

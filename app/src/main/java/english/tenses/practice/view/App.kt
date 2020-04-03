@@ -9,14 +9,13 @@ import com.chibatching.kotpref.Kotpref
 import english.tenses.practice.dagger.Component
 import english.tenses.practice.dagger.DaggerComponent
 import english.tenses.practice.dagger.providers.ContextProvider
-import english.tenses.practice.model.AnswersDao
-import english.tenses.practice.model.AssetsLoader
-import english.tenses.practice.model.Prefs
-import english.tenses.practice.model.SentenceStatistic
-import english.tenses.practice.model.db.LearnedSentence2
-import english.tenses.practice.model.db.LearnedSentencesDao2
-import english.tenses.practice.model.db.LearnedSentencesDao
-import english.tenses.practice.model.db.SentencesDao
+import english.tenses.practice.model.logic.AssetsLoader
+import english.tenses.practice.model.db.Prefs
+import english.tenses.practice.model.logic.SentenceStatistic
+import english.tenses.practice.model.db.entity.LearnedSentence2
+import english.tenses.practice.model.db.dao.LearnedSentencesDao2
+import english.tenses.practice.model.db.dao.LearnedSentencesDao
+import english.tenses.practice.model.db.dao.SentencesDao
 import english.tenses.practice.toMask
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
@@ -63,7 +62,11 @@ class App : Application() {
                 map[id] = map[id] or toMask(it.tenseCode)
             }
             val list = ArrayList<LearnedSentence2>()
-            map.forEach { key, value -> list += LearnedSentence2(key, value) }
+            map.forEach { key, value -> list += LearnedSentence2(
+                key,
+                value
+            )
+            }
             learnedSentencesDao.insert(list)
             oldLearnedSentencesDao.clearAll()
         }

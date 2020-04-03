@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import english.tenses.practice.SingleLiveEvent
-import english.tenses.practice.model.*
-import english.tenses.practice.model.db.AchievementDao
+import english.tenses.practice.model.db.dao.AchievementDao
+import english.tenses.practice.model.enums.*
 import javax.inject.Inject
 
 class AchievementViewModel @Inject constructor(

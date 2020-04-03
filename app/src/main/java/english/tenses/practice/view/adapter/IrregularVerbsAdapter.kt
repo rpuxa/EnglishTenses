@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import english.tenses.practice.databinding.ItemIrregularVerbBinding
-import english.tenses.practice.model.IrregularVerb
+import english.tenses.practice.model.enums.IrregularVerb
 
 class IrregularVerbsAdapter : BaseAdapter<IrregularVerb, ItemIrregularVerbBinding>() {
 

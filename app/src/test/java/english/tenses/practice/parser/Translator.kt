@@ -1,6 +1,6 @@
 package english.tenses.practice.parser
 
-import english.tenses.practice.model.Languages
+import english.tenses.practice.model.enums.Languages
 import english.tenses.practice.parser.handler.HANDLED_FILE_NAME
 import english.tenses.practice.parser.handler.HandledSentence
 import java.io.DataOutputStream

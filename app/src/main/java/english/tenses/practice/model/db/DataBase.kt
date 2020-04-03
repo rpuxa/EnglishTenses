@@ -4,21 +4,19 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+import english.tenses.practice.model.db.dao.*
+import english.tenses.practice.model.db.entity.*
 import english.tenses.practice.model.db.migrations.MigrationFrom1To2
 
 @Database(
     entities = [
         LearnedSentenceEntity::class,
         CorrectnessStatistic::class,
-        AchievementEntity::class,
         SentenceEntity::class,
         AnswerEntity::class,
         TranslateEntity::class,
         LearnedSentence2::class,
-        AchievementEntity::class,
-        TranslateEntity::class
+        AchievementEntity::class
     ],
     version = 2
 )
@@ -30,7 +28,6 @@ abstract class DataBase : RoomDatabase() {
     abstract val translatesDao: TranslatesDao
     abstract val answersDao: AnswersDao
     abstract val learnedSentencesDao2: LearnedSentencesDao2
-    abstract val translatesDao: TranslateDao
 
     companion object {
         fun create(context: Context) =

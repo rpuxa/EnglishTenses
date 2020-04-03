@@ -1,7 +1,7 @@
 package english.tenses.practice.viewmodel
 
 import androidx.lifecycle.ViewModel
-import english.tenses.practice.model.Prefs
+import english.tenses.practice.model.db.Prefs
 import javax.inject.Inject
 
 class RateViewModel @Inject constructor(

@@ -1,9 +1,9 @@
 package english.tenses.practice.parser.handler
 
 import kotlinx.coroutines.CancellationException
-import english.tenses.practice.model.IrregularVerb
-import english.tenses.practice.model.Person
-import english.tenses.practice.model.Tense
+import english.tenses.practice.model.enums.IrregularVerb
+import english.tenses.practice.model.enums.Person
+import english.tenses.practice.model.enums.Tense
 import english.tenses.practice.parser.*
 import english.tenses.practice.parser.raw.RAW_FILE_NAMES
 import english.tenses.practice.parser.raw.RawSentence

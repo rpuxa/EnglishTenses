@@ -29,7 +29,8 @@ import english.tenses.practice.*
 import english.tenses.practice.databinding.BottomMenuCorrectBinding
 import english.tenses.practice.databinding.FragmentExerciseBinding
 import english.tenses.practice.databinding.MistakeBottomMenuBinding
-import english.tenses.practice.model.*
+import english.tenses.practice.model.enums.*
+import english.tenses.practice.model.pojo.ExerciseResult
 import english.tenses.practice.view.activities.ExerciseActivity
 import english.tenses.practice.view.activities.IrregularVerbsActivity
 import english.tenses.practice.view.views.*

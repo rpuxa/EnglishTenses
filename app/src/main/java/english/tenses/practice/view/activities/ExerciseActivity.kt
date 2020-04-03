@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import english.tenses.practice.R
-import english.tenses.practice.model.ExerciseResult
+import english.tenses.practice.model.pojo.ExerciseResult
 import english.tenses.practice.view.fragments.ExerciseFragment
 
 abstract class ExerciseActivity(private val tipMode: Boolean) : BaseActivity() {

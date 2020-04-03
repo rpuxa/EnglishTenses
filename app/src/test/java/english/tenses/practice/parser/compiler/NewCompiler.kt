@@ -1,11 +1,10 @@
 package english.tenses.practice.parser.compiler
 
-import english.tenses.practice.model.Languages
+import english.tenses.practice.model.enums.Languages
 import english.tenses.practice.parser.handler.HANDLED_FILE_NAME
 import english.tenses.practice.parser.handler.HandledSentence
 import java.io.*
 import java.security.MessageDigest
-import kotlin.experimental.and
 
 fun main() {
     val list = ObjectInputStream(FileInputStream(HANDLED_FILE_NAME)).use {

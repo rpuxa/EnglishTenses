@@ -1,9 +1,9 @@
 package english.tenses.practice.model.db
 
 import androidx.room.TypeConverter
-import english.tenses.practice.model.Languages
-import english.tenses.practice.model.Person
-import english.tenses.practice.model.Tense
+import english.tenses.practice.model.enums.Languages
+import english.tenses.practice.model.enums.Person
+import english.tenses.practice.model.enums.Tense
 
 class TypeConverter {
 

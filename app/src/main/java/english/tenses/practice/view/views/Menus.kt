@@ -3,7 +3,7 @@ package english.tenses.practice.view.views
 import android.app.Activity
 import english.tenses.practice.R
 import english.tenses.practice.databinding.BottomMenuTipBinding
-import english.tenses.practice.model.Tense
+import english.tenses.practice.model.enums.Tense
 
 object Menus {
 

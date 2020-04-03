@@ -4,13 +4,16 @@ import android.util.Log
 import androidx.lifecycle.*
 import english.tenses.practice.SingleLiveEvent
 import english.tenses.practice.State
-import english.tenses.practice.model.*
-import english.tenses.practice.model.db.CorrectnessStatistic
+import english.tenses.practice.model.db.entity.CorrectnessStatistic
+import english.tenses.practice.model.enums.*
+import english.tenses.practice.model.logic.ComplaintSender
+import english.tenses.practice.model.logic.SentenceStatistic
+import english.tenses.practice.model.logic.Translator
+import english.tenses.practice.model.pojo.ExerciseResult
+import english.tenses.practice.model.pojo.Sentence
 import english.tenses.practice.update
 import english.tenses.practice.view.fragments.ExerciseFragment
 import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -53,14 +56,21 @@ class ExerciseViewModel @Inject constructor(
 
             if (_tipMode.value != TIP_MODE_OFF && _tipMode.value.spaceIndex == spaceId) {
                 return if (rightAnswers[spaceId] == shuffledAnswers[answerId]) {
-                    answerStates.update { this[answerId] = Result(correct = true, block = true) }
+                    answerStates.update { this[answerId] =
+                        Result(
+                            correct = true,
+                            block = true
+                        )
+                    }
                     _tipMode.value = TIP_MODE_OFF
                     if (spacesStates.value!!.all { it.spaceId == spaceId || !it.empty && answerStates.value!![it.answerId].right }) {
                         setResult(sentence.answers, emptyList())
                     }
                     true
                 } else {
-                    answerStates.update { this[answerId] = WrongSignal }
+                    answerStates.update { this[answerId] =
+                        WrongSignal
+                    }
                     false
                 }
             }
@@ -123,15 +133,16 @@ class ExerciseViewModel @Inject constructor(
                 if (it.empty) {
                     incorrect += answer
                 } else {
-                    this[it.answerId] = Result(
-                        if (rightAnswers[it.spaceId] == it.text) {
-                            correct += answer
-                            true
-                        } else {
-                            incorrect += answer
-                            false
-                        }
-                    )
+                    this[it.answerId] =
+                        Result(
+                            if (rightAnswers[it.spaceId] == it.text) {
+                                correct += answer
+                                true
+                            } else {
+                                incorrect += answer
+                                false
+                            }
+                        )
                 }
             }
             forEach { it.block = true }
@@ -159,7 +170,10 @@ class ExerciseViewModel @Inject constructor(
                     this[it] = None(true)
                 } else {
                     rightAnswersIndexes += it
-                    this[it] = Result(true, block = true)
+                    this[it] = Result(
+                        true,
+                        block = true
+                    )
                 }
             }
         }
@@ -178,18 +192,23 @@ class ExerciseViewModel @Inject constructor(
             fun add(list: List<WordAnswer>, correct: Boolean) {
                 list.forEach {
                     val statistic =
-                        correctness[it.tense] ?: CorrectnessStatistic(it.tense.code, 0, 0)
+                        correctness[it.tense] ?: CorrectnessStatistic(
+                            it.tense.code,
+                            0,
+                            0
+                        )
                     statistic.addResult(correct)
                     correctness[it.tense] = statistic
                 }
             }
             add(correct, true)
             add(incorrect, false)
-            val exerciseResult = ExerciseResult(
-                correctness.values.toList(),
-                incorrect.isEmpty(),
-                System.currentTimeMillis() - startTime
-            )
+            val exerciseResult =
+                ExerciseResult(
+                    correctness.values.toList(),
+                    incorrect.isEmpty(),
+                    System.currentTimeMillis() - startTime
+                )
 
             sentenceStatistic.addResult(exerciseResult.result)
             result.value = exerciseResult

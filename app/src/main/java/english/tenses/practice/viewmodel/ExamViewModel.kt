@@ -2,10 +2,9 @@ package english.tenses.practice.viewmodel
 
 import androidx.lifecycle.ViewModel
 import english.tenses.practice.State
-import english.tenses.practice.model.ExamResult
-import english.tenses.practice.model.ExerciseResult
-import english.tenses.practice.model.SentenceStatistic
-import english.tenses.practice.model.db.CorrectnessStatistic
+import english.tenses.practice.model.pojo.ExamResult
+import english.tenses.practice.model.pojo.ExerciseResult
+import english.tenses.practice.model.db.entity.CorrectnessStatistic
 import java.text.DecimalFormat
 import javax.inject.Inject
 import kotlin.math.roundToInt
@@ -23,7 +22,11 @@ class ExamViewModel @Inject constructor(
         consumedTime += result.time
         exerciseNumber++
         result.result.forEach {
-            val s = correctness[it.tenseCode] ?: CorrectnessStatistic(it.tenseCode, 0, 0)
+            val s = correctness[it.tenseCode] ?: CorrectnessStatistic(
+                it.tenseCode,
+                0,
+                0
+            )
             s += it
             correctness[it.tenseCode] = s
         }

@@ -3,7 +3,7 @@ package english.tenses.practice.view.activities
 import android.os.Bundle
 import android.util.Log
 import english.tenses.practice.databinding.ActivityExamBinding
-import english.tenses.practice.model.ExerciseResult
+import english.tenses.practice.model.pojo.ExerciseResult
 import english.tenses.practice.view.fragments.ExamResultFragment
 import english.tenses.practice.view.fragments.StartTestFragment
 import english.tenses.practice.viewModel

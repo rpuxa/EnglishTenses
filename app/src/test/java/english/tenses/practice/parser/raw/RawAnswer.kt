@@ -1,6 +1,6 @@
 package english.tenses.practice.parser.raw
 
-import english.tenses.practice.model.Person
+import english.tenses.practice.model.enums.Person
 import java.io.Serializable
 
 data class RawAnswer(

@@ -1,8 +1,8 @@
 package english.tenses.practice.parser.editor
 
-import english.tenses.practice.model.Person
-import english.tenses.practice.model.Tense
-import english.tenses.practice.model.TenseHandler
+import english.tenses.practice.model.enums.Person
+import english.tenses.practice.model.enums.Tense
+import english.tenses.practice.model.logic.TenseHandler
 import english.tenses.practice.parser.allWords
 import english.tenses.practice.parser.handler.HANDLED_FILE_NAME
 import english.tenses.practice.parser.handler.HandledSentence

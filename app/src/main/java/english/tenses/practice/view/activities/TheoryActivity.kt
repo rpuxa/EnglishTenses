@@ -3,8 +3,8 @@ package english.tenses.practice.view.activities
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import english.tenses.practice.databinding.ActivityTheoryBinding
-import english.tenses.practice.model.Tense
-import english.tenses.practice.model.Theory
+import english.tenses.practice.model.enums.Tense
+import english.tenses.practice.model.enums.Theory
 import english.tenses.practice.onMeasured
 import english.tenses.practice.view.adapter.TheoryAdapter
 

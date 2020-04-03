@@ -5,9 +5,9 @@ import android.widget.TextView
 import english.tenses.practice.databinding.ItemExampleBinding
 import english.tenses.practice.databinding.ItemTextBinding
 import english.tenses.practice.databinding.ItemUsageBinding
-import english.tenses.practice.model.Example
-import english.tenses.practice.model.Text
-import english.tenses.practice.model.Usage
+import english.tenses.practice.model.enums.Example
+import english.tenses.practice.model.enums.Text
+import english.tenses.practice.model.enums.Usage
 
 class TheoryAdapter : BaseMultiItemAdapter2() {
 

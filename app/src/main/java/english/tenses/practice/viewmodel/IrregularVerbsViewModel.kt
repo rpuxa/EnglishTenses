@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 import english.tenses.practice.State
-import english.tenses.practice.model.IrregularVerb
+import english.tenses.practice.model.enums.IrregularVerb
 import javax.inject.Inject
 
 class IrregularVerbsViewModel @Inject constructor(

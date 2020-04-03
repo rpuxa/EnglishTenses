@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import org.jetbrains.anko.support.v4.act
 import english.tenses.practice.R
 import english.tenses.practice.databinding.FragmentExamResultBinding
-import english.tenses.practice.model.ExamResult
+import english.tenses.practice.model.pojo.ExamResult
 
 class ExamResultFragment : Fragment() {
 
@@ -18,7 +18,8 @@ class ExamResultFragment : Fragment() {
         FragmentExamResultBinding.inflate(layoutInflater)
     }
     private val result by lazy {
-        arguments?.get(EXAM_RESULT) as? ExamResult ?: error("Exam result needed")
+        arguments?.get(EXAM_RESULT) as? ExamResult
+            ?: error("Exam result needed")
     }
 
     override fun onCreateView(

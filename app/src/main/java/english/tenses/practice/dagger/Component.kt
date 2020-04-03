@@ -6,8 +6,8 @@ import english.tenses.practice.dagger.providers.ContextProvider
 import english.tenses.practice.dagger.providers.DataBaseProvider
 import english.tenses.practice.dagger.providers.MainProvider
 import english.tenses.practice.dagger.providers.ViewModelsProvider
-import english.tenses.practice.model.Achievement
-import english.tenses.practice.model.SentenceStatistic
+import english.tenses.practice.model.enums.Achievement
+import english.tenses.practice.model.logic.SentenceStatistic
 import english.tenses.practice.view.App
 import english.tenses.practice.view.activities.SplashActivity
 import javax.inject.Singleton

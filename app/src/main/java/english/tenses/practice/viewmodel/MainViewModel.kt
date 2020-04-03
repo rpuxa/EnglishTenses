@@ -3,8 +3,8 @@ package english.tenses.practice.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import english.tenses.practice.State
-import english.tenses.practice.model.Tense
-import english.tenses.practice.model.db.CorrectnessStatisticDao
+import english.tenses.practice.model.enums.Tense
+import english.tenses.practice.model.db.dao.CorrectnessStatisticDao
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(

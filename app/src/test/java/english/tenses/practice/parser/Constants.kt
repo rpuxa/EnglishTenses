@@ -1,6 +1,6 @@
 package english.tenses.practice.parser
 
-import english.tenses.practice.model.IrregularVerb
+import english.tenses.practice.model.enums.IrregularVerb
 import java.io.*
 
 val irregularVerbs = IrregularVerb.values()
