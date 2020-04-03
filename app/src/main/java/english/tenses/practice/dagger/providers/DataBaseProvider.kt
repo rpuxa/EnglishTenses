@@ -6,7 +6,6 @@ import dagger.Module
 import dagger.Provides
 import english.tenses.practice.model.ComplaintSender
 import english.tenses.practice.model.db.DataBase
-import english.tenses.practice.model.db.migrations.MigrationFrom1To2
 import javax.inject.Singleton
 
 
@@ -15,9 +14,7 @@ class DataBaseProvider {
 
     @Provides
     @Singleton
-    fun db(context: Context) = Room.databaseBuilder(context, DataBase::class.java, "database.db")
-        .addMigrations(MigrationFrom1To2)
-        .build()
+    fun db(context: Context) = DataBase.create(context)
 
     @Provides
     fun learnedSentencesDao(db: DataBase) = db.learnedSentencesDao
@@ -41,6 +38,5 @@ class DataBaseProvider {
     fun learnedSentencesDao2(db: DataBase) = db.learnedSentencesDao2
 
     @Provides
-    @Singleton
-    fun complaintSender() = ComplaintSender()
+    fun translates(db: DataBase) = db.translatesDao
 }

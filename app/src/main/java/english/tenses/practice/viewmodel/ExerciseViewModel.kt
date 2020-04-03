@@ -9,13 +9,16 @@ import english.tenses.practice.model.db.CorrectnessStatistic
 import english.tenses.practice.update
 import english.tenses.practice.view.fragments.ExerciseFragment
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.system.measureTimeMillis
 
 class ExerciseViewModel @Inject constructor(
     private val loader: SentenceStatistic,
     private val sentenceStatistic: SentenceStatistic,
-    private val complaintSender: ComplaintSender
+    private val complaintSender: ComplaintSender,
+    private val translator: Translator
 ) : ViewModel() {
 
 
@@ -24,6 +27,9 @@ class ExerciseViewModel @Inject constructor(
     private val answerStates = MutableLiveData<MutableList<AnswerState>>()
     private val _tipMode = State(TIP_MODE_OFF)
     private val startTime = System.currentTimeMillis()
+    private val sentenceToString get() = sentence.items.joinToString(" ")
+    private val _translate = MutableLiveData<String?>()
+
 
     lateinit var sentence: Sentence
     val tipMode = _tipMode.liveData
@@ -34,6 +40,7 @@ class ExerciseViewModel @Inject constructor(
     var result = State<ExerciseResult?>(null)
     val showTipButton: LiveData<Boolean> = spacesStates.map { tipsEnabled && it.any { it.empty } }
     val showIrregularVerbTable = SingleLiveEvent<String>()
+    val translate: LiveData<String?> get() = _translate
 
     val answerListener = object : ExerciseFragment.AnswersMoveListener {
         override fun onMoveToSpace(answerId: Int, spaceId: Int): Boolean {
@@ -199,8 +206,15 @@ class ExerciseViewModel @Inject constructor(
     }
 
     fun sendComplaint() {
-        val text = sentence.items.joinToString(" ")
-        complaintSender.send(text)
+        complaintSender.send(sentenceToString)
+    }
+
+    fun translate() {
+        if (translate.value != null) return
+
+        viewModelScope.launch {
+            _translate.value = translator.translate(sentenceToString)
+        }
     }
 
     class TipMode(
@@ -211,14 +225,11 @@ class ExerciseViewModel @Inject constructor(
 
     companion object {
         val TIP_MODE_OFF = TipMode(Tense.PRESENT_SIMPLE, -1)
-        private val testSentence: Sentence? = null/*Sentence(
+        private val testSentence: Sentence? =null /*Sentence(
             listOf(
                 Word("Hi"),
-                WordAnswer("read", listOf("read"), Tense.PAST_SIMPLE, null),
-                WordAnswer("read", listOf("read"), Tense.PAST_SIMPLE, null)
-            ),
-            listOf(
-                "readasdfasdfasdf"
+                WordAnswer("read", listOf("read"), Tense.PAST_SIMPLE, null, listOf("read")),
+                WordAnswer("read", listOf("read"), Tense.PAST_SIMPLE, null, listOf("read"))
             )
         )*/
     }

@@ -58,6 +58,7 @@ class ExerciseFragment : Fragment() {
     private val spaceViewDummies = ArrayList<DummyView>()
     private val wordDummies = ArrayList<DummyView>()
 
+    private val translateView by lazy { TranslateView(ctx) }
 
     private val answersDummyParent = object : DummyView.Parent {
         override fun addOnLayoutChangeListener(followListener: DummyView.FollowListener) {
@@ -116,7 +117,7 @@ class ExerciseFragment : Fragment() {
 
         viewModel.tipMode.observe(viewLifecycleOwner) {
             if (it == ExerciseViewModel.TIP_MODE_OFF) {
-               dismissMenu()
+                dismissMenu()
             } else {
                 showMenu(
                     Menus.showTipMenu(act, it.tense, it.spaceIndex, answerSpaces.size > 1)
@@ -336,6 +337,43 @@ class ExerciseFragment : Fragment() {
                 }
 
                 dimensions.scale *= .9f
+            }
+        }
+
+        binding.field.addView(translateView.root)
+        val translateFlyView = FlyView(translateView.root, translateView)
+        binding.startTranslatePoint.dummyView.apply {
+            val d = resources.getDimensionPixelSize(R.dimen.button3d_height)
+            width = d
+            height = d
+            requestLayout()
+        }
+        binding.endTranslatePoint.dummyView.apply {
+            updateParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            requestLayout()
+        }
+        binding.startTranslatePoint.dummyView.doOnLayout {
+            translateView.root.coordinates = binding.startTranslatePoint.dummyView.coordinates
+            translateFlyView.follow(binding.startTranslatePoint.dummyView)
+        }
+        translateView.onCollapseClick {
+            translateFlyView.follow(binding.startTranslatePoint.dummyView)
+            translateView.collapse()
+        }
+        translateView.onOpenClick {
+            viewModel.translate()
+            translateFlyView.follow(binding.endTranslatePoint.dummyView)
+            translateView.open()
+        }
+
+        viewModel.translate.observe(viewLifecycleOwner) {
+            if (it == null) {
+                translateView.error()
+            } else {
+                translateView.translate(it)
             }
         }
     }
