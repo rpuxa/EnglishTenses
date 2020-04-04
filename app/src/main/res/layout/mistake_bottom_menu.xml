@@ -49,11 +49,11 @@
         android:layout_height="0dp"
         android:visibility="visible"
         app:layout3dColor="@color/colorRedButton"
-        app:layout_constraintBottom_toBottomOf="@+id/showCorrectAnswers"
+        app:layout_constraintBottom_toBottomOf="@+id/next"
         app:layout_constraintEnd_toStartOf="@+id/showCorrectAnswers"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toTopOf="@+id/showCorrectAnswers">
+        app:layout_constraintTop_toTopOf="@+id/next">
 
         <ImageView
             android:id="@+id/imageView2"
