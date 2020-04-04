@@ -38,14 +38,21 @@ val continuousVerbs = mapOf(
     "becoming" to "become"
 )
 
-val modalVerbs = setOf(
+val pastModalVerbs = setOf(
+    "was", "were"
+)
+
+val futureModelVerbs = setOf(
+    "will", "shall", "would"
+)
+
+val presentModelVerbs = setOf(
     "can", "could",
     "may", "might",
-    "shall", "should",
-    "will", "would",
-    "was", "were",
-    "must"
+    "should", "must"
 )
+
+val modalVerbs = pastModalVerbs + presentModelVerbs + futureModelVerbs
 
 val pretexts = setOf(
     "off",

@@ -1,7 +1,6 @@
 package english.tenses.practice.parser.handler
 
 import kotlinx.coroutines.CancellationException
-import english.tenses.practice.model.enums.IrregularVerb
 import english.tenses.practice.model.enums.Person
 import english.tenses.practice.model.enums.Tense
 import english.tenses.practice.parser.*
@@ -16,7 +15,7 @@ object Handler {
     @JvmStatic
     fun main(a: Array<String>) {
         println(
-            "will children be playing".words().determineTense(null)
+            "were you".words().determineTense(null)
         )
     }
 }
@@ -35,7 +34,11 @@ fun main() {
                 require(words.all { it.isNotBlank() }) { maxBy }
 
                 val answer = words.determineTense(sentence)
-                answer.verb = rawAnswer.infinitive.words().last()
+                val verb = rawAnswer.infinitive.words().last()
+                if (answer.verb != verb) {
+//                    println("Different verbs:   ${answer.verb}  ${verb}          ${sentence.text}")
+                }
+                answer.verb = verb
                 answer.person = rawAnswer.person
                 if (answer.verb !in allWords) {
                     System.err.println("Unknown word ${answer.verb}   $rawAnswer")
@@ -420,8 +423,13 @@ fun List<String>.determineTense(sentence: RawSentence?): HandledAnswer {
 
     if (first() in modalVerbs) {
         return HandledAnswer(
-            Tense.PAST_SIMPLE,
-            last(),
+            when (first()) {
+                in pastModalVerbs -> Tense.PAST_SIMPLE
+                in presentModelVerbs -> Tense.PRESENT_SIMPLE
+                in futureModelVerbs -> Tense.FUTURE_SIMPLE
+                else -> error(first())
+            },
+            first(),
             subject(1, 0) ?: return wrongTense(),
             Person.UNKNOWN,
             true
