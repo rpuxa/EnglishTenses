@@ -1,6 +1,8 @@
 package english.tenses.practice.parser.compiler
 
 import english.tenses.practice.model.enums.Language
+import english.tenses.practice.parser.CACHE
+import english.tenses.practice.parser.editor.sentences
 import english.tenses.practice.parser.handler.HANDLED_FILE_NAME
 import english.tenses.practice.parser.handler.HandledSentence
 import java.io.*
@@ -9,6 +11,10 @@ import java.security.MessageDigest
 fun main() {
     val list = ObjectInputStream(FileInputStream(HANDLED_FILE_NAME)).use {
         it.readObject() as List<HandledSentence>
+    }
+
+    val translates = ObjectInputStream(FileInputStream(CACHE)).use {
+        it.readObject() as Map<Language, Map<String, String>>
     }
 
     val text = buildString {
@@ -39,22 +45,24 @@ fun main() {
             append("@#")
         }
         append("\",\n")
-        Language.values().forEachIndexed { index, lang ->
-            val name = "output/translates/${lang.code}"
-            DataInputStream(FileInputStream(name)).use {
-                append("\"${lang.code}\" : \"")
-                val list = ArrayList<String>()
-                try {
-                    while (true) {
-                        list += "${it.readInt()}#${it.readUTF()}#"
+        (Language.values().toSet() - Language.ENGLISH).forEachIndexed { index, lang ->
+            append("\"${lang.code}\" : \"")
+            append(
+                list.joinToString("") { sentence ->
+                    var text = sentence.text
+                    sentence.answers.forEach {
+                        require("%s" in text)
+                        text = text.replaceFirst("%s", it.simpleAnswer!!.forms.first())
                     }
-                } catch (e: EOFException) {
+                    text = text.first().toUpperCase() + text.substring(1)
+
+                    val s = ((translates[lang] ?: error(lang))[text] ?: error(text)).shielding()
+                    "${sentence.id}#$s#"
                 }
-                append(list.joinToString(""))
-                append('"')
-                append(',')
-                append('\n')
-            }
+            )
+            append('"')
+            append(',')
+            append('\n')
         }
     }
 
@@ -74,3 +82,6 @@ fun main() {
         it.print(json)
     }
 }
+
+fun String.shielding(): String =
+    replace("\"", "\\\"")

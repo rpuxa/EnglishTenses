@@ -14,7 +14,7 @@ class SettingsViewModel @Inject constructor(
     private val translator: Translator
 ) : ViewModel() {
 
-    private val sortedLanguages = Language.values().sorted()
+    private val sortedLanguages = Language.values().sortedBy { it.name }
     private val _nativeLanguageAutoDetection = MutableLiveData<Boolean>()
     private val _nativeLanguage = MutableLiveData<Language>()
 

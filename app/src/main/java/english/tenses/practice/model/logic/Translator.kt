@@ -26,9 +26,6 @@ class Translator(
         loader?.cancel()
         val loader = GlobalScope.launch {
             try {
-                if (language == Language.ENGLISH || translatesDao.getRandom(language) != null) {
-                    return@launch
-                }
                 updateTranslations(language, false)
             } catch (e: CancellationException){
                 Log.d(TAG, "Cancelled $language")
@@ -39,6 +36,9 @@ class Translator(
     }
 
     suspend fun updateTranslations(language: Language, clear: Boolean) {
+        if (language == Language.ENGLISH || translatesDao.getRandom(language) != null) {
+            return
+        }
         Log.d(TAG, "Updating $language")
         val translates = loadDataBase(language.code).toTranslateEntities(language)
         translatesDao.update(translates, clear)

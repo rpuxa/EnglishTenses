@@ -248,7 +248,7 @@ suspend fun loadDataBase(name: String): String {
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
-                    it.resume(p0.getValue<String>()!!)
+                    it.resume(p0.getValue<String>() ?: error("NPE"))
                 }
             })
     }
