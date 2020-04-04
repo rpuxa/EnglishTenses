@@ -8,7 +8,7 @@ enum class IrregularVerb(
     ARISE("arise", listOf("arose"), listOf("arisen")),
     AWAKE("awake", listOf("awakened", "awoke"), listOf("awakened", "awoken")),
     BACKSLIDE("backslide", listOf("backslid"), listOf("backslidden", "backslid")),
-    BE("be", listOf("was, were"), listOf("been")),
+    BE("be", listOf("was", "were"), listOf("been")),
     BEAR("bear", listOf("bore"), listOf("born", "borne")),
     BEAT("beat", listOf("beat"), listOf("beaten", "beat")),
     BECOME("become", listOf("became"), listOf("become")),

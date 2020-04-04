@@ -181,25 +181,7 @@ fun CharSequence.words() =
     split(' ', ',', '.').filter { it.isNotBlank() }.map { it.trim().toLowerCase() }
 
 fun String.determineSingleWord(): HandledAnswer {
-    var verb: String? = null
-    var irregularVerb: IrregularVerb? = null
-    for (it in irregularVerbs) {
-        verb = it.second.find { it == this }
-        irregularVerb = it
-        if (verb != null) break
-    }
-
-    if (verb != null && verb != irregularVerb!!.first) {
-        return HandledAnswer(
-            Tense.PAST_SIMPLE,
-            irregularVerb.first,
-            null,
-            Person.UNKNOWN,
-            true
-        )
-    }
-
-    isSimpleVerb()?.let {
+    isSecondForm()?.let {
         return HandledAnswer(
             Tense.PAST_SIMPLE,
             it,
@@ -243,6 +225,16 @@ fun String.isSimpleVerb(): String? {
 fun String.isThirdForm(): String? {
     irregularVerbs.forEach {
         if (it.third.any { it == this })
+            return it.first
+    }
+
+
+    return isSimpleVerb()
+}
+
+fun String.isSecondForm(): String? {
+    irregularVerbs.forEach {
+        if (it.second.any { it == this })
             return it.first
     }
 
