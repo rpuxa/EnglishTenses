@@ -72,7 +72,7 @@
     <string name="consumed_time">Consumed time</string>
     <string name="tenses_learned">Total tenses</string>
     <string name="quit">Quit</string>
-    <string name="please_rate_app">Please, rate app to make it better</string>
+    <string name="please_rate_app">Please, rate the app to make it better</string>
     <string name="make_correct_answers">Try to give as many correct answers as you can in less time</string>
     <string name="incorrect">Oops… mistake</string>
     <string name="irregular_verbs_table">Irregular verbs table</string>
@@ -86,7 +86,7 @@
     <string name="begin">Begin</string>
     <string name="show_correct_answers">Show answers</string>
     <string name="complaint_dialog_title">Complaint</string>
-    <string name="complaint_dialog_message">Does this example contain an error? Do you want send a complaint?</string>
+    <string name="complaint_dialog_message">Does this example contain an error? Do you want to send a complaint?</string>
     <string name="complaint_thanks">Thank you!</string>
     <string name="send">Send</string>
     <string name="cancel">Cancel</string>
