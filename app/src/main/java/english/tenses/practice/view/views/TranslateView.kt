@@ -43,20 +43,12 @@ class TranslateView(context: Context) : ResizableView {
     fun loading() {
         binding.translate.isVisible = false
         binding.progressBar.isVisible = true
-        binding.unreachableServer.isVisible = false
     }
 
     fun translate(text: String) {
         binding.translate.text = text
         binding.translate.isVisible = true
         binding.progressBar.isVisible = false
-        binding.unreachableServer.isVisible = false
-    }
-
-    fun error() {
-        binding.translate.isVisible = false
-        binding.progressBar.isVisible = false
-        binding.unreachableServer.isVisible = true
     }
 
     fun collapse() {

@@ -372,11 +372,7 @@ class ExerciseFragment : Fragment() {
             }
 
             viewModel.translate.observe(viewLifecycleOwner) {
-                if (it == null) {
-                    translateView.error()
-                } else {
-                    translateView.translate(it)
-                }
+                translateView.translate(it)
             }
         } else {
             binding.startTranslatePoint.isVisible = false

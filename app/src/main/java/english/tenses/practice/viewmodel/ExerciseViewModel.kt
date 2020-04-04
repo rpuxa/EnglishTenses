@@ -33,7 +33,7 @@ class ExerciseViewModel @Inject constructor(
     private val _tipMode = State(TIP_MODE_OFF)
     private val startTime = System.currentTimeMillis()
     private val sentenceToString get() = sentence.items.joinToString(" ")
-    private val _translate = MutableLiveData<String?>()
+    private val _translate = MutableLiveData<String>()
 
 
     lateinit var sentence: Sentence
@@ -45,7 +45,7 @@ class ExerciseViewModel @Inject constructor(
     var result = State<ExerciseResult?>(null)
     val showTipButton: LiveData<Boolean> = spacesStates.map { tipsEnabled && it.any { it.empty } }
     val showIrregularVerbTable = SingleLiveEvent<String>()
-    val translate: LiveData<String?> get() = _translate
+    val translate: LiveData<String> get() = _translate
 
     val answerListener = object : ExerciseFragment.AnswersMoveListener {
         override fun onMoveToSpace(answerId: Int, spaceId: Int): Boolean {
