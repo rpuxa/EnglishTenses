@@ -278,7 +278,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:button3dStyle="blue_borderless"
-            app:button3dText="Settings"
+            app:button3dText="@string/settings"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/irregularVerbs" />

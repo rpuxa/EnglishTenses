@@ -62,7 +62,7 @@
     <string name="please_rate_app">Пожалуйста, оцените приложение, чтобы сделать его лучше</string>
     <string name="make_correct_answers">Постарайтесь дать как можно больше правильных ответов за меньшее время</string>
     <string name="incorrect">Упс… ошибочка</string>
-    <string name="irregular_verbs_table">Таблица неправильных глаголов</string>
+    <string name="irregular_verbs_table">Неправильные глаголы</string>
     <string name="check">Проверить</string>
     <string name="theory">Теория</string>
     <string name="chose">Выбрать</string>
@@ -80,4 +80,11 @@
     <string name="cant_start_exercise">Выберите 2 или более времени, чтобы начать упражнение</string>
     <string name="skip">Пропустить</string>
 
+    <string name="translation">Перевод</string>
+    <string name="may_not_be_100_accurate">Перевод может содержать ошибки</string>
+    <string name="loading">Сейчас мы всё настроим для вас</string>
+    <string name="settings">Настройки</string>
+    <string name="native_language">Родной язык</string>
+    <string name="auto_detection">Автоопределение</string>
+    <string name="choose_english">Выберите English чтобы выключить перевод</string>
 </resources>

@@ -11,6 +11,7 @@ public class All {
         RawLoaderKt.main();
         HandlerKt.main();
         EditorKt.main();
+        TranslatorKt.main();
         NewCompilerKt.main();
     }
 }

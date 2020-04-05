@@ -16,11 +16,11 @@ class SettingsViewModel @Inject constructor(
 
     private val sortedLanguages = Language.values().sortedBy { it.name }
     private val _nativeLanguageAutoDetection = MutableLiveData<Boolean>()
-    private val _nativeLanguage = MutableLiveData<Language>()
+    private val _nativeLanguage = MutableLiveData<Int>()
 
 
     val nativeLanguageAutoDetection: LiveData<Boolean> get() = _nativeLanguageAutoDetection
-    val nativeLanguage: LiveData<Language> get() = _nativeLanguage
+    val nativeLanguage: LiveData<Int> get() = _nativeLanguage
     val languages = sortedLanguages.map {
         buildString {
             append(it.name.first())
@@ -31,12 +31,15 @@ class SettingsViewModel @Inject constructor(
 
     init {
         _nativeLanguageAutoDetection.value = prefs.nativeLanguageAutoDetection
-        _nativeLanguage.value = Language[prefs.nativeLanguage]
+        val prefsLanguage = prefs.nativeLanguage
+        _nativeLanguage.value = sortedLanguages.indexOfFirst {
+            it.code == prefsLanguage
+        }
     }
 
     fun languageSelected(position: Int) {
-        val language = sortedLanguages.first { it.ordinal == position }
-        _nativeLanguage.value = language
+        val language = sortedLanguages[position]
+        _nativeLanguage.value = position
         prefs.nativeLanguage = language.code
     }
 
@@ -44,8 +47,8 @@ class SettingsViewModel @Inject constructor(
         _nativeLanguageAutoDetection.value = bFlag
         prefs.nativeLanguageAutoDetection = bFlag
         if (bFlag) {
-            val language = Language[Locale.getDefault().language]
-            languageSelected(language.ordinal)
+            val language = Locale.getDefault().language
+            languageSelected(sortedLanguages.indexOfFirst { it.code == language })
         }
     }
 

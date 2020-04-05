@@ -33,7 +33,7 @@ class SettingsActivity : AppCompatActivity() {
         binding.spinner.adapter = adapter
 
         viewModel.nativeLanguage.observe(this) {
-            binding.spinner.setSelection(it.ordinal)
+            binding.spinner.setSelection(it)
         }
 
         viewModel.nativeLanguageAutoDetection.observe(this) {

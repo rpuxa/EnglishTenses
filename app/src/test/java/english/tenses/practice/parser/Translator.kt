@@ -21,10 +21,10 @@ fun main(): Unit = runBlocking<Unit> {
         it.readObject() as List<HandledSentence>
     }
 
-    thread {
+   /* thread {
         readLine()
         stop = true
-    }
+    }*/
 
     val translates = read()
     try {

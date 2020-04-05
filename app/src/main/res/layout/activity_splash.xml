@@ -27,7 +27,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="24dp"
         android:gravity="center"
-        android:text="Сейчас мы всё настроим под вас"
+        android:text="@string/loading"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"
